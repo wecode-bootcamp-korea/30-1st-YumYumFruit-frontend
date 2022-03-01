@@ -45,14 +45,16 @@ function Nav() {
                 </li>
                 <li>
                   <Link className="link" to="/">
-                    ORDER
+                    MYPAGE
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
           <div className="topLogo">
-            <img src="/images/logo.png" alt="logo" className="logo" />
+            <Link className="link" to="/">
+              <img src="/images/logo.png" alt="logo" className="logo" />
+            </Link>
           </div>
         </div>
       </div>
