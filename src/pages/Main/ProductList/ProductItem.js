@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function ProductItem({ product }) {
-  const { id, name, country, price, thumb_image } = product;
+  const { name, country, price, thumb_image } = product;
 
   return (
     <article className="productItem">

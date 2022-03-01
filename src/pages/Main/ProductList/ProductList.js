@@ -30,7 +30,7 @@ function ProductList() {
       </header>
       <section>
         {productList.map(product => (
-          <ProductItem product={product} />
+          <ProductItem key="product.id" product={product} />
         ))}
       </section>
     </div>
