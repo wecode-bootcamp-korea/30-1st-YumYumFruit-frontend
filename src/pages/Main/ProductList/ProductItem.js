@@ -7,9 +7,11 @@ function ProductItem({ product }) {
 
   return (
     <article className="productItem">
-      <Link to="/">
-        <img alt="img" src={thumb_image} />
-      </Link>
+      <div className="imgContainer">
+        <Link to="/">
+          <img alt="img" src={thumb_image} />
+        </Link>
+      </div>
       <ul className="info">
         <li className="item">
           <Link to="/" className="link">

@@ -1,5 +1,4 @@
-/* conflict -> 여기 쓰지 마세요 */
-
+// conflict 일어나면 여기 지우기
 @import '../../styles/variables.scss';
 
 .nav {
@@ -18,8 +17,8 @@
         justify-content: left;
         align-items: center;
 
-        li {
-          margin-right: 10px;
+        .item {
+          margin-right: 25px;
         }
       }
 
@@ -28,22 +27,25 @@
         justify-content: right;
         align-items: center;
 
-        li {
-          margin-left: 10px;
+        .item {
+          margin-left: 25px;
         }
       }
 
       .link {
         text-decoration: none;
-        color: #222;
+        color: $theme-font-black;
         cursor: pointer;
+      }
+      .link:hover {
+        color: $theme-font-lightgray;
       }
     }
   }
 
   .top {
     .topInner {
-      width: 1200px;
+      width: 1400px;
       margin: 0 auto;
       padding-bottom: 40px;
 
@@ -68,11 +70,11 @@
   .menu {
     padding: 10px 0;
     background-color: white;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid $theme-border-lightgray;
+    border-bottom: 1px solid $theme-border-lightgray;
 
     .menuInner {
-      width: 1200px;
+      width: 1400px;
       margin: 0 auto;
     }
   }

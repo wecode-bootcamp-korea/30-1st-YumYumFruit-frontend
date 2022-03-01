@@ -1,11 +1,16 @@
 @import '../../../styles/variables.scss';
 
 .productItem {
-  .img {
-    max-width: 279px;
+  .imgContainer {
+    max-width: 325px;
+
+    .img {
+      width: 100%;
+    }
   }
+
   .info {
-    margin-bottom: 55px;
+    margin-bottom: 60px;
 
     .item {
       margin: 16px 0;
@@ -24,5 +29,5 @@
 }
 
 .productItem:not(:nth-child(4n)) {
-  margin-right: 28px;
+  margin-right: 33px;
 }
