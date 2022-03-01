@@ -7,7 +7,7 @@ function Main() {
     <main className="main">
       <Nav />
       <ProductList />
-    </main>0
+    </main>
   );
 }
 
