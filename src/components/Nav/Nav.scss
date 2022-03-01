@@ -1,1 +1,77 @@
-/* hi */
+@import '../../styles/variables.scss';
+
+.nav {
+  margin-bottom: 50px;
+  z-index: 10;
+
+  .menuList {
+    display: flex;
+    padding: 20px 0;
+
+    .halfBox {
+      width: 50%;
+
+      .leftBox {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        li {
+          margin-right: 10px;
+        }
+      }
+
+      .rightBox {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        li {
+          margin-left: 10px;
+        }
+      }
+
+      .link {
+        text-decoration: none;
+        color: #222;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .top {
+    .topInner {
+      width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+
+      .topLogo {
+        text-align: center;
+
+        .logo {
+          // font-size: 26px;
+          // @include logoFont;
+          width: 30%;
+        }
+      }
+    }
+  }
+
+  .fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .menu {
+    padding: 10px 0;
+    background-color: white;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+
+    .menuInner {
+      width: 1200px;
+      margin: 0 auto;
+    }
+  }
+}

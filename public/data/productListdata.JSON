@@ -6,7 +6,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 1
   },
   {
@@ -16,7 +16,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 1
   },
   {
@@ -26,7 +26,7 @@
     "price": 10000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 2
   },
   {
@@ -36,7 +36,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 2
   },
   {
@@ -46,7 +46,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 3
   },
   {
@@ -56,7 +56,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 3
   },
   {
@@ -66,7 +66,7 @@
     "price": 8000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 4
   },
   {
@@ -76,7 +76,7 @@
     "price": 10000,
     "receiving_date": 20210302,
     "description": "맛있는 감귤 마말랭",
-    "thumb_image": "/images/testImg.jpg",
+    "thumb_image": "/images/product.jpg",
     "category_id": 4
   }
 ]
