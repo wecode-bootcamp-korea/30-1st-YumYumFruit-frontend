@@ -17,8 +17,10 @@
         .leftBox {
           @include leftBox;
 
-          .item:not(:first-child) {
-            margin-left: 5px;
+          .item {
+            &:not(:first-child) {
+              margin-left: 5px;
+            }
           }
 
           .totalNum {
@@ -29,13 +31,15 @@
         .rightBox {
           @include rightBox;
 
-          .item:hover {
-            color: $theme-font-black;
-            cursor: pointer;
-          }
+          .item {
+            &:hover {
+              color: $theme-font-black;
+              cursor: pointer;
+            }
 
-          .item:not(:last-child) {
-            margin-right: 15px;
+            &:not(:last-child) {
+              margin-right: 15px;
+            }
           }
         }
       }
