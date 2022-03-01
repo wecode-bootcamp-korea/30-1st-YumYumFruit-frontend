@@ -29,12 +29,12 @@ function Nav() {
             <div className="halfBox">
               <ul className="rightBox">
                 <li>
-                  <Link className="link" to="/">
+                  <Link className="link" to="/login">
                     LOGIN
                   </Link>
                 </li>
                 <li>
-                  <Link className="link" to="/">
+                  <Link className="link" to="/signup">
                     JOIN
                   </Link>
                 </li>
@@ -52,7 +52,6 @@ function Nav() {
             </div>
           </div>
           <div className="topLogo">
-            {/* <h1 className="logo">냠냠프룻 ・ YUMYUM FRUITS</h1> */}
             <img src="/images/logo.png" alt="logo" className="logo" />
           </div>
         </div>
@@ -64,17 +63,27 @@ function Nav() {
               <ul className="leftBox">
                 <li>
                   <Link className="link" to="/">
-                    마말랭
+                    상품전체
                   </Link>
                 </li>
                 <li>
                   <Link className="link" to="/">
-                    마시는 마말랭
+                    국산과일
                   </Link>
                 </li>
                 <li>
                   <Link className="link" to="/">
-                    냠냠프룻 마말랭 SET
+                    수입과일
+                  </Link>
+                </li>
+                <li>
+                  <Link className="link" to="/">
+                    냉동과일
+                  </Link>
+                </li>
+                <li>
+                  <Link className="link" to="/">
+                    과일세트
                   </Link>
                 </li>
               </ul>
