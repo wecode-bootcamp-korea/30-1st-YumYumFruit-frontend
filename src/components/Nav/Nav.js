@@ -23,27 +23,27 @@ function Nav() {
           <div className="menuList">
             <div className="halfBox">
               <ul className="leftBox">
-                <li>(+) ADD BOOKMARK</li>
+                <li className="item">(+) ADD BOOKMARK</li>
               </ul>
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                <li>
+                <li className="item">
                   <Link className="link" to="/login">
                     LOGIN
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/signup">
                     JOIN
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     CART (0)
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     MYPAGE
                   </Link>
@@ -63,27 +63,27 @@ function Nav() {
           <div className="menuList">
             <div className="halfBox">
               <ul className="leftBox">
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     상품전체
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     국산과일
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     수입과일
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     냉동과일
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     과일세트
                   </Link>
@@ -92,22 +92,22 @@ function Nav() {
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     NOTICE
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     Q&A
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     REVIEW
                   </Link>
                 </li>
-                <li>
+                <li className="item">
                   <Link className="link" to="/">
                     GUIDE
                   </Link>

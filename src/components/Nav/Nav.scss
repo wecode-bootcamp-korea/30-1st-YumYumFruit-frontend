@@ -16,8 +16,8 @@
         justify-content: left;
         align-items: center;
 
-        li {
-          margin-right: 10px;
+        .item {
+          margin-right: 25px;
         }
       }
 
@@ -26,15 +26,18 @@
         justify-content: right;
         align-items: center;
 
-        li {
-          margin-left: 10px;
+        .item {
+          margin-left: 25px;
         }
       }
 
       .link {
         text-decoration: none;
-        color: #222;
+        color: $theme-font-black;
         cursor: pointer;
+      }
+      .link:hover {
+        color: $theme-font-lightgray;
       }
     }
   }
