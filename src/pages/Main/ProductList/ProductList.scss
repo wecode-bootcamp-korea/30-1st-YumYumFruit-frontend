@@ -29,6 +29,11 @@
         .rightBox {
           @include rightBox;
 
+          .item:hover {
+            color: $theme-font-black;
+            cursor: pointer;
+          }
+
           .item:not(:last-child) {
             margin-right: 15px;
           }
