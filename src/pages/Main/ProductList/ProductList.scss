@@ -1,3 +1,43 @@
+@import '../../../styles/variables.scss';
+
 .productList {
-  display: flex;
+  .inner {
+    width: 1200px;
+    margin: 0 auto;
+
+    .menu {
+      display: flex;
+      padding-bottom: 40px;
+
+      .halfBox {
+        @include halfBox;
+        color: $theme-font-lightgray;
+
+        .leftBox {
+          @include leftBox;
+
+          .item:not(:first-child) {
+            margin-left: 5px;
+          }
+
+          .totalNum {
+            color: $theme-font-black;
+          }
+        }
+
+        .rightBox {
+          @include rightBox;
+
+          .item:not(:last-child) {
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 }

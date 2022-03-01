@@ -1,24 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './ProductItem.scss';
 
 function ProductItem({ product }) {
   const { name, country, price, thumb_image } = product;
 
   return (
     <article className="productItem">
-      <div class="img">
-        <Link to="/">
-          <img alt="productImg" src={thumb_image} />
-        </Link>
-      </div>
-      <ul class="info">
-        <li>
+      <Link to="/">
+        <img alt="img" src={thumb_image} />
+      </Link>
+      <ul className="info">
+        <li className="item">
           <Link to="/" className="link">
             {name}
           </Link>
         </li>
-        <li>{country}</li>
-        <li className="price">{price}</li>
+        <li className="item">{country}</li>
+        <li className="item">
+          <span className="price">{price.toLocaleString()}원</span>
+        </li>
       </ul>
     </article>
   );

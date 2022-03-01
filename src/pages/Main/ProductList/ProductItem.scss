@@ -1,0 +1,28 @@
+@import '../../../styles/variables.scss';
+
+.productItem {
+  .img {
+    max-width: 279px;
+  }
+  .info {
+    margin-bottom: 55px;
+
+    .item {
+      margin: 16px 0;
+
+      .link {
+        text-decoration: none;
+        color: $theme-font-black;
+      }
+
+      .price {
+        color: $theme-font-blue;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.productItem:not(:nth-child(4n)) {
+  margin-right: 28px;
+}

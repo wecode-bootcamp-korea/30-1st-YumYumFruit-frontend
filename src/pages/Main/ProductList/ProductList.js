@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
+import './ProductList.scss';
 
 function ProductList() {
   const [productList, setProductList] = useState([]);
@@ -12,27 +13,33 @@ function ProductList() {
 
   return (
     <div className="productList">
-      <header>
-        <div className="halfBox">
-          <div className="leftBox">
-            TOTAL <span className="totalNum">10</span> ITEMS
+      <div className="inner">
+        <header className="menu">
+          <div className="halfBox">
+            <ul className="leftBox">
+              <li className="item">TOTAL</li>
+              <li className="item">
+                <span className="totalNum">{productList.length}</span>
+              </li>
+              <li className="item">ITEMS</li>
+            </ul>
           </div>
           <div className="halfBox">
             <ul className="rightBox">
-              <li class="sort">LOW PRICE</li>
-              <li class="sort">HIGH PRICE</li>
-              <li class="sort">NAME</li>
-              <li class="sort">NEW</li>
-              <li class="sort">REVIEW</li>
+              <li className="item">LOW PRICE</li>
+              <li className="item">HIGH PRICE</li>
+              <li className="item">NAME</li>
+              <li className="item">NEW</li>
+              <li className="item">REVIEW</li>
             </ul>
           </div>
-        </div>
-      </header>
-      <section>
-        {productList.map(product => (
-          <ProductItem key="product.id" product={product} />
-        ))}
-      </section>
+        </header>
+        <section className="list">
+          {productList.map(product => (
+            <ProductItem key={product.id} product={product} />
+          ))}
+        </section>
+      </div>
     </div>
   );
 }

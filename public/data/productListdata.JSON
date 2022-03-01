@@ -78,5 +78,45 @@
     "description": "맛있는 감귤 마말랭",
     "thumb_image": "/images/product.jpg",
     "category_id": 4
+  },
+  {
+    "id": 9,
+    "name": "키위 마말랭 165g",
+    "country": "한국",
+    "price": 8000,
+    "receiving_date": 20210302,
+    "description": "맛있는 감귤 마말랭",
+    "thumb_image": "/images/product.jpg",
+    "category_id": 3
+  },
+  {
+    "id": 10,
+    "name": "땡귤 마말랭 165g",
+    "country": "한국",
+    "price": 8000,
+    "receiving_date": 20210302,
+    "description": "맛있는 감귤 마말랭",
+    "thumb_image": "/images/product.jpg",
+    "category_id": 3
+  },
+  {
+    "id": 11,
+    "name": "양파 마말랭 165g",
+    "country": "한국",
+    "price": 8000,
+    "receiving_date": 20210302,
+    "description": "맛있는 감귤 마말랭",
+    "thumb_image": "/images/product.jpg",
+    "category_id": 4
+  },
+  {
+    "id": 12,
+    "name": "천혜향 마말랭 165g",
+    "country": "한국",
+    "price": 10000,
+    "receiving_date": 20210302,
+    "description": "맛있는 감귤 마말랭",
+    "thumb_image": "/images/product.jpg",
+    "category_id": 4
   }
 ]

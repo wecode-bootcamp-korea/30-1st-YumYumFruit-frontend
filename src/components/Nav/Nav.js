@@ -1,4 +1,4 @@
-// hi
+// conflict -> 여기 쓰지 마세요
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
