@@ -50,5 +50,18 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
+
+    .paging {
+      @include flexbox;
+
+      .pagingBox {
+        padding: 10px;
+        border: 1px solid $theme-border-lightgray;
+
+        .link {
+          text-decoration: none;
+        }
+      }
+    }
   }
 }

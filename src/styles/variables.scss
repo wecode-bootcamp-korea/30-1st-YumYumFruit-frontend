@@ -12,6 +12,12 @@ $theme-font-blue: #008bcc;
   color: #222;
 }
 
+@mixin flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin halfBox {
   width: 50%;
 }

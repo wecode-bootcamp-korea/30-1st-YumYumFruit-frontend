@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductItem from './ProductItem';
+import { SORTMENU_LIST } from './sortmenudata.js';
 import './ProductList.scss';
 
 function ProductList() {
@@ -26,10 +28,11 @@ function ProductList() {
           </div>
           <div className="halfBox">
             <ul className="rightBox">
-              <li className="item">LOW PRICE</li>
-              <li className="item">HIGH PRICE</li>
-              <li className="item">NAME</li>
-              <li className="item">NEW</li>
+              {SORTMENU_LIST.map(menu => (
+                <li key={menu.id} className="item">
+                  {menu.name}
+                </li>
+              ))}
             </ul>
           </div>
         </header>
@@ -38,6 +41,37 @@ function ProductList() {
             <ProductItem key={product.id} product={product} />
           ))}
         </section>
+        <div className="paging">
+          <p className="pagingBox">
+            <Link to="/" className="link">
+              ←
+            </Link>
+          </p>
+          <p className="pagingBox">
+            <Link to="/" className="link">
+              ←
+            </Link>
+          </p>
+          <p className="pagingBox">
+            <ul>
+              <li>
+                <Link to="/" className="link">
+                  1
+                </Link>
+              </li>
+            </ul>
+          </p>
+          <p className="pagingBox">
+            <Link to="/" className="link">
+              →
+            </Link>
+          </p>
+          <p className="pagingBox">
+            <Link to="/" className="link">
+              →
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
