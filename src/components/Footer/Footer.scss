@@ -1,5 +1,6 @@
 .footer {
   background-color: #f7f7f7;
+
   .inner {
     height: 265px;
     width: 1200px;
@@ -44,8 +45,7 @@
       height: 70px;
       width: 400px;
       margin: 0 70px 0 0;
-      float: left;
-      display: block;
+      display: inline-block;
       font-size: 11px;
 
       h3 {
@@ -53,9 +53,7 @@
         width: 580px;
         margin: 0 0 10px 0;
         display: block;
-
         font-weight: 600;
-        text-align: left;
       }
 
       ul {
