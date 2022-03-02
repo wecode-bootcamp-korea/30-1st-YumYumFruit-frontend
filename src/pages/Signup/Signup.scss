@@ -1,1 +1,114 @@
-/* hi */
+.signup {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+
+  .titleArea {
+    // background-color: #f1dfdf;
+    height: 18px;
+    width: 1200px;
+    text-align: center;
+
+    h2 {
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+  }
+
+  .joinForm {
+    // background-color: #f8d3d3;
+
+    .memberJoin {
+      // background-color: #f8b1b1;
+      height: 1386px;
+      width: 1200px;
+
+      .boardWriteTop {
+        // background-color: #ecbbbb;
+        height: 12px;
+        width: 1200px;
+        padding: 50px 0 10px 0;
+
+        h3 {
+          // background-color: #ec4141;
+          font-size: 11px;
+          font-weight: 700;
+        }
+      }
+
+      p {
+        margin: -25px 0 10px 0;
+        text-align: left;
+      }
+    }
+    th {
+      // background-color: #b6a4a4;
+      height: 24px;
+      width: 130px;
+      padding: 10px 0 10px 0;
+      display: table-cell;
+      border-collapse: collapse;
+      line-height: 19px;
+      text-align: left;
+      vertical-align: middle;
+
+      td {
+        // background-color: #978a8a;
+        height: 24px;
+        width: 1060px;
+        padding: 10px 0 10px 10px;
+        position: relative;
+        line-height: 23px;
+        vertical-align: top;
+      }
+
+      input {
+        height: 15px;
+        width: 133px;
+        border: 1px solid #dddddd;
+        margin: -1px 0 0 0;
+        padding: 4px;
+        display: inline-block;
+        cursor: text;
+      }
+
+      .tel {
+        td {
+          // background-color: #6b4949;
+          width: 1060px;
+          padding: 10px 0 10px 10px;
+          position: relative;
+          line-height: 23px;
+          vertical-align: top;
+        }
+
+        select {
+          height: 24px;
+          width: 60px;
+          margin: 0 4px 0 0;
+          padding: 0 5px 0 5px;
+          cursor: default;
+          white-space: pre;
+        }
+
+        input {
+          height: 15px;
+          width: 50px;
+          border: 1px solid #dddddd;
+          margin: 0 4px 0 4px;
+          padding: 4px;
+          display: inline-block;
+          cursor: text;
+        }
+      }
+    }
+  }
+  .required {
+  }
+
+  .boardWrite {
+  }
+}
