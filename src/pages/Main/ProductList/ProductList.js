@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProductItem from './ProductItem';
 import { getProducts } from '../../../api/api';
+// 상수 데이터 파일 사용 여부 질문
 // import { SORTMENU_LIST } from './sortmenudata.js';
 import './ProductList.scss';
 
 function ProductList() {
-  const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
+  const [sort, setSort] = useState('price');
 
+  // 낮은 가격순 정렬 구현 예정
   // const handleLowPriceClick = () => setSort('price');
   const handleNameClick = () => setSort('name');
   const handleHighPriceClick = () => setSort('price');
   const handleNewestClick = () => setSort('receiving_date');
 
+  // 쿼리의 category_id를 가져오는 방법?
+  // category_id 값 가져와서 -> 서버에 보내면 -> 필터링된 값을 주나요? 프론트에서 filter 메소드를 써야 하는지?
   const handleLoad = async sortQuery => {
     const products = await getProducts(sortQuery);
     setProductList(products);
@@ -22,7 +26,7 @@ function ProductList() {
   const sortedProducts = productList.sort((a, b) => b[sort] - a[sort]);
 
   useEffect(() => {
-    handleLoad(sort);
+    handleLoad({ sort });
   }, [sort]);
 
   return (
@@ -77,9 +81,9 @@ function ProductList() {
           <div className="pagingBox">
             <ul>
               <li>
-                <NavLink to="/" className="link">
+                <Link to="/" className="link">
                   1
-                </NavLink>
+                </Link>
               </li>
             </ul>
           </div>
