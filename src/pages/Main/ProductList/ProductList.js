@@ -30,7 +30,6 @@ function ProductList() {
               <li className="item">HIGH PRICE</li>
               <li className="item">NAME</li>
               <li className="item">NEW</li>
-              <li className="item">REVIEW</li>
             </ul>
           </div>
         </header>

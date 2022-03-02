@@ -1,6 +1,8 @@
 @import '../../../styles/variables.scss';
 
 .productItem {
+  margin-bottom: 60px;
+
   .imgContainer {
     max-width: 325px;
 
@@ -10,8 +12,6 @@
   }
 
   .info {
-    margin-bottom: 60px;
-
     .item {
       margin: 16px 0;
 
