@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductItem.scss';
 
-function ProductItem({ product }) {
-  const { name, country, price, thumb_image } = product;
-
+function ProductItem({ name, country, price, thumb_image }) {
   return (
     <article className="productItem">
       <div className="imgContainer">
