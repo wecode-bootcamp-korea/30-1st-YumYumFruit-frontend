@@ -52,7 +52,8 @@ function Nav() {
             </div>
           </div>
           <div className="topLogo">
-            <h1 className="logo">냠냠프룻 ・ YUMYUM FRUITS</h1>
+            {/* <h1 className="logo">냠냠프룻 ・ YUMYUM FRUITS</h1> */}
+            <img src="/images/logo.png" alt="logo" className="logo" />
           </div>
         </div>
       </div>
