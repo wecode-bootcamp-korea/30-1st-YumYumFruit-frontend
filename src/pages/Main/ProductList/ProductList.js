@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import ProductItem from './ProductItem';
 import { SORTMENU_LIST } from './sortmenudata.js';
 import './ProductList.scss';
@@ -55,9 +55,9 @@ function ProductList() {
           <p className="pagingBox">
             <ul>
               <li>
-                <Link to="/" className="link">
+                <NavLink to="/" className="link">
                   1
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </p>
