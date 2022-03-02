@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
 import ProductList from './pages/Main/ProductList/ProductList';
 
+// useLocation은 Router에서만 사용가능하다 에러 뜸
 function Router() {
   return (
     <BrowserRouter>
