@@ -1,1 +1,120 @@
-/* hi */
+.main {
+  background-color: #ffffff;
+  color: #222222;
+  position: relative;
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+
+  .titleArea {
+    height: 18px;
+    width: 1200px;
+    text-align: center;
+
+    span {
+      height: auto;
+      width: auto;
+      display: inline;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 3px;
+    }
+  }
+
+  .loginWarp {
+    height: 259.8px;
+    width: 1200px;
+    padding: 30px 0 30px 0;
+    text-align: center;
+
+    .login {
+      height: 259.8px;
+      width: 310px;
+      margin: 0 445px 0 445px;
+      position: relative;
+      text-align: center;
+
+      h3 {
+        height: 12px;
+        width: 310px;
+        margin: 0 0 10px 0;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-align: left;
+      }
+
+      .loginBox {
+        height: 215px;
+        width: 312px;
+        margin: 1 -2px 0 0;
+        min-width: min-content;
+
+        .id,
+        .password {
+          background-color: #ffffff;
+          height: 30px;
+          width: 290px;
+          border: 1px solid #dddddd;
+          margin: 10px 0 0 0;
+          padding: 7px 10px;
+          overflow: hidden;
+          text-decoration: none solid rgb(34, 34, 34);
+          text-align: center;
+
+          span {
+            height: 30px;
+            width: 90px;
+            // text-align: left;
+            float: left;
+            font-size: 10px;
+          }
+
+          input {
+            height: 26px;
+            width: 178px;
+            padding: 2px 0 2px 0;
+            float: right;
+            font-size: 11px;
+            line-height: 26px;
+            text-decoration: none solid #ffffff;
+            cursor: text;
+
+            // .memberId {
+            // }
+
+            // .memberPassword {
+            // }
+          }
+        }
+
+        .securityCheck {
+          height: 12px;
+          width: 312px;
+          margin: 15px 0 15px 0;
+          text-align: end;
+
+          span {
+            height: 12px;
+            width: 68px;
+          }
+        }
+
+        // .idSave {
+        // }
+
+        .loginButton {
+          height: 14px;
+          width: 310px;
+          // border: 1px solid #333333;
+          margin: 0 0 5px 0;
+          padding: 20px 0 20px 0;
+          display: inline-block;
+          // font-size: 10px;
+          // font-weight: 700;
+          // text-decoration: none solid rgb(255, 255, 255);
+        }
+      }
+    }
+  }
+}
