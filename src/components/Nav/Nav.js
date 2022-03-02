@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import NavItem from './NavItem';
 import { NAV_LIST01, NAV_LIST02, NAV_LIST03 } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
-  // 1. useRef로 수정하기
+  const ref = useRef();
+
   useEffect(() => {
-    const menu = document.querySelector('.menu');
-    const menuTop = menu.offsetTop;
+    const menuTop = ref.current.offsetTop;
 
     const fixMenu = () => {
       window.scrollY >= menuTop
-        ? menu.classList.add('fixed')
-        : menu.classList.remove('fixed');
+        ? ref.current.classList.add('fixed')
+        : ref.current.classList.remove('fixed');
     };
 
     window.addEventListener('scroll', fixMenu);
@@ -44,7 +44,7 @@ function Nav() {
           </div>
         </div>
       </div>
-      <div className="menu">
+      <div className="menu" ref={ref}>
         <div className="menuInner">
           <div className="menuList">
             <div className="halfBox">
