@@ -5,6 +5,7 @@ import { NAV_LIST01, NAV_LIST02, NAV_LIST03 } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
+  // 1. useRef로 수정하기
   useEffect(() => {
     const menu = document.querySelector('.menu');
     const menuTop = menu.offsetTop;
