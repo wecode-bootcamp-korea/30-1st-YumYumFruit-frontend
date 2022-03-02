@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import NavItem from './NavItem';
+import { NAV_LIST01, NAV_LIST02, NAV_LIST03 } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
@@ -28,26 +30,9 @@ function Nav() {
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                <li className="item">
-                  <Link className="link" to="/login">
-                    LOGIN
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/signup">
-                    JOIN
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    CART (0)
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    MYPAGE
-                  </Link>
-                </li>
+                {NAV_LIST01.map(item => (
+                  <NavItem key={item.id} item={item} />
+                ))}
               </ul>
             </div>
           </div>
@@ -63,55 +48,16 @@ function Nav() {
           <div className="menuList">
             <div className="halfBox">
               <ul className="leftBox">
-                <li className="item">
-                  <Link className="link" to="/">
-                    상품전체
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    국산과일
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    수입과일
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    냉동과일
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    과일세트
-                  </Link>
-                </li>
+                {NAV_LIST02.map(item => (
+                  <NavItem key={item.id} item={item} />
+                ))}
               </ul>
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                <li className="item">
-                  <Link className="link" to="/">
-                    NOTICE
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    Q&A
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    REVIEW
-                  </Link>
-                </li>
-                <li className="item">
-                  <Link className="link" to="/">
-                    GUIDE
-                  </Link>
-                </li>
+                {NAV_LIST03.map(item => (
+                  <NavItem key={item.id} item={item} />
+                ))}
               </ul>
             </div>
           </div>
