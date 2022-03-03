@@ -25,27 +25,27 @@ export const NAV_LIST02 = [
   {
     id: 1,
     name: '전체상품',
-    url: '/product/list',
+    url: '/products/list?category=all',
   },
   {
     id: 2,
     name: '국산과일',
-    url: '/product/list?category_id=1',
+    url: '/products/list?category=1',
   },
   {
     id: 3,
     name: '수입과일',
-    url: '/product/list?category_id=2',
+    url: '/products/list?category=2',
   },
   {
     id: 4,
     name: '냉동과일',
-    url: '/product/list?category_id=3',
+    url: '/products/list?category=3',
   },
   {
     id: 5,
     name: '세트과일',
-    url: '/product/list?category_id=4',
+    url: '/products/list?category=4',
   },
 ];
 

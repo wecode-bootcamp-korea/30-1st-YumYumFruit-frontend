@@ -14,27 +14,21 @@ function ProductList() {
   // state가 변하지 않음
   // Nav 메뉴 누를때 마다, Keyword state가 변하도록 이벤트 함수 추가 필요
   // App.js 필요한지? App.js에서 데이터 불러와야 하는지?
-  const [keyword, setKeyword] = useState(searchParams.get('category_id'));
+  const [keyword, setKeyword] = useState(searchParams.get('category'));
 
-  // 낮은 가격순 정렬 구현 예정
-  // const handleLowPriceClick = () => setSort('price');
+  const handleLowPriceClick = () => setSort('price');
+  const handleHighPriceClick = () => setSort('-price');
   const handleNameClick = () => setSort('name');
-  const handleHighPriceClick = () => setSort('price');
   const handleNewestClick = () => setSort('receiving_date');
 
-  const handleLoad = async sortQuery => {
-    const products = await getProducts(sortQuery);
-    setProductList(products);
+  const handleLoad = async query => {
+    const { results } = await getProducts(query);
+    setProductList(results);
   };
 
-  // 카테고리 필터링 -> 정렬 순서? 프론트에서 filter, sort 안해도 되는지? 해야 되는지?
-  const sortedProducts = productList.sort((a, b) => b[sort] - a[sort]);
-
-  // category_id=n&sort=str
-  // category_id 쿼리 자체가 없을 때는 어떻게 처리?
   useEffect(() => {
-    handleLoad({ sort });
-  }, [sort, keyword]);
+    handleLoad({ category: keyword, sort });
+  }, [keyword, sort]);
 
   return (
     <div className="productList">
@@ -51,7 +45,9 @@ function ProductList() {
           </div>
           <div className="halfBox">
             <ul className="rightBox">
-              <li className="item">LOW PRICE</li>
+              <li className="item" onClick={handleLowPriceClick}>
+                LOW PRICE
+              </li>
               <li className="item" onClick={handleHighPriceClick}>
                 HIGH PRICE
               </li>
@@ -70,7 +66,7 @@ function ProductList() {
           </div>
         </header>
         <section className="list">
-          {sortedProducts.map(product => (
+          {productList.map(product => (
             <ProductItem key={product.id} product={product} />
           ))}
         </section>
