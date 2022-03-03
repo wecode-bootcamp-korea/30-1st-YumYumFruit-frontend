@@ -1,4 +1,4 @@
-.main {
+.login {
   background-color: #ffffff;
   color: #222222;
   position: relative;
@@ -11,7 +11,7 @@
     width: 1200px;
     text-align: center;
 
-    span {
+    h2 {
       height: auto;
       width: auto;
       display: inline;
@@ -65,7 +65,6 @@
           span {
             height: 30px;
             width: 90px;
-            // text-align: left;
             float: left;
             font-size: 10px;
           }
@@ -79,12 +78,6 @@
             line-height: 26px;
             text-decoration: none solid #ffffff;
             cursor: text;
-
-            // .memberId {
-            // }
-
-            // .memberPassword {
-            // }
           }
         }
 
@@ -100,19 +93,16 @@
           }
         }
 
-        // .idSave {
-        // }
-
         .loginButton {
           height: 14px;
           width: 310px;
-          // border: 1px solid #333333;
           margin: 0 0 5px 0;
           padding: 20px 0 20px 0;
           display: inline-block;
-          // font-size: 10px;
-          // font-weight: 700;
-          // text-decoration: none solid rgb(255, 255, 255);
+
+          button {
+            cursor: pointer;
+          }
         }
       }
     }
