@@ -3,9 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
-
-// import ProductItem from './pages/ProductItem/ProductItem';
-import ProductItem from './pages/ProductItem/ProductItem';
+import ProductItemPage from './pages/Main/ProductItemPage';
 
 function Router() {
   return (
@@ -14,7 +12,7 @@ function Router() {
         <Route path="/" element={<Main />} />;
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
-        <Route path="/productitem" element={<ProductItem />} />;
+        <Route path="/productitempage" element={<ProductItemPage />} />;
       </Routes>
     </BrowserRouter>
   );
