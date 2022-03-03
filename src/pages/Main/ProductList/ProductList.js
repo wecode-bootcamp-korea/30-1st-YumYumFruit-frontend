@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import ProductItem from './ProductItem';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import ProductListItem from './ProductListItem';
 import { getProducts } from '../../../api/api';
 // 상수 데이터 파일 사용 여부 질문
+// <li> 마다 다른 함수를 등록하려고 하는데, 상수 데이터 파일에서 함수도 등록 가능한지?
 // import { SORTMENU_LIST } from './sortmenudata.js';
 import './ProductList.scss';
 
 function ProductList() {
-  const [productList, setProductList] = useState([]);
-  const [sort, setSort] = useState('price');
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams('');
-
-  // state가 변하지 않음
-  // Nav 메뉴 누를때 마다, Keyword state가 변하도록 이벤트 함수 추가 필요
-  // App.js 필요한지? App.js에서 데이터 불러와야 하는지?
-  const [keyword, setKeyword] = useState(searchParams.get('category'));
+  const [category, setCategory] = useState(searchParams.get('category'));
+  const [sort, setSort] = useState('price');
+  const [productList, setProductList] = useState([]);
 
   const handleLowPriceClick = () => setSort('price');
   const handleHighPriceClick = () => setSort('-price');
@@ -26,9 +24,16 @@ function ProductList() {
     setProductList(results);
   };
 
+  const goToDetail = item => {
+    navigate(`/products/detail/${item.id}`);
+  };
+
+  // category=숫자 -> 카테고리 넘버가 변경될 때마다 데이터를 다시 받아와서, productList의 스테이트가 변경된다.
+  // 문제 : Nav 메뉴를 클릭하면 url은 바뀌는데, category 스테이트가 변경되지 않음
+
   useEffect(() => {
-    handleLoad({ category: keyword, sort });
-  }, [keyword, sort]);
+    handleLoad({ category, sort });
+  }, [category, sort]);
 
   return (
     <div className="productList">
@@ -67,7 +72,11 @@ function ProductList() {
         </header>
         <section className="list">
           {productList.map(product => (
-            <ProductItem key={product.id} product={product} />
+            <ProductListItem
+              key={product.id}
+              product={product}
+              onClick={goToDetail}
+            />
           ))}
         </section>
         <div className="paging">

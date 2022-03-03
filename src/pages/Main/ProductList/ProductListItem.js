@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ProductItem.scss';
+import './ProductListItem.scss';
 
-function ProductItem({ product }) {
+function ProductListItem({ product }) {
   const { name, country, price, thumb_image } = product;
 
   return (
-    <article className="productItem">
+    <article className="productListItem">
       <div className="imgContainer">
         <Link to="/">
           <img alt="img" src={thumb_image} />
@@ -27,4 +27,4 @@ function ProductItem({ product }) {
   );
 }
 
-export default ProductItem;
+export default ProductListItem;
