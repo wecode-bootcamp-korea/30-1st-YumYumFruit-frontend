@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import ProductListItem from './ProductListItem';
 import { getProducts } from '../../../api/api';
 // 상수 데이터 파일 사용 여부 질문
