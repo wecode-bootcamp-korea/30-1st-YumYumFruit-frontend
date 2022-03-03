@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import NavItem from './NavItem';
-import { NAV_LIST01, NAV_LIST02, NAV_LIST03 } from './navdata.js';
+import { NAV_LIST_DATA } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
-  // 1. useRef로 수정하기
+  const ref = useRef();
+
   useEffect(() => {
-    const menu = document.querySelector('.menu');
-    const menuTop = menu.offsetTop;
+    const menu = ref.current;
+    const menuTop = ref.current.offsetTop;
 
     const fixMenu = () => {
       window.scrollY >= menuTop
@@ -17,6 +18,10 @@ function Nav() {
     };
 
     window.addEventListener('scroll', fixMenu);
+
+    return () => {
+      window.removeEventListener('scroll', fixMenu);
+    };
   }, []);
 
   return (
@@ -31,7 +36,7 @@ function Nav() {
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                {NAV_LIST01.map(item => (
+                {NAV_LIST_DATA.userPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
@@ -44,19 +49,19 @@ function Nav() {
           </div>
         </div>
       </div>
-      <div className="menu">
+      <div className="menu" ref={ref}>
         <div className="menuInner">
           <div className="menuList">
             <div className="halfBox">
               <ul className="leftBox">
-                {NAV_LIST02.map(item => (
+                {NAV_LIST_DATA.productPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                {NAV_LIST03.map(item => (
+                {NAV_LIST_DATA.boardPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
