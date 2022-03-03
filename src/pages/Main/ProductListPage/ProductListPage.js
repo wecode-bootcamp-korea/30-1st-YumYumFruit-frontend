@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
-import ProductListItem from './ProductListItem';
-import { getProducts } from '../../../api/api';
-import './ProductList.scss';
+import { Link, useSearchParams } from 'react-router-dom';
+import ProductItem from 'components/ProductItem/ProductItem';
+import { getProducts } from 'api/api';
+import './ProductListPage.scss';
 
-function ProductList() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams('');
+function ProductListPage() {
+  const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
 
@@ -20,12 +19,9 @@ function ProductList() {
     setProductList(results);
   };
 
-  const goToDetail = item => {
-    navigate(`/products/detail/${item.id}`);
-  };
-
   // useLocation, locationSearch 사용해보기
-  // 메뉴 누르면 뒤에 쿼리 붙이는 방법 공부하기
+  // 이슈 : 메뉴 클릭 시 모두 location.search = ?category=all
+  // 메뉴 클릭하면 쿼리 붙이는 방법 연구하기
   useEffect(() => {
     handleLoad({ category: searchParams.get('category'), sort });
   }, [searchParams, sort]);
@@ -49,7 +45,7 @@ function ProductList() {
                 LOW PRICE
               </li>
               <li className="item" onClick={handleHighPriceClick}>
-                HIGH PRICE
+                HIsGH PRICE
               </li>
               <li className="item" onClick={handleNameClick}>
                 NAME
@@ -57,7 +53,8 @@ function ProductList() {
               <li className="item" onClick={handleNewestClick}>
                 NEW
               </li>
-              {/* {SORTMENU_LIST.map(menu => (
+              {/* 추후 맵을 쓸 수 있을 것 같아 남겨놓음
+                s{SORTMENU_LIST.map(menu => (
                 <li key={menu.id} className="item">
                   {menu.name}
                 </li>
@@ -67,11 +64,7 @@ function ProductList() {
         </header>
         <section className="list">
           {productList.map(product => (
-            <ProductListItem
-              key={product.id}
-              product={product}
-              onClick={goToDetail}
-            />
+            <ProductItem key={product.id} product={product} />
           ))}
         </section>
         <div className="paging">
@@ -110,4 +103,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default ProductListPage;

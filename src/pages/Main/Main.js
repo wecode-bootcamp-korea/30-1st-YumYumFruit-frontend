@@ -1,10 +1,10 @@
 import React from 'react';
-import ProductList from '../Main/ProductList/ProductList';
+import ProductListPage from './ProductListPage/ProductListPage';
 
 function Main() {
   return (
     <main className="main">
-      <ProductList />
+      <ProductListPage />
     </main>
   );
 }
