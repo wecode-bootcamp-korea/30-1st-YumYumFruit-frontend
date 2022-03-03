@@ -10,7 +10,6 @@ import './ProductList.scss';
 function ProductList() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams('');
-  const [category, setCategory] = useState(searchParams.get('category'));
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
 
@@ -28,12 +27,10 @@ function ProductList() {
     navigate(`/products/detail/${item.id}`);
   };
 
-  // category=숫자 -> 카테고리 넘버가 변경될 때마다 데이터를 다시 받아와서, productList의 스테이트가 변경된다.
-  // 문제 : Nav 메뉴를 클릭하면 url은 바뀌는데, category 스테이트가 변경되지 않음
-
+  // useLocation, locationSearch 사용해보기
   useEffect(() => {
-    handleLoad({ category, sort });
-  }, [category, sort]);
+    handleLoad({ category: searchParams.get('category'), sort });
+  }, [searchParams.get('category'), sort]);
 
   return (
     <div className="productList">

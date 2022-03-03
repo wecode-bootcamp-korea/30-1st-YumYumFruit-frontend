@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import './ProductListItem.scss';
 
 function ProductListItem({ product }) {
-  const { name, country, price, thumb_image } = product;
+  const { name, country, price, thumbnail_image_url } = product;
 
   return (
     <article className="productListItem">
       <div className="imgContainer">
         <Link to="/">
-          <img alt="img" src={thumb_image} />
+          <img alt="img" src={thumbnail_image_url} className="img" />
         </Link>
       </div>
       <ul className="info">
