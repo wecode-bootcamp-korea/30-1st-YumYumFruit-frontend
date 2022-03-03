@@ -1,22 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import NavItem from './NavItem';
-import { NAV_LIST01, NAV_LIST02, NAV_LIST03 } from './navdata.js';
+import { NAV_LIST_DATA } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
   const ref = useRef();
 
   useEffect(() => {
+    const menu = ref.current;
     const menuTop = ref.current.offsetTop;
 
     const fixMenu = () => {
       window.scrollY >= menuTop
-        ? ref.current.classList.add('fixed')
-        : ref.current.classList.remove('fixed');
+        ? menu.classList.add('fixed')
+        : menu.classList.remove('fixed');
     };
 
     window.addEventListener('scroll', fixMenu);
+
+    return () => {
+      window.removeEventListener('scroll', fixMenu);
+    };
   }, []);
 
   return (
@@ -31,7 +36,7 @@ function Nav() {
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                {NAV_LIST01.map(item => (
+                {NAV_LIST_DATA.userPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
@@ -49,14 +54,14 @@ function Nav() {
           <div className="menuList">
             <div className="halfBox">
               <ul className="leftBox">
-                {NAV_LIST02.map(item => (
+                {NAV_LIST_DATA.productPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
             </div>
             <div className="halfBox">
               <ul className="rightBox">
-                {NAV_LIST03.map(item => (
+                {NAV_LIST_DATA.boardPageLinks.map(item => (
                   <NavItem key={item.id} item={item} />
                 ))}
               </ul>
