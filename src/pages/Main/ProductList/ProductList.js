@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import ProductListItem from './ProductListItem';
 import { getProducts } from '../../../api/api';
-// 상수 데이터 파일 사용 여부 질문
-// <li> 마다 다른 함수를 등록하려고 하는데, 상수 데이터 파일에서 함수도 등록 가능한지?
-// import { SORTMENU_LIST } from './sortmenudata.js';
 import './ProductList.scss';
 
 function ProductList() {
@@ -28,9 +25,10 @@ function ProductList() {
   };
 
   // useLocation, locationSearch 사용해보기
+  // 메뉴 누르면 뒤에 쿼리 붙이는 방법 공부하기
   useEffect(() => {
     handleLoad({ category: searchParams.get('category'), sort });
-  }, [searchParams.get('category'), sort]);
+  }, [searchParams, sort]);
 
   return (
     <div className="productList">

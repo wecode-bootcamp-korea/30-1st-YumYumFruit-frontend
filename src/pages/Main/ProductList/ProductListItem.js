@@ -20,7 +20,7 @@ function ProductListItem({ product }) {
         </li>
         <li className="item">{country}</li>
         <li className="item">
-          <span className="price">{price.toLocaleString()}원</span>
+          <span className="price">{Math.floor(price).toLocaleString()}원</span>
         </li>
       </ul>
     </article>
