@@ -15,7 +15,7 @@ function Login() {
 
   const sendLoginInfo = e => {
     e.preventDefault();
-    fetch('https://westagram-signup.herokuapp.com/login', {
+    fetch('https://b8a6-61-105-107-145.ngrok.io/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: loginVlaue.id,
@@ -23,16 +23,20 @@ function Login() {
       }),
     })
       .then(response => response.json())
-      .then(result => inLogin(result));
+      .then(result => {
+        if (result.token) {
+          localStorage.setItem('token', result.token);
+        }
+      });
   };
 
   const inLogin = ({ token, messege }) => {
     if (token) {
       localStorage.setItem('token', token);
-      alert('로그인 완료');
+      alert('냠냠푸룻! 환영합니다! :) ');
       Navigate('/');
     } else if (messege === 'INVALID_USER') {
-      alert('로그인 실패');
+      alert('앗! 아이디 또는 비밀번호를 확인해주세요! :( ');
     }
   };
 
@@ -44,12 +48,12 @@ function Login() {
       <div className="loginWarp">
         <div className="login">
           <h3>MEMBER LOGIN</h3>
-          <div className="loginBox">
+          <form className="loginBox" onSubmit={sendLoginInfo}>
             <div className="id">
               <span>ID</span>
               <input
                 type="text"
-                id="memberId"
+                className="memberId"
                 name="id"
                 onChange={handleInputValue}
               />
@@ -58,7 +62,7 @@ function Login() {
               <span>PASSWORD</span>
               <input
                 type="password"
-                id="memberPassword"
+                className="memberPassword"
                 name="pw"
                 onChange={handleInputValue}
               />
@@ -67,11 +71,9 @@ function Login() {
               <span>보안접속</span>
             </div>
             <div className="loginButton">
-              <button onSubmit={sendLoginInfo} onClick={inLogin}>
-                LOGIN
-              </button>
+              <button onClick={inLogin}>LOGIN </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
