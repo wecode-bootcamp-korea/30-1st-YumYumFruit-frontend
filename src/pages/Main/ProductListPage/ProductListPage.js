@@ -9,8 +9,8 @@ function ProductListPage() {
   const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
 
   const handleLowPriceClick = () => setSort('price');

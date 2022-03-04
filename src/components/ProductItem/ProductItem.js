@@ -12,16 +12,12 @@ function ProductItem({ product }) {
 
   return (
     <article className="productItem">
-      <div className="imgContainer">
-        <Link to="/">
-          <img
-            alt="img"
-            src={thumbnail_image_url}
-            className="img"
-            onClick={goToDetail}
-          />
-        </Link>
-      </div>
+      <img
+        alt="img"
+        src={thumbnail_image_url}
+        className="img"
+        onClick={goToDetail}
+      />
       <ul className="info">
         <li className="item">
           <Link to={`/products/detail/${id}`} className="link">
