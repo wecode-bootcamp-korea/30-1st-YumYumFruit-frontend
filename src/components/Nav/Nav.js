@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavItem from './NavItem';
 import { NAV_LIST_DATA } from './navdata.js';
 import './Nav.scss';
