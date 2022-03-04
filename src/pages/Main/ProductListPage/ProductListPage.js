@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import ProductItem from 'components/ProductItem/ProductItem';
-import PagingItem from 'components/PagingItem/PagingItem';
+import Pagination from 'components/Pagination/Pagination';
 import { getProducts } from 'api/api';
 import './ProductListPage.scss';
 
@@ -49,7 +49,7 @@ function ProductListPage() {
   // 이슈
   // 1) 메뉴 클릭 시 모두 location.search = ?category=all
   // 2) product/list 어떻게 출력 되는지? -> productList.map is not a function / category=null로 뜨는 듯
-  // 3) product/list 만들고 -> category/all을 없애기 (초기값 || "" , ?limit=20&offset=0) + 예솔님과 논의
+  // 3) product/list 만들고 -> category/all을 없애기 (초기값 || "" , `?limit=20&offset=0`) + 예솔님과 논의
 
   useEffect(() => {
     handleLoad({ category: searchParams.get('category'), sort, page });
@@ -97,27 +97,7 @@ function ProductListPage() {
           ))}
         </section>
         <div className="paging">
-          <div className="pagingBox">
-            <Link to="/" className="link">
-              ←
-            </Link>
-          </div>
-          <div className="pagingBox">
-            <Link to="/" className="link">
-              ←
-            </Link>
-          </div>
-          <PagingItem />
-          <div className="pagingBox">
-            <Link to="/" className="link">
-              →
-            </Link>
-          </div>
-          <p className="pagingBox">
-            <Link to="/" className="link">
-              →
-            </Link>
-          </p>
+          <Pagination totalPages={totalPages} page={page} setPage={setPage} />
         </div>
       </div>
     </div>
