@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import ProductItem from 'components/ProductItem/ProductItem';
 import PagingItem from 'components/PagingItem/PagingItem';
 import { getProducts } from 'api/api';
 import './ProductListPage.scss';
 
 function ProductListPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
@@ -13,10 +14,26 @@ function ProductListPage() {
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
 
-  const handleLowPriceClick = () => setSort('price');
-  const handleHighPriceClick = () => setSort('-price');
-  const handleNameClick = () => setSort('name');
-  const handleNewestClick = () => setSort('receiving_date');
+  // useLoaction.search -> &sort 뒤에 짜르기 (초기화 필요)
+  const handleLowPriceClick = () => {
+    setSort('price');
+    navigate(`?category=${searchParams.get('category')}&sort=price`);
+  };
+
+  const handleHighPriceClick = () => {
+    setSort('-price');
+    navigate(`?category=${searchParams.get('category')}&sort=-price`);
+  };
+
+  const handleNameClick = () => {
+    setSort('name');
+    navigate(`?category=${searchParams.get('category')}&sort=name`);
+  };
+
+  const handleNewestClick = () => {
+    setSort('receiving_date');
+    navigate(`?category=${searchParams.get('category')}&sort=receiving_date`);
+  };
 
   const handleLoad = async query => {
     const { results, total_pages, total_items } = await getProducts(query);
@@ -25,9 +42,15 @@ function ProductListPage() {
     setTotalItems(total_items);
   };
 
-  // useLocation, locationSearch 사용해보기
-  // 이슈 : 메뉴 클릭 시 모두 location.search = ?category=all
-  // 메뉴 클릭하면 쿼리 붙이는 방법 연구하기
+  // 리팩토링
+  // 1) '' 빈 스트링은 데이터가 모두 나온다 (all) 필요 없음
+  // 2) useLocation, location.search 사용해보기
+  // 3) 쿼리스트링 키 순서는 상관없음
+  // 이슈
+  // 1) 메뉴 클릭 시 모두 location.search = ?category=all
+  // 2) product/list 어떻게 출력 되는지? -> productList.map is not a function / category=null로 뜨는 듯
+  // 3) product/list 만들고 -> category/all을 없애기 (초기값 || "" , ?limit=20&offset=0) + 예솔님과 논의
+
   useEffect(() => {
     handleLoad({ category: searchParams.get('category'), sort, page });
   }, [searchParams, sort, page]);
