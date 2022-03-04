@@ -25,27 +25,22 @@ export const NAV_LIST_DATA = {
     {
       id: 1,
       name: '전체상품',
-      url: '/products/list',
     },
     {
       id: 2,
       name: '국산과일',
-      url: '/products/list',
     },
     {
       id: 3,
       name: '수입과일',
-      url: '/products/list',
     },
     {
       id: 4,
       name: '냉동과일',
-      url: '/products/list',
     },
     {
       id: 5,
       name: '세트과일',
-      url: '/products/list',
     },
   ],
   boardPageLinks: [
