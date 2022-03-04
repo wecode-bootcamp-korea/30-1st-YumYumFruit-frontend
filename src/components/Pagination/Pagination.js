@@ -23,14 +23,14 @@ function Pagination({ totalPages, page, setPage }) {
       </button>
       {Array(totalPages)
         .fill()
-        .map((paging, i) => (
+        .map((_, idx) => (
           <button
-            key={i + 1}
-            onClick={() => setPage(i + 1)}
-            aria-current={page === i + 1 ? 'page' : null}
+            key={idx + 1}
+            onClick={() => setPage(idx + 1)}
+            aria-current={page === idx + 1 ? 'page' : null}
             className="pageNum"
           >
-            {i + 1}
+            {idx + 1}
           </button>
         ))}
       <button
