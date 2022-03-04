@@ -9,7 +9,9 @@ function Pagination({ totalPages, page, setPage }) {
     <ol className="pagination">
       <button
         className="arrow"
-        onClick={() => setPage(1)}
+        onClick={() => {
+          setPage(1);
+        }}
         disabled={isFirstBtnValid}
       >
         &lt;&lt;
