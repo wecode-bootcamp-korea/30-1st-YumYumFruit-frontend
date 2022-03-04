@@ -5,14 +5,27 @@ function Signup() {
   const [signupValue, setSignupValue] = useState({
     email: '',
     password: '',
-    repassword: '',
-    name: '',
+    // repassword: '',
+    username: '',
     phone_number: '',
   });
 
-  // const { email, password, repassword, name, phone_number } = signupValue;
+  //이메일 @, . 포함
   const isValidEmail =
-    signupValue.email.includes('@') && signupValue.email.includes('.');
+    signupValue.email.includes('@') && signupValue.email.includes('.') === true;
+
+  //비밀번호 8자 이상 포함
+  const isValidPw = signupValue.password.length >= 8 === true;
+
+  //비밀번호 숫자
+  // const numValue = signupValue.password.search(/[0-9]/) === true;
+  // const engValue = signupValue.password.search(/[a-zA-Z]/) === true;
+
+  // //특수문자
+  //모든 문자열 1 이상?
+  const lengthValue =
+    signupValue.email.length && signupValue.username.length > 0 === true;
+  // const isValidPhone = signupValue.phone_number > 0 === true;
 
   const handlesetSignupValue = e => {
     const { name, value } = e.target;
@@ -20,20 +33,64 @@ function Signup() {
     console.log(e.target, value);
   };
 
-  // const sendJoinInfo = e => {
+  const sendJoinInfo = e => {
+    e.preventDefault();
+    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: signupValue.email,
+        password: signupValue.password,
+        username: signupValue.username,
+        phone_number: signupValue.phone_number,
+        // username: 'testrrr123',
+        // email: 'qwer12555@naver.com',
+        // password: 'asdf3456',
+        // phone_number: '01022344321',
+      }),
+    })
+      .then(Response => Response.json())
+      .then(result => handleJoinButton(result));
+  };
 
-  // };
+  const handleJoinButton = () => {
+    if (
+      !isValidEmail ||
+      !lengthValue ||
+      // !numValue < 0 ||
+      // !engValue < 0
+      !isValidPw
+    ) {
+      alert('양식에 맞게 모두 써 주셨나요?! T_T');
+    }
+    // } else {
+    //   alert('냠냠푸룻 Join 성공!');
+    // }
+  };
 
+  console.log(
+    '메일 >> ',
+    isValidEmail,
+    'pw >>',
+    isValidPw,
+    'pw 숫자>>',
+    // numValue,
+    // 'pw 영문>>',
+    // engValue,
+    '문자 입력1이상?>>',
+    lengthValue
+  );
   // const inJoin = ({}) => {
 
   // }
+
+  // const joinRemove = () => {}
 
   return (
     <div className="signup">
       <div className="titleArea">
         <h2>JOIN US</h2>
       </div>
-      <form className="joinForm">
+      <div className="joinForm">
         <div className="memberJoin">
           <div className="boardWriteTop">
             <h3>기본정보</h3>
@@ -42,7 +99,7 @@ function Signup() {
             <img src="" />
             필수 입력사항
           </p>
-          <div className="boardWrite">
+          <form className="boardWrite" onSubmit={sendJoinInfo}>
             <table>
               {/* <caption>회원 기본정보</caption> */}
               <tbody>
@@ -76,17 +133,17 @@ function Signup() {
                       maxLength={16}
                       onChange={handlesetSignupValue}
                     />
-                    (영문 대소문자/숫자 조합, 10자~16자)
+                    (영문 대소문자/숫자 조합, 8자~16자)
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <th scope="row">
                     비밀번호 확인
                     <img />
                   </th>
                   <td>
                     <input
-                      type="repassword"
+                      type="password"
                       name="repassword"
                       className="inputTypeText"
                       autoComplete="off"
@@ -97,16 +154,16 @@ function Signup() {
                     <span className="pwConfirmMsg"></span>
                     (영문 대소문자/숫자 조합, 8자~16자)
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
-                  <th scope="row" className="nameTitle" id="name">
+                  <th scope="row" className="nameTitle" id="username">
                     이름
                     <img />
                   </th>
                   <td>
                     <input
                       type="text"
-                      name="name"
+                      name="username"
                       className="inputTypeText"
                       maxLength={21}
                       onChange={handlesetSignupValue}
@@ -150,12 +207,11 @@ function Signup() {
                 </tr>
               </tbody>
             </table>
-            <button
-              onClick={inJoin} // onSubmit={sendJoinInfo}
-            ></button>
-          </div>
+            <button onClick={handleJoinButton}> 회원가입</button>
+            {/* <button onClick={handleJoinButton}>취소</button> */}
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
