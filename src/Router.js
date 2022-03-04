@@ -16,7 +16,7 @@ function Router() {
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/products/list" element={<ProductListPage />} />
-        <Route path="/products/detail/:id" element={<ProductItemPage />} />
+        <Route path="/products/product/:id" element={<ProductItemPage />} />
       </Routes>
     </BrowserRouter>
   );

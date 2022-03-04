@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProductItem from 'components/ProductItem/ProductItem';
+import PagingItem from 'components/PagingItem/PagingItem';
 import { getProducts } from 'api/api';
 import './ProductListPage.scss';
 
@@ -8,6 +9,9 @@ function ProductListPage() {
   const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
 
   const handleLowPriceClick = () => setSort('price');
   const handleHighPriceClick = () => setSort('-price');
@@ -15,16 +19,18 @@ function ProductListPage() {
   const handleNewestClick = () => setSort('receiving_date');
 
   const handleLoad = async query => {
-    const { results } = await getProducts(query);
+    const { results, total_pages, total_items } = await getProducts(query);
     setProductList(results);
+    setTotalPages(total_pages);
+    setTotalItems(total_items);
   };
 
   // useLocation, locationSearch 사용해보기
   // 이슈 : 메뉴 클릭 시 모두 location.search = ?category=all
   // 메뉴 클릭하면 쿼리 붙이는 방법 연구하기
   useEffect(() => {
-    handleLoad({ category: searchParams.get('category'), sort });
-  }, [searchParams, sort]);
+    handleLoad({ category: searchParams.get('category'), sort, page });
+  }, [searchParams, sort, page]);
 
   return (
     <div className="productList">
@@ -34,7 +40,7 @@ function ProductListPage() {
             <ul className="leftBox">
               <li className="item">TOTAL</li>
               <li className="item">
-                <span className="totalNum">{productList.length}</span>
+                <span className="totalNum">{totalItems}</span>
               </li>
               <li className="item">ITEMS</li>
             </ul>
@@ -45,7 +51,7 @@ function ProductListPage() {
                 LOW PRICE
               </li>
               <li className="item" onClick={handleHighPriceClick}>
-                HIsGH PRICE
+                HIGH PRICE
               </li>
               <li className="item" onClick={handleNameClick}>
                 NAME
@@ -78,15 +84,7 @@ function ProductListPage() {
               ←
             </Link>
           </div>
-          <div className="pagingBox">
-            <ul>
-              <li>
-                <Link to="/" className="link">
-                  1
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <PagingItem />
           <div className="pagingBox">
             <Link to="/" className="link">
               →

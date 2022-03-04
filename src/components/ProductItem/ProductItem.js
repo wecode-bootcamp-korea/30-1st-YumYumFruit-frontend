@@ -7,7 +7,7 @@ function ProductItem({ product }) {
   const { id, name, country, price, thumbnail_image_url } = product;
 
   const goToDetail = () => {
-    navigate(`/products/detail/${id}`);
+    navigate(`/products/product/${id}`);
   };
 
   return (
