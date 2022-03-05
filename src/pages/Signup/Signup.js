@@ -5,7 +5,7 @@ function Signup() {
   const [signupValue, setSignupValue] = useState({
     email: '',
     password: '',
-    // repassword: '',
+    repassword: '',
     username: '',
     phone_number: '',
   });
@@ -14,17 +14,18 @@ function Signup() {
   const isValidEmail =
     signupValue.email.includes('@') && signupValue.email.includes('.') === true;
 
-  //비밀번호 8자 이상 포함
-  const isValidPw = signupValue.password.length >= 8 === true;
+  //비밀번호 특수문자 포함
+  const spacialValue = signupValue.password.search(/[!@#$%^&*]/);
 
-  //비밀번호 숫자
-  // const numValue = signupValue.password.search(/[0-9]/) === true;
-  // const engValue = signupValue.password.search(/[a-zA-Z]/) === true;
+  //비밀번호 8자 이상 포함 & 특수문자 포함
+  const isValidPw = signupValue.password.length >= 8 && spacialValue >= 1;
 
-  // //특수문자
-  //모든 문자열 1 이상?
+  //비밀번호 === 비밀번호 확인
+  const checkPw = signupValue.password === signupValue.repassword;
+
+  //length 문자열 1 이상(폰번호 제외)
   const lengthValue =
-    signupValue.email.length && signupValue.username.length > 0 === true;
+    signupValue.email.length >= 1 && signupValue.username.length >= 1;
   // const isValidPhone = signupValue.phone_number > 0 === true;
 
   const handlesetSignupValue = e => {
@@ -35,7 +36,7 @@ function Signup() {
 
   const sendJoinInfo = e => {
     e.preventDefault();
-    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signup', {
+    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signu', {
       method: 'POST',
       body: JSON.stringify({
         email: signupValue.email,
@@ -53,36 +54,13 @@ function Signup() {
   };
 
   const handleJoinButton = () => {
-    if (
-      !isValidEmail ||
-      !lengthValue ||
-      // !numValue < 0 ||
-      // !engValue < 0
-      !isValidPw
-    ) {
+    if (!isValidEmail || !lengthValue || !isValidPw || !checkPw) {
       alert('양식에 맞게 모두 써 주셨나요?! T_T');
     }
     // } else {
     //   alert('냠냠푸룻 Join 성공!');
     // }
   };
-
-  console.log(
-    '메일 >> ',
-    isValidEmail,
-    'pw >>',
-    isValidPw,
-    'pw 숫자>>',
-    // numValue,
-    // 'pw 영문>>',
-    // engValue,
-    '문자 입력1이상?>>',
-    lengthValue
-  );
-  // const inJoin = ({}) => {
-
-  // }
-
   // const joinRemove = () => {}
 
   return (
@@ -136,7 +114,7 @@ function Signup() {
                     (영문 대소문자/숫자 조합, 8자~16자)
                   </td>
                 </tr>
-                {/* <tr>
+                <tr>
                   <th scope="row">
                     비밀번호 확인
                     <img />
@@ -152,9 +130,9 @@ function Signup() {
                       onChange={handlesetSignupValue}
                     />
                     <span className="pwConfirmMsg"></span>
-                    (영문 대소문자/숫자 조합, 8자~16자)
+                    입력하신 비밀번호와 동일하게 입력해주세요
                   </td>
-                </tr> */}
+                </tr>
                 <tr>
                   <th scope="row" className="nameTitle" id="username">
                     이름
