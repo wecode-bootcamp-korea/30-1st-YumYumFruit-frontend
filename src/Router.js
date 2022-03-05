@@ -4,8 +4,8 @@ import Nav from '../src/components/Nav/Nav';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
-import ProductListPage from './pages/Main/ProductListPage/ProductListPage';
-import ProductItemPage from './pages/Main/ProductItemPage/ProductItemPage';
+import ProductListPage from './pages/ProductListPage/ProductListPage';
+import ProductItemPage from './pages/ProductItemPage/ProductItemPage';
 
 function Router() {
   return (

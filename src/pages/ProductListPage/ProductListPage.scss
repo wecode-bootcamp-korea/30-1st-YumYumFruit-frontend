@@ -1,0 +1,49 @@
+@import 'styles/variables.scss';
+
+.productListPage {
+  .inner {
+    width: 1400px;
+    margin: 0 auto;
+
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 50px;
+      color: $theme-font-lightgray;
+
+      .totalItemsBox {
+        display: flex;
+
+        .item {
+          &:not(:first-child) {
+            margin-left: 5px;
+          }
+        }
+
+        .totalNum {
+          color: $theme-font-black;
+        }
+      }
+
+      .sortButtonsBox {
+        display: flex;
+
+        .item {
+          &:hover {
+            color: $theme-font-black;
+            cursor: pointer;
+          }
+
+          &:not(:last-child) {
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

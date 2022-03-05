@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ProductItem from 'components/ProductItem/ProductItem';
 import Pagination from 'components/Pagination/Pagination';
 import { getProducts } from 'api/api';
@@ -56,40 +56,36 @@ function ProductListPage() {
   }, [searchParams, sort, page]);
 
   return (
-    <div className="productList">
+    <div className="productListPage">
       <div className="inner">
         <header className="menu">
-          <div className="halfBox">
-            <ul className="leftBox">
-              <li className="item">TOTAL</li>
-              <li className="item">
-                <span className="totalNum">{totalItems}</span>
-              </li>
-              <li className="item">ITEMS</li>
-            </ul>
-          </div>
-          <div className="halfBox">
-            <ul className="rightBox">
-              <li className="item" onClick={handleLowPriceClick}>
-                LOW PRICE
-              </li>
-              <li className="item" onClick={handleHighPriceClick}>
-                HIGH PRICE
-              </li>
-              <li className="item" onClick={handleNameClick}>
-                NAME
-              </li>
-              <li className="item" onClick={handleNewestClick}>
-                NEW
-              </li>
-              {/* 추후 맵을 쓸 수 있을 것 같아 남겨놓음
+          <ul className="totalItemsBox">
+            <li className="item">TOTAL</li>
+            <li className="item">
+              <span className="totalNum">{totalItems}</span>
+            </li>
+            <li className="item">ITEMS</li>
+          </ul>
+          <ul className="sortButtonsBox">
+            <li className="item" onClick={handleLowPriceClick}>
+              LOW PRICE
+            </li>
+            <li className="item" onClick={handleHighPriceClick}>
+              HIGH PRICE
+            </li>
+            <li className="item" onClick={handleNameClick}>
+              NAME
+            </li>
+            <li className="item" onClick={handleNewestClick}>
+              NEW
+            </li>
+            {/* 추후 맵을 쓸 수 있을 것 같아 남겨놓음
                 s{SORTMENU_LIST.map(menu => (
                 <li key={menu.id} className="item">
                   {menu.name}
                 </li>
               ))} */}
-            </ul>
-          </div>
+          </ul>
         </header>
         <section className="list">
           {productList.map(product => (
