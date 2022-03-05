@@ -1,0 +1,33 @@
+.cart {
+  .container {
+    width: 1400px;
+    margin: 0 auto;
+
+    .titleArea {
+      text-align: center;
+
+      .title {
+        font-size: 25px;
+      }
+    }
+
+    .userInfoArea {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding: 15px 0;
+
+      .member {
+      }
+      .mileage {
+        display: flex;
+
+        .item {
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
