@@ -28,9 +28,9 @@ function Pagination({ totalPages, page, setPage }) {
         .map((_, idx) => (
           <button
             key={idx + 1}
+            className="pageNum"
             onClick={() => setPage(idx + 1)}
             aria-current={page === idx + 1 ? 'page' : null}
-            className="pageNum"
           >
             {idx + 1}
           </button>
