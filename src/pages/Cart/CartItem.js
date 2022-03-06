@@ -10,7 +10,7 @@ function CartItem({ item }) {
         <input type="checkbox" />
       </td>
       <td className="thumb">
-        <img alt="image" src={thumbnail_image_url} />
+        <img alt="img" src={thumbnail_image_url} />
       </td>
       <td className="product">{name}</td>
       <td className="price">{price}원</td>

@@ -12,7 +12,7 @@ export const GUIDE_LIST = {
     },
     {
       id: 3,
-      contet:
+      content:
         '- 선택하신 상품의 수량을 변경하시려면 수량변경 후 [변경] 버튼을 누르시면 됩니다.',
     },
     {
@@ -21,7 +21,7 @@ export const GUIDE_LIST = {
     },
     {
       id: 5,
-      contet:
+      content:
         '- 장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.',
     },
   ],
@@ -39,7 +39,7 @@ export const GUIDE_LIST = {
     },
     {
       id: 3,
-      contet:
+      content:
         '- 단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.',
     },
   ],

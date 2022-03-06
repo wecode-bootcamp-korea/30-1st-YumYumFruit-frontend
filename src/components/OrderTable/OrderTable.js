@@ -35,19 +35,15 @@ function OrderTable() {
         <tr>
           <td colSpan="10" className="orderTableBottom">
             <div className="wrapper">
-              <span className="type">[기본배송]</span>
-              <div className="totalPriceArea">
-                <span>상품구매금액</span>
-                <span className="price">24,600</span>
-                <span>+</span>
-                <span>배송비</span>
-                <span className="shippingFee">4,000</span>
-                <span>=</span>
-                <span>합계 :</span>
+              <p className="type">[기본배송]</p>
+              <p className="totalPriceArea">
+                상품구매금액
+                <span className="price"> 24,600 </span>+ 배송비
+                <span className="shippingFee"> 4,000 </span>= 합계 :
                 <span className="totalPrice">
                   28,600<span className="won">원</span>
                 </span>
-              </div>
+              </p>
             </div>
           </td>
         </tr>

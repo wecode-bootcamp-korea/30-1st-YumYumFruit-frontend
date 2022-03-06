@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GUIDE_LIST } from './guidedata';
 import { TABMENU_DATA } from './tabmenudata';
@@ -72,16 +72,28 @@ function Cart() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="price">55,200원</td>
-                  <td className="option">+0원</td>
-                  <td className="total">=55,200원</td>
+                  <td>
+                    <span className="num">55,200</span>원
+                  </td>
+                  <td>
+                    <span className="num">+0</span>원
+                  </td>
+                  <td className="total">
+                    <span className="num">=55,200</span>원
+                  </td>
                 </tr>
               </tbody>
             </table>
             <div className="orderBtnArea">
-              <button className="totalBtn">전체상품주문</button>
-              <button className="checkBtn">선택상품주문</button>
-              <button className="goToMainBtn">쇼핑계속하기</button>
+              <Link to="/order/orderform" className="btn totalBtn">
+                전체상품주문
+              </Link>
+              <Link to="/order/orderform" className="btn checkBtn">
+                선택상품주문
+              </Link>
+              <Link to="/" className="btn goToMainBtn">
+                쇼핑계속하기
+              </Link>
             </div>
             <div className="cartGuide">
               <h3 className="title">이용안내</h3>
@@ -89,13 +101,17 @@ function Cart() {
                 <h4 className="subTitle">장바구니 이용안내</h4>
                 <ul>
                   {GUIDE_LIST.cartGuide.map(item => (
-                    <li key={item.id}>{item.content}</li>
+                    <li key={item.id} className="item">
+                      {item.content}
+                    </li>
                   ))}
                 </ul>
                 <h4 className="subTitle">무이자할부 이용안내</h4>
                 <ul>
                   {GUIDE_LIST.payingGuide.map(item => (
-                    <li key={item.id}>{item.content}</li>
+                    <li key={item.id} className="item">
+                      {item.content}
+                    </li>
                   ))}
                 </ul>
               </div>

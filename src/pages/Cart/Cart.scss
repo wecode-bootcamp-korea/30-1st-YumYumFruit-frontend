@@ -59,6 +59,117 @@
         padding: 15px 0;
         font-weight: 700;
       }
+
+      .priceGuide {
+        padding: 15px 10px;
+        border-bottom: 1px solid $theme-border-lightgray;
+        color: $theme-font-gray;
+      }
+
+      .selectMenu {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 10px;
+        margin-bottom: 50px;
+
+        button {
+          padding: 8px 10px 6px;
+          margin-left: 10px;
+          background-color: white;
+          border: 1px solid $theme-border-lightgray;
+          border-radius: 3px;
+          font-size: 16px;
+
+          &:hover {
+            border: 1px solid $theme-border-gray;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .totalTable {
+        width: 100%;
+        border: 1px solid $theme-border-lightgray;
+        border-collapse: collapse;
+
+        th,
+        td {
+          width: 33%;
+        }
+
+        th {
+          padding: 10px 0;
+          background-color: $theme-background-lightgray;
+          border: 1px solid $theme-border-lightgray;
+          font-weight: 700;
+        }
+
+        td {
+          padding: 20px 0;
+          border: 1px solid $theme-border-lightgray;
+          text-align: center;
+          font-size: 25px;
+        }
+
+        .num {
+          font-weight: 700;
+        }
+
+        .total {
+          color: $theme-font-red;
+        }
+      }
+
+      .orderBtnArea {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin: 20px 0 50px;
+
+        .btn {
+          display: block;
+          padding: 15px 20px 17px;
+          border-radius: 3px;
+          text-decoration: none;
+          margin: 0 6px;
+        }
+
+        .totalBtn {
+          background-color: $theme-background-black;
+          color: white;
+        }
+
+        .checkBtn {
+          background-color: $theme-background-gray;
+          color: white;
+        }
+
+        .goToMainBtn {
+          position: absolute;
+          right: 0;
+          border: 1px solid $theme-border-lightgray;
+          color: $theme-font-black;
+        }
+      }
+
+      .cartGuide {
+        padding: 30px 15px;
+        border: 1px solid $theme-border-lightgray;
+
+        .title {
+          font-weight: 500;
+        }
+        .content {
+          .subTitle {
+            margin-top: 30px;
+          }
+
+          .item {
+            padding-top: 10px;
+            color: $theme-font-gray;
+          }
+        }
+      }
     }
   }
 }
