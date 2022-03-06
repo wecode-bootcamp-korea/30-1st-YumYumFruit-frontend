@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import JoinButton from './Button/JoinButton';
+import CancButton from './Button/CancButton';
 import './Signup.scss';
 
 function Signup() {
@@ -9,6 +12,11 @@ function Signup() {
     username: '',
     phone_number: '',
   });
+  // const [emailMessage, setEmailMessage] = useState('');
+  // const [passwordMessage, setPasswordMessage] = useState('');
+  // const [repasswordMessage, setRepasswordMessage] = useState('');
+
+  const navigate = useNavigate();
 
   //이메일 @, . 포함
   const isValidEmail =
@@ -17,11 +25,15 @@ function Signup() {
   //비밀번호 특수문자 포함
   const spacialValue = signupValue.password.search(/[!@#$%^&*]/);
 
+  //비밀번호 === 비밀번호 확인
+  const checkPw = signupValue.password;
+  const checkRePw = signupValue.repassword;
+
   //비밀번호 8자 이상 포함 & 특수문자 포함
   const isValidPw = signupValue.password.length >= 8 && spacialValue >= 1;
 
-  //비밀번호 === 비밀번호 확인
-  const checkPw = signupValue.password === signupValue.repassword;
+  //비밀번호 확인
+  const rePwcheck = checkPw === checkRePw;
 
   //length 문자열 1 이상(폰번호 제외)
   const lengthValue =
@@ -29,14 +41,30 @@ function Signup() {
   // const isValidPhone = signupValue.phone_number > 0 === true;
 
   const handlesetSignupValue = e => {
+    // const handlesetSignupValue = useCallback(e => {
     const { name, value } = e.target;
     setSignupValue({ ...signupValue, [name]: value });
     console.log(e.target, value);
   };
+  // );
+
+  // const isValidEmail = useCallback(e => {
+  //   const emailcheck =
+  //     signupValue.email.includes('@') && signupValue.email.includes('.');
+  //   const emailcurrent = e.target.value;
+  //   setSignupValue.email(emailcurrent);
+  //   if (!emailcheck.test(emailcurrent)) {
+  //     setEmailMessage('이메일을 바르게 써 주세요');
+  //     setSignupValue.email(false);
+  //   } else {
+  //     setEmailMessage('이메일을 바르게 써 주세요');
+  //     setSignupValue.email(true);
+  //   }
+  // }, []);
 
   const sendJoinInfo = e => {
     e.preventDefault();
-    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signu', {
+    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signup', {
       method: 'POST',
       body: JSON.stringify({
         email: signupValue.email,
@@ -54,14 +82,22 @@ function Signup() {
   };
 
   const handleJoinButton = () => {
-    if (!isValidEmail || !lengthValue || !isValidPw || !checkPw) {
+    if (!isValidEmail || !lengthValue || !isValidPw || !checkPw || !rePwcheck) {
       alert('양식에 맞게 모두 써 주셨나요?! T_T');
+      return false;
+    } else {
+      // 회원가입 완료 창으로 추후에 수정하기!
+      navigate('/');
     }
-    // } else {
-    //   alert('냠냠푸룻 Join 성공!');
-    // }
   };
-  // const joinRemove = () => {}
+  console.log('이메일 @,.있음? >>', isValidEmail);
+  console.log('pw8자이상+특문있음?/비번같 >>', isValidPw);
+  console.log('문자열 1 이상? >>', lengthValue);
+  console.log('비번 재확인', rePwcheck);
+
+  const CancleButton = () => {
+    navigate('/');
+  };
 
   return (
     <div className="signup">
@@ -72,19 +108,18 @@ function Signup() {
         <div className="memberJoin">
           <div className="boardWriteTop">
             <h3>기본정보</h3>
+            <p className="required">
+              <img alt="checkImg" src="./images/checked.png" />
+              필수 입력사항
+            </p>
           </div>
-          <p className="required">
-            <img src="" />
-            필수 입력사항
-          </p>
           <form className="boardWrite" onSubmit={sendJoinInfo}>
             <table>
-              {/* <caption>회원 기본정보</caption> */}
               <tbody>
                 <tr>
                   <th scope="row">
                     아이디(EMAIL)
-                    <img />
+                    <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
@@ -100,7 +135,7 @@ function Signup() {
                 <tr>
                   <th scope="row">
                     비밀번호
-                    <img />
+                    <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
@@ -117,7 +152,7 @@ function Signup() {
                 <tr>
                   <th scope="row">
                     비밀번호 확인
-                    <img />
+                    <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
@@ -136,7 +171,7 @@ function Signup() {
                 <tr>
                   <th scope="row" className="nameTitle" id="username">
                     이름
-                    <img />
+                    <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
@@ -149,10 +184,9 @@ function Signup() {
                     <span className="pwMsg"></span>
                   </td>
                 </tr>
-                <tr>
+                <tr className="phoneNumber">
                   <th scope="row" className="tel">
                     전화번호
-                    <img />
                   </th>
                   <td>
                     <select
@@ -185,8 +219,22 @@ function Signup() {
                 </tr>
               </tbody>
             </table>
-            <button onClick={handleJoinButton}> 회원가입</button>
-            {/* <button onClick={handleJoinButton}>취소</button> */}
+            <div className="joinButtons">
+              <JoinButton
+                className="joinBtn"
+                type="button"
+                onClick={handleJoinButton}
+              >
+                회원가입
+              </JoinButton>
+              <CancButton
+                className="cancleBtn"
+                type="button"
+                onClick={CancleButton}
+              >
+                취소
+              </CancButton>
+            </div>
           </form>
         </div>
       </div>

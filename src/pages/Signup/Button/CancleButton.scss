@@ -1,0 +1,16 @@
+.cancleBtn {
+  button {
+    margin: 5px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    padding: 12px 18px;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 0.25rem;
+    font-size: 11px;
+    line-height: 1.5;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
