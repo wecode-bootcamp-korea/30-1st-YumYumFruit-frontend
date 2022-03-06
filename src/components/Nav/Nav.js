@@ -29,18 +29,14 @@ function Nav() {
       <div className="top">
         <div className="topInner">
           <div className="menuList">
-            <div className="halfBox">
-              <ul className="leftBox">
-                <li className="item">(+) ADD BOOKMARK</li>
-              </ul>
-            </div>
-            <div className="halfBox">
-              <ul className="rightBox">
-                {NAV_LIST_DATA.userPageLinks.map(item => (
-                  <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
+            <ul className="leftMenu">
+              <li className="item">(+) ADD BOOKMARK</li>
+            </ul>
+            <ul className="rightMenu">
+              {NAV_LIST_DATA.userPageLinks.map(item => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </ul>
           </div>
           <div className="topLogo">
             <Link className="link" to="/">
@@ -52,20 +48,16 @@ function Nav() {
       <div className="menu" ref={ref}>
         <div className="menuInner">
           <div className="menuList">
-            <div className="halfBox">
-              <ul className="leftBox">
-                {NAV_LIST_DATA.productPageLinks.map(item => (
-                  <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
-            <div className="halfBox">
-              <ul className="rightBox">
-                {NAV_LIST_DATA.boardPageLinks.map(item => (
-                  <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
+            <ul className="leftMenu">
+              {NAV_LIST_DATA.productPageLinks.map(item => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </ul>
+            <ul className="rightMenu">
+              {NAV_LIST_DATA.boardPageLinks.map(item => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </ul>
           </div>
         </div>
       </div>
