@@ -1,0 +1,15 @@
+@import 'styles/variables.scss';
+
+.navItem {
+  color: $theme-font-black;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $theme-font-lightgray;
+  }
+
+  &:not(:first-child) {
+    margin-left: 25px;
+  }
+}
