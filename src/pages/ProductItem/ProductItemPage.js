@@ -3,28 +3,20 @@ import Option from './Option';
 import './ProductItemPage.scss';
 
 const ProductItemPage = () => {
-  const [optionFalse, setOptionFalse] = useState({ count: 1, price: 10000 });
-  const [productItem, setProductItem] = useState([]);
-  const [optionList, setOptionList] = useState([]);
-  const [option, setOption] = useState({});
-
-  const increase = () => {
-    setOptionFalse({
-      ...optionFalse,
-      count: optionFalse.count + 1,
-      price: optionFalse.price + 10000,
-    });
-  };
-
-  const decrease = () => {
-    if (optionFalse.count > 1) {
-      setOptionFalse({
-        ...optionFalse,
-        count: optionFalse.count - 1,
-        price: optionFalse.price - 10000,
-      });
-    }
-  };
+  const [productItem, setProductItem] = useState([]); //상세페이지 아이템
+  const [optionList, setOptionList] = useState([]); //packaging option
+  const [total, setTotal] = useState({
+    //상품 총합(개수 and price)
+    sumNum: 0,
+    noPackaging: {
+      quantity: 0,
+      option: '',
+    },
+    packaging: {
+      quantity: 0,
+      option: '',
+    },
+  });
 
   useEffect(() => {
     fetch('http://localhost:3000/data/ProductItemPages.json')
@@ -36,23 +28,43 @@ const ProductItemPage = () => {
     if (optionList.length === 0) {
       setOptionList(
         optionList.concat({
-          productName: productItem.name,
-          extraPrice: e.target.getAttribute('status'),
+          name: productItem.name,
+          price: productItem.price,
+          status: e.target.getAttribute('status'),
+          pck: e.target.getAttribute('pck'),
         })
       );
     } else if (
       optionList.length < 2 &&
-      optionList[0].extraPrice !== e.target.getAttribute('status')
+      optionList[0].status !== e.target.getAttribute('status')
     ) {
       setOptionList(
         optionList.concat({
-          productName: productItem.name,
-          extraPrice: e.target.getAttribute('status'),
+          name: productItem.name,
+          price: productItem.price,
+          status: e.target.getAttribute('status'),
+          pck: e.target.getAttribute('pck'),
         })
       );
     }
   };
-  console.log(optionList);
+
+  // const goToCart = () => {
+  //   // console.log('hello');
+  //   fetch('', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       name: ,
+  //       price:
+  //     })
+  //   })
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     if (res.success) {
+  //       alert("장바구니로 이동")
+  //     }
+  //   })
+  // };
 
   if (!productItem.name) {
     return null;
@@ -90,18 +102,20 @@ const ProductItemPage = () => {
             <div>
               <label>
                 <input
+                  name="option"
                   type="radio"
                   status="선물포장 없음"
-                  name="packaging"
+                  pck="noPackaging"
                   onClick={addList}
                 />
                 선물포장 없음
               </label>
               <label>
                 <input
+                  name="option"
                   type="radio"
                   status="- 포장 있음(+3,000원)"
-                  name="packaging"
+                  pck="packaging"
                   onClick={addList}
                 />
                 선물포장 있음(+ 3,000원)
@@ -112,13 +126,24 @@ const ProductItemPage = () => {
             return (
               <Option
                 key={index}
-                name={option.productName}
-                extraPrice={option.extraPrice}
+                name={option.name}
+                price={option.price}
+                status={option.status}
+                pck={option.pck}
+                total={total}
+                setTotal={setTotal}
               />
             );
           })}
           <div className="totalProducts">
-            <span>TOTAL : 0(0개)</span>
+            <span>
+              {/* TOTAL : {total.sumPrice.toLocaleString()}원({total.sumNum}개) */}
+              TOTAL :
+              {total.noPackaging.quantity * productItem.price +
+                total.packaging.quantity * (productItem.price + 3000)}
+              원(
+              {total.sumNum}개)
+            </span>
             <div>
               <button className="buyBtn" />
               <div>

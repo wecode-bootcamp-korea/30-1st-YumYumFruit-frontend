@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Option = ({ name, extraPrice }) => {
+const Option = ({ name, price, status, pck, total, setTotal }) => {
+  const [optionCount, setOptionCount] = useState({ count: 0 });
+
+  const increase = () => {
+    setOptionCount({
+      count: optionCount.count + 1,
+    });
+    setTotal({
+      ...total,
+      sumNum: total.sumNum + 1,
+      [pck]: {
+        quantity: total[pck].quantity + 1,
+      },
+    });
+  };
+
+  const decrease = () => {
+    if (optionCount.count >= 1) {
+      setOptionCount({
+        count: optionCount.count - 1,
+      });
+      setTotal({
+        ...total,
+        sumPrice: total.sumPrice - price,
+        sumNum: total.sumNum - 1,
+        [pck]: {
+          quantity: total[pck].quantity - 1,
+        },
+      });
+    }
+  };
+
   return (
     <div className="productCount">
       <div className="productInfo">
         <span>{name}</span>
-        <span>{extraPrice}</span>
+        <span>{status}</span>
       </div>
-      <span>1</span>
+      <span>{optionCount.count}</span>
       <div className="amountSelect">
         <div>
-          <button className="btnPlus">+</button>
-          <button className="btnMinus">-</button>
+          <button className="btnPlus" onClick={increase} pck={pck}>
+            +
+          </button>
+          <button className="btnMinus" onClick={decrease} pck={pck}>
+            -
+          </button>
         </div>
         <button className="btnDelete">x</button>
       </div>
