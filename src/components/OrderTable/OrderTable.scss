@@ -1,0 +1,76 @@
+@import 'styles/variables.scss';
+
+.orderTable {
+  width: 100%;
+  border-top: 3px solid $theme-font-black;
+
+  thead {
+    th {
+      padding: 17px 0px 15px;
+    }
+
+    .check {
+      width: 27px;
+    }
+
+    .thumb,
+    .price,
+    .mileage,
+    .delivery,
+    .total,
+    .charge,
+    .quantity {
+      width: 90px;
+    }
+
+    .button {
+      width: 120px;
+    }
+  }
+
+  tbody {
+    border-top: 1px solid $theme-border-lightgray;
+    border-bottom: 1px solid $theme-border-lightgray;
+  }
+
+  tfoot {
+    .orderTableBottom {
+      /* td에 display: flex 주면 width가 늘어나지 않음 --> 왜? */
+      padding: 30px 22px 33px;
+      background-color: $theme-background-lightgray;
+
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .totalPriceArea {
+          //   display: flex; --> flex로 하면 28,600만 내려가는 이유?
+          position: relative;
+          top: -4px;
+
+          span {
+            &:not(:last-child) {
+              margin-right: 5px;
+            }
+          }
+
+          .price,
+          .shippingFee {
+            font-weight: 700;
+          }
+
+          .totalPrice {
+            margin-left: 5px;
+            font-size: 24px;
+            font-weight: 700;
+            color: $theme-font-red;
+
+            .won {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

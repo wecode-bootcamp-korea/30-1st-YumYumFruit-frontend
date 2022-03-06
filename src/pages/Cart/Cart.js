@@ -1,9 +1,16 @@
-import React from 'react';
-import CartItem from './CartItem';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { GUIDE_LIST } from './guidedata';
+import { TABMENU_DATA } from './tabmenudata';
 import './Cart.scss';
 
 function Cart() {
+  const [currentId, setCurrentId] = useState(1);
+
+  const clickHandler = id => {
+    setCurrentId(id);
+  };
+
   return (
     <div className="cart">
       <div className="container">
@@ -20,63 +27,27 @@ function Cart() {
               <li className="item">쿠폰 : 0개</li>
             </ul>
           </div>
+          {/* tabMenu */}
+          <ul className="tabs">
+            {TABMENU_DATA.CATEGORY_ARR.map(category => {
+              const { id, name, src } = category;
+              return (
+                <li
+                  key={id}
+                  className="tabMenu"
+                  onClick={() => clickHandler(id)}
+                >
+                  <Link to={src} className="link">
+                    {name} (n)
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
           <div className="orderListArea">
             <div className="orderTitle">일반상품 (N)</div>
-            <table className="orderTable">
-              <thead>
-                <tr>
-                  <th>
-                    <input type="checkbox" />
-                  </th>
-                  <th scope="col" className="thumb">
-                    이미지
-                  </th>
-                  <th scope="col" className="product">
-                    상품정보
-                  </th>
-                  <th scope="col" className="price">
-                    판매가
-                  </th>
-                  <th scope="col" className="quantity">
-                    수량
-                  </th>
-                  <th scope="col" className="mileage">
-                    적립금
-                  </th>
-                  <th scope="col" className="delivery">
-                    배송구분
-                  </th>
-                  <th scope="col" className="charge">
-                    배송비
-                  </th>
-                  <th scope="col" className="total">
-                    합계
-                  </th>
-                  <th scope="col" className="button">
-                    선택
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <CartItem />
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="10">
-                    <div>
-                      <span className="type">[기본배송]</span>
-                    </div>
-                    <div>
-                      상품구매금액
-                      <span className="price">` 24,600 `</span>` + 배송비 4,000
-                      = 합계 : `<span className="totalPrice">28,600</span>원
-                    </div>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+            {/* orderTable */}
+            {TABMENU_DATA.MAPPING_OBJ[currentId]}
             <div className="priceGuide">
               할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다
             </div>
@@ -101,13 +72,13 @@ function Cart() {
               </thead>
               <tbody>
                 <tr>
-                  <td clasdsName="price">55,200원</td>
-                  <td clasdsName="option">+0원</td>
-                  <td clasdsName="total">=55,200원</td>
+                  <td className="price">55,200원</td>
+                  <td className="option">+0원</td>
+                  <td className="total">=55,200원</td>
                 </tr>
               </tbody>
             </table>
-            <div clasName="orderBtnArea">
+            <div className="orderBtnArea">
               <button className="totalBtn">전체상품주문</button>
               <button className="checkBtn">선택상품주문</button>
               <button className="goToMainBtn">쇼핑계속하기</button>

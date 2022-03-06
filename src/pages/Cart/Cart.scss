@@ -1,4 +1,4 @@
-// @import
+@import 'styles/variables.scss';
 
 .cart {
   .container {
@@ -16,12 +16,11 @@
     .userInfoArea {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      padding: 15px 0;
-      // border: 1px solid $theme-border-lightgray;
+      margin-top: 50px;
+      padding: 25px 0;
+      border-top: 1px solid $theme-border-lightgray;
+      border-bottom: 1px solid $theme-border-lightgray;
 
-      .member {
-      }
       .mileage {
         display: flex;
 
@@ -30,6 +29,35 @@
             margin-right: 10px;
           }
         }
+      }
+    }
+
+    .tabs {
+      display: flex;
+      margin-top: 55px;
+      margin-bottom: 45px;
+      border-bottom: 1px solid $theme-border-lightgray;
+
+      .tabMenu {
+        padding: 20px 80px;
+        border-top: 1px solid $theme-border-lightgray;
+        border-left: 1px solid $theme-border-lightgray;
+
+        &:last-child {
+          border-right: 1px solid $theme-border-lightgray;
+        }
+
+        .link {
+          text-decoration: none;
+          color: $theme-font-black;
+        }
+      }
+    }
+
+    .orderListArea {
+      .orderTitle {
+        padding: 15px 0;
+        font-weight: 700;
       }
     }
   }
