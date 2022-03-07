@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Option from './Option';
 import './ProductItemPage.scss';
 
@@ -10,19 +11,26 @@ const ProductItemPage = () => {
     sumNum: 0,
     noPackaging: {
       quantity: 0,
-      option: '',
+      option: 'noPackaging',
     },
     packaging: {
       quantity: 0,
-      option: '',
+      option: 'packaging',
     },
   });
 
   useEffect(() => {
-    fetch('http://localhost:3000/data/ProductItemPages.json')
+    fetch('http://10.58.1.244:8000/products/7')
       .then(response => response.json())
-      .then(data => setProductItem(data));
+      // .then(data => setProductItem(data));
+      .then(data => setProductItem(data.data));
   }, []);
+
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/data/ProductItemPages.json')
+  //     .then(response => response.json())
+  //     .then(data => setProductItem(data));
+  // }, []);
 
   const addList = e => {
     if (optionList.length === 0) {
@@ -49,22 +57,44 @@ const ProductItemPage = () => {
     }
   };
 
-  // const goToCart = () => {
-  //   // console.log('hello');
-  //   fetch('', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       name: ,
-  //       price:
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(res => {
-  //     if (res.success) {
-  //       alert("장바구니로 이동")
-  //     }
-  //   })
-  // };
+  const cartclick = () => {
+    fetch('http://10.58.1.244:8000/users/shoppingcart', {
+      method: 'POST',
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTZ9.Uvl7_ZDwmPHKd-av0nQG5pf5-F29Hv8Tb1fjhZp_o6U',
+      },
+      // body: JSON.stringify({
+      //   product_id: productItem.product_id,
+      //   quantity: total.packaging.quantity,
+      //   packing_option: total.packaging.option,
+      // }),
+      body: JSON.stringify([
+        {
+          product_id: productItem.product_id,
+          quantity: total.packaging.quantity,
+          packing_option: total.packaging.option,
+        },
+        {
+          product_id: productItem.product_id,
+          quantity: total.noPackaging.quantity,
+          packing_option: total.noPackaging.option,
+        },
+      ]),
+    })
+      .then(res => res.json())
+      .then(alert('장바구니에 담겼습니다.'));
+    // .then(res => console.log(res));
+    // .then(res => {
+    //   if (res.success) {
+    //     alert("장바구니로 이동")
+    //   }
+    // })
+
+    // const goToCart = () => {
+    //   Navigate('/');
+    // }
+  };
 
   if (!productItem.name) {
     return null;
@@ -147,7 +177,7 @@ const ProductItemPage = () => {
             <div>
               <button className="buyBtn" />
               <div>
-                <button className="cartBtn" />
+                <button className="cartBtn" onClick={cartclick} />
                 <button className="wishBtn" />
               </div>
             </div>

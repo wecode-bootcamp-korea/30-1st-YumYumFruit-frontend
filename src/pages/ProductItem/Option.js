@@ -12,6 +12,7 @@ const Option = ({ name, price, status, pck, total, setTotal }) => {
       sumNum: total.sumNum + 1,
       [pck]: {
         quantity: total[pck].quantity + 1,
+        option: pck,
       },
     });
   };
@@ -27,6 +28,7 @@ const Option = ({ name, price, status, pck, total, setTotal }) => {
         sumNum: total.sumNum - 1,
         [pck]: {
           quantity: total[pck].quantity - 1,
+          option: pck,
         },
       });
     }

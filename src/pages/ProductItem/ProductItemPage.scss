@@ -66,10 +66,12 @@
 
         label {
           margin-bottom: 5px;
+          cursor: pointer;
 
           input {
             margin-top: -1px;
             vertical-align: middle;
+            cursor: pointer;
           }
         }
       }
@@ -153,6 +155,7 @@
         .buyBtn:hover {
           animation-play-state: paused;
           background-color: black;
+          cursor: pointer;
         }
 
         .buyBtn:hover::before {
@@ -181,6 +184,7 @@
 
           .cartBtn:hover {
             background-color: #dddddd;
+            cursor: pointer;
           }
 
           .cartBtn:hover::before {
@@ -200,6 +204,7 @@
           .wishBtn:hover {
             animation-play-state: paused;
             background-color: #dddddd;
+            cursor: pointer;
           }
 
           .wishBtn:hover::before {
