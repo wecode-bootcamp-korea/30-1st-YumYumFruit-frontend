@@ -4,7 +4,6 @@ import { getProducts } from 'api/api';
 import './Main.scss';
 
 function Main() {
-<<<<<<< HEAD
   const [productList, setProductList] = useState([]);
 
   const handleLoad = async query => {
@@ -25,8 +24,5 @@ function Main() {
       </section>
     </main>
   );
-=======
-  return <main className="main"></main>;
->>>>>>> master
 }
 export default Main;
