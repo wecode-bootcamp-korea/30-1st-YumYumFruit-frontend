@@ -5,6 +5,7 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
 import Cart from './pages/Cart/Cart';
+import Footer from 'components/Footer/Footer';
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
         <Route path="/login" element={<Login />} />;
         <Route path="/users/shoppingcart" element={<Cart />} />;
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
