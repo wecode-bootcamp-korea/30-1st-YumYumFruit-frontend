@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { config } from '../../config';
 import JoinButton from './Button/JoinButton';
 import CancButton from './Button/CancButton';
 import './Signup.scss';
@@ -9,7 +10,7 @@ function Signup() {
     email: '',
     password: '',
     repassword: '',
-    username: '',
+    name: '',
     phone_number: '',
   });
 
@@ -34,50 +35,40 @@ function Signup() {
 
   //length 문자열 1 이상(폰번호 제외)
   const lengthValue =
-    signupValue.email.length >= 1 && signupValue.username.length >= 1;
+    signupValue.email.length >= 1 && signupValue.name.length >= 1;
   // const isValidPhone = signupValue.phone_number > 0 === true;
 
   const handlesetSignupValue = e => {
     // const handlesetSignupValue = useCallback(e => {
     const { name, value } = e.target;
     setSignupValue({ ...signupValue, [name]: value });
-    console.log(e.target, value);
   };
   // );
 
   const sendJoinInfo = e => {
-    console.log('e');
     e.preventDefault();
-    fetch('https://31fb-61-105-107-145.ngrok.i/users/signup', {
+    fetch(`${config.api}/users/signup`, {
       method: 'POST',
       body: JSON.stringify({
         email: signupValue.email,
         password: signupValue.password,
-        username: signupValue.username,
+        name: signupValue.name,
         phone_number: signupValue.phone_number,
       }),
     })
       .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        handleJoinButton(result);
-      });
+      .then(result => handleJoinButton(result));
   };
 
   const handleJoinButton = () => {
-    console.log('양식');
     if (!isValidEmail || !lengthValue || !isValidPw || !checkPw || !rePwcheck) {
       alert('양식에 맞게 모두 써 주셨나요?! T_T');
       return false;
     } else {
-      // 회원가입 완료 창으로 추후에 수정하기!
+      alert('냠냠푸룻 회원가입 완료! 🍉');
       navigate('/');
     }
   };
-  console.log('이메일 @,.있음? >>', isValidEmail);
-  console.log('pw8자이상+특문있음?/비번같 >>', isValidPw);
-  console.log('문자열 1 이상? >>', lengthValue);
-  console.log('비번 재확인', rePwcheck);
 
   const CancleButton = () => {
     navigate('/');
@@ -126,7 +117,6 @@ function Signup() {
                       type="password"
                       name="password"
                       className="inputTypeText"
-                      // disabled={0}s
                       maxLength={16}
                       onChange={handlesetSignupValue}
                     />
@@ -153,19 +143,20 @@ function Signup() {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="nameTitle" id="username">
+                  <th scope="row" className="nameTitle" id="name">
                     이름
                     <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
                       type="text"
-                      name="username"
+                      name="name"
                       className="inputTypeText"
                       maxLength={21}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="pwMsg">{/* 메세지 유효식 수정? */}</span>
+                    <span className="pwMsg"></span>
+                    핸드폰 번호를 입력해주세요
                   </td>
                 </tr>
                 <tr className="phoneNumber">
@@ -204,19 +195,9 @@ function Signup() {
               </tbody>
             </table>
             <div className="joinButtons">
-              {/* <JoinButton className="joinBtn" type="button">
-                회원가입
-              </JoinButton> */}
               <button className="joinBtn" type="button" onClick={sendJoinInfo}>
                 회원가입
               </button>
-              {/* <CancButton
-                className="cancleBtn"
-                type="button"
-                onClick={CancleButton}
-              >
-                취소
-              </CancButton> */}
               <button
                 className="cancleBtn"
                 type="button"
@@ -224,6 +205,16 @@ function Signup() {
               >
                 취소
               </button>
+              {/* <JoinButton className="joinBtn" type="button">
+                  회원가입
+                </JoinButton> */}
+              {/* <CancButton
+                  className="cancleBtn"
+                  type="button"
+                  onClick={CancleButton}
+                >
+                  취소
+                </CancButton> */}
             </div>
           </form>
         </div>
