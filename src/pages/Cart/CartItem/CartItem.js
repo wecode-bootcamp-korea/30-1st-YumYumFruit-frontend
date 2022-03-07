@@ -6,7 +6,7 @@ import './CartItem.scss';
 function CartItem({ item, isallChecked, checkedItemsHandler }) {
   const { cart_id, name, price, thumbnail_image_url, quantity, option } = item;
   const [quantityNum, setQuantityNum] = useState(quantity);
-  const priceSum = price * quantityNum;
+  const priceSum = price * quantity;
   const navigate = useNavigate();
 
   // 수량 인풋 핸들러
@@ -15,6 +15,7 @@ function CartItem({ item, isallChecked, checkedItemsHandler }) {
   };
 
   // 변경버튼 onClick : quantity 수정하는 PATCH 함수 넣기
+  // 수정 후, cartList를 다시 받아야 하나? setCartList(data.cart_info);
   // 옵션 있을 경우, +3000원 백? 프? 어디서 처리할지 논의하기
   const updateQuantity = () => {};
 
@@ -62,9 +63,7 @@ function CartItem({ item, isallChecked, checkedItemsHandler }) {
           변경
         </button>
       </td>
-      <td className="mileage">
-        {(price * quantityNum * 0.05).toLocaleString()}원
-      </td>
+      <td className="mileage">{(priceSum * 0.05).toLocaleString()}원</td>
       <td className="delivery">기본배송</td>
       <td className="charge">무료</td>
       <td className="total">{priceSum.toLocaleString()}원</td>
