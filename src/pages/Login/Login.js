@@ -17,7 +17,7 @@ function Login() {
 
   const sendLoginInfo = e => {
     e.preventDefault();
-    fetch('https://3364-61-105-107-145.ngrok.io/users/signin', {
+    fetch('https://750d-61-105-107-145.ngrok.io/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: loginVlaue.id,
