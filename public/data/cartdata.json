@@ -1,0 +1,31 @@
+{
+  "cart_info": [
+    {
+      "cart_id": 1,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 1,
+      "option": "선물포장 있음 (+3000)"
+    },
+    {
+      "cart_id": 2,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 5,
+      "option": "선물포장 있음 (+3000)"
+    },
+    {
+      "cart_id": 3,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 3,
+      "option": "선물포장 없음"
+    }
+  ]
+}

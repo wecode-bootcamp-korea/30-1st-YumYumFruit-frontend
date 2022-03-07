@@ -7,7 +7,8 @@ function OrderTable() {
   const [cartList, setCartList] = useState([]);
 
   useEffect(() => {
-    fetch('http://10.58.0.168:8000/users/shoppingcart')
+    // fetch('http://10.58.0.168:8000/users/shoppingcart')
+    fetch('/data/cartdata.json')
       .then(response => response.json())
       .then(data => setCartList(data.cart_info));
   }, []);

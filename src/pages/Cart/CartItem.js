@@ -1,4 +1,5 @@
 import React from 'react';
+import './CartItem.scss';
 
 // messge : cart_id가 없음 -> 장바구니가 비었습니다 조건부 렌더링
 function CartItem({ item }) {
@@ -10,7 +11,7 @@ function CartItem({ item }) {
         <input type="checkbox" />
       </td>
       <td className="thumb">
-        <img alt="img" src={thumbnail_image_url} />
+        <img alt="img" src={thumbnail_image_url} className="thumbImage" />
       </td>
       <td className="product">{name}</td>
       <td className="price">{price}원</td>
