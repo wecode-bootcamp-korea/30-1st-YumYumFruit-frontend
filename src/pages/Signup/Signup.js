@@ -12,9 +12,6 @@ function Signup() {
     username: '',
     phone_number: '',
   });
-  // const [emailMessage, setEmailMessage] = useState('');
-  // const [passwordMessage, setPasswordMessage] = useState('');
-  // const [repasswordMessage, setRepasswordMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -48,40 +45,27 @@ function Signup() {
   };
   // );
 
-  // const isValidEmail = useCallback(e => {
-  //   const emailcheck =
-  //     signupValue.email.includes('@') && signupValue.email.includes('.');
-  //   const emailcurrent = e.target.value;
-  //   setSignupValue.email(emailcurrent);
-  //   if (!emailcheck.test(emailcurrent)) {
-  //     setEmailMessage('이메일을 바르게 써 주세요');
-  //     setSignupValue.email(false);
-  //   } else {
-  //     setEmailMessage('이메일을 바르게 써 주세요');
-  //     setSignupValue.email(true);
-  //   }
-  // }, []);
-
   const sendJoinInfo = e => {
+    console.log('e');
     e.preventDefault();
-    fetch('https://e3a0-61-105-107-145.ngrok.io/users/signup', {
+    fetch('https://31fb-61-105-107-145.ngrok.i/users/signup', {
       method: 'POST',
       body: JSON.stringify({
         email: signupValue.email,
         password: signupValue.password,
         username: signupValue.username,
         phone_number: signupValue.phone_number,
-        // username: 'testrrr123',
-        // email: 'qwer12555@naver.com',
-        // password: 'asdf3456',
-        // phone_number: '01022344321',
       }),
     })
-      .then(Response => Response.json())
-      .then(result => handleJoinButton(result));
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        handleJoinButton(result);
+      });
   };
 
   const handleJoinButton = () => {
+    console.log('양식');
     if (!isValidEmail || !lengthValue || !isValidPw || !checkPw || !rePwcheck) {
       alert('양식에 맞게 모두 써 주셨나요?! T_T');
       return false;
@@ -181,7 +165,7 @@ function Signup() {
                       maxLength={21}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="pwMsg"></span>
+                    <span className="pwMsg">{/* 메세지 유효식 수정? */}</span>
                   </td>
                 </tr>
                 <tr className="phoneNumber">
@@ -220,20 +204,26 @@ function Signup() {
               </tbody>
             </table>
             <div className="joinButtons">
-              <JoinButton
-                className="joinBtn"
-                type="button"
-                onClick={handleJoinButton}
-              >
+              {/* <JoinButton className="joinBtn" type="button">
                 회원가입
-              </JoinButton>
-              <CancButton
+              </JoinButton> */}
+              <button className="joinBtn" type="button" onClick={sendJoinInfo}>
+                회원가입
+              </button>
+              {/* <CancButton
                 className="cancleBtn"
                 type="button"
                 onClick={CancleButton}
               >
                 취소
-              </CancButton>
+              </CancButton> */}
+              <button
+                className="cancleBtn"
+                type="button"
+                onClick={CancleButton}
+              >
+                취소
+              </button>
             </div>
           </form>
         </div>
