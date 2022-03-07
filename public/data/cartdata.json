@@ -10,7 +10,7 @@
       "option": "선물포장 있음 (+3000)"
     },
     {
-      "cart_id": 2,
+      "cart_id": 4,
       "product_id": 8,
       "name": "딸기",
       "price": 18000,
@@ -19,7 +19,7 @@
       "option": "선물포장 있음 (+3000)"
     },
     {
-      "cart_id": 3,
+      "cart_id": 7,
       "product_id": 8,
       "name": "딸기",
       "price": 18000,

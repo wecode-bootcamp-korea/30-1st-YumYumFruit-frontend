@@ -1,6 +1,6 @@
 @import 'styles/variables.scss';
 
-.orderTable {
+.cartTable {
   width: 100%;
   border-top: 3px solid $theme-font-black;
 
@@ -24,11 +24,11 @@
     .total,
     .charge,
     .quantity {
-      width: 90px;
+      width: 95px;
     }
 
     .button {
-      width: 120px;
+      width: 160px;
     }
   }
 
@@ -38,7 +38,7 @@
   }
 
   tfoot {
-    .orderTableBottom {
+    .cartTableBottom {
       /* td에 display: flex 주면 width가 늘어나지 않음 --> 왜? */
       padding: 30px 10px 33px;
       background-color: $theme-background-lightgray;

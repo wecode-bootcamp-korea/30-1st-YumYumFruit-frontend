@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import CartTable from 'pages/Cart/CartTable/CartTable';
 import { GUIDE_LIST } from './guidedata';
 import { TABMENU_DATA } from './tabmenudata';
 import './Cart.scss';
 
 function Cart() {
   const [currentId, setCurrentId] = useState(1);
+  const [cartList, setCartList] = useState([]);
 
   const clickHandler = id => {
     setCurrentId(id);
+  };
+
+  useEffect(() => {
+    // fetch('http://10.58.1.244:8000/users/shoppingcart')
+    fetch('/data/cartdata.json')
+      .then(response => response.json())
+      .then(data => setCartList(data.cart_info));
+  }, []);
+
+  const MAPPING_OBJ = {
+    1: <CartTable cartList={cartList} />,
+    2: <div>해외배송</div>,
   };
 
   return (
@@ -20,11 +34,10 @@ function Cart() {
         <section className="cartArea">
           <div className="userInfoArea">
             <div className="member">
-              <span>김혜진</span> 님은, <span>[일반회원]</span> 회원이십니다.
+              <span>김혜진 님의 장바구니</span>
             </div>
             <ul className="mileage">
               <li className="item">가용적립금 : 1,000원</li>
-              <li className="item">쿠폰 : 0개</li>
             </ul>
           </div>
           {/* tabMenu */}
@@ -38,52 +51,15 @@ function Cart() {
                   onClick={() => clickHandler(id)}
                 >
                   <Link to={src} className="link">
-                    {name} (n)
+                    {name} ({cartList.length})
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <div className="orderListArea">
-            <div className="orderTitle">일반상품 (N)</div>
-            {/* orderTable */}
-            {TABMENU_DATA.MAPPING_OBJ[currentId]}
-            <div className="priceGuide">
-              할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다
-            </div>
-            <div className="selectMenu">
-              <div>
-                <span>선택상품을</span>
-                <button>삭제하기</button>
-                <button>해외배송 장바구니로 이동</button>
-              </div>
-              <div>
-                <button>장바구니 비우기</button>
-                <button>견적서 출력</button>
-              </div>
-            </div>
-            <table className="totalTable">
-              <thead>
-                <tr>
-                  <th scope="col">총 상품금액</th>
-                  <th scope="col">총 배송비</th>
-                  <th scope="col">총 결제예정금액</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="num">55,200</span>원
-                  </td>
-                  <td>
-                    <span className="num">+0</span>원
-                  </td>
-                  <td className="total">
-                    <span className="num">=55,200</span>원
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="cartTableArea">
+            {/* CartTable */}
+            {MAPPING_OBJ[currentId]}
             <div className="orderBtnArea">
               <Link to="/order/orderform" className="btn totalBtn">
                 전체상품주문
