@@ -1,1 +1,35 @@
-/* hi */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+$theme-background-lightgray: #f7f7f7;
+$theme-border-lightgray: #ddd;
+$theme-font-black: #222;
+$theme-font-gray: #888;
+$theme-font-lightgray: #aaa;
+$theme-font-blue: #008bcc;
+
+@mixin logoFont {
+  font-family: 'Lato', sans-serif;
+  color: #222;
+}
+
+@mixin flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin halfBox {
+  width: 50%;
+}
+
+@mixin leftBox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+@mixin rightBox {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
