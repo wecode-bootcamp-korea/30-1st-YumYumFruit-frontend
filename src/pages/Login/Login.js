@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { config } from '../../config.js';
 import './Login.scss';
 
 function Login() {
@@ -9,15 +10,32 @@ function Login() {
   });
 
   const navigate = useNavigate();
+  const checkInput = loginVlaue.id.length >= 1 && loginVlaue.pw.length >= 1;
 
   const handleInputValue = e => {
     const { name, value } = e.target;
     setloginVlaue({ ...loginVlaue, [name]: value });
   };
 
+  const idCheck = e => {
+    if (!loginVlaue.id.length >= 1) {
+      console.log('입력해주세요');
+    } else {
+      console.log('ok');
+    }
+  };
+
+  const pwCheck = e => {
+    if (!loginVlaue.pw.length >= 1) {
+      console.log('입력해주세요');
+    } else {
+      console.log('ok');
+    }
+  };
+
   const sendLoginInfo = e => {
     e.preventDefault();
-    fetch('https://750d-61-105-107-145.ngrok.io/users/signin', {
+    fetch(`${config.api}/users/signin`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginVlaue.id,
@@ -35,6 +53,8 @@ function Login() {
       localStorage.setItem('token', token);
       alert('냠냠푸룻! 환영합니다! :) ');
       navigate('/');
+    } else if (!checkInput) {
+      alert('어라? 입력을 해 주셨나요? (ㅇ0ㅇ)');
     } else if (message === 'INVALID_USER') {
       alert('앗! 아이디 또는 비밀번호를 확인해주세요! :( ');
     }
@@ -55,6 +75,7 @@ function Login() {
                 type="text"
                 className="memberId"
                 name="id"
+                onBlur={idCheck}
                 onChange={handleInputValue}
               />
             </div>
@@ -64,9 +85,13 @@ function Login() {
                 type="password"
                 className="memberPassword"
                 name="pw"
+                onBlur={pwCheck}
                 onChange={handleInputValue}
               />
             </div>
+            {/* <div className="checkText"> */}
+            {/* <span>어라? 입력을 해 주셨나요? 💦</span> */}
+            {/* </div> */}
             <div className="loginButton">
               <button>LOGIN </button>
             </div>
