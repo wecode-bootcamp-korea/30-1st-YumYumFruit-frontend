@@ -1,26 +1,18 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ProductItem.scss';
 
 function ProductItem({ product }) {
-  const navigate = useNavigate();
   const { id, name, country, price, thumbnail_image_url } = product;
-
-  const goToDetail = () => {
-    navigate(`/products/product/${id}`);
-  };
 
   return (
     <article className="productItem">
-      <img
-        alt="img"
-        src={thumbnail_image_url}
-        className="img"
-        onClick={goToDetail}
-      />
+      <Link to={`/products/${id}`}>
+        <img alt="img" src={thumbnail_image_url} className="img" />
+      </Link>
       <ul className="info">
         <li className="item">
-          <Link to={`/products/detail/${id}`} className="link">
+          <Link to={`/products/${id}`} className="link">
             {name}
           </Link>
         </li>

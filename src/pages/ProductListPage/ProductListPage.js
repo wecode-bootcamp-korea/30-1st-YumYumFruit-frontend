@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import ProductItem from 'components/ProductItem/ProductItem';
+import ProductItem from 'pages/ProductListPage/ProductItem/ProductItem';
 import Pagination from 'components/Pagination/Pagination';
 import { getProducts } from 'api/api';
 import './ProductListPage.scss';

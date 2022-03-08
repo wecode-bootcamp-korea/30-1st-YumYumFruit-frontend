@@ -5,7 +5,6 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
 import ProductListPage from './pages/ProductListPage/ProductListPage';
-import ProductItemPage from './pages/ProductItemPage/ProductItemPage';
 import Footer from 'components/Footer/Footer';
 
 function Router() {
@@ -17,7 +16,6 @@ function Router() {
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/products/list" element={<ProductListPage />} />
-        <Route path="/products/product/:id" element={<ProductItemPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
