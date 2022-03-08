@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import CartItem from 'pages/Cart/CartItem/CartItem';
+import CartTableItem from 'pages/Cart/CartTableItem/CartTableItem';
 import { TABLE_MENU_LIST } from './tablecolsdata';
+import { deleteProduct, deleteAllItems, deleteCheckedItems } from 'api/api';
 import './CartTable.scss';
 
-function CartTable({ cartList }) {
-  // TODO) totalShippingFee : 배송비가 무료가 아닌 cartItem 개수 * 4000
+function CartTable({ cartList, setCartList }) {
+  // TODO) totalPrice : packing 합계 + noPacking 합계
+  // TODO) totalShippingFee : 배송비가 무료가 아닌 CartTableItem 개수 * 4000
   const packingSum = cartList.reduce((acc, el) => {
     const { price, quantity, packing_option } = el;
     if (el[packing_option] === '선물포장 있음 (+3000)') {
@@ -46,25 +48,16 @@ function CartTable({ cartList }) {
     }
   };
 
-  // 선택 상품 삭제 : 스트링 전송 -> 해당하는 cart_id 삭제
-  const deleteCheckedItems = items => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart/${items.join}`, {
-      method: 'DELETE',
-    })
-      .then(response => response.json())
-      .then(data => console.log(data));
+  // 개별 상품 삭제
+  const handleDelete = async id => {
+    await deleteProduct(id);
+    setCartList(prevItems => prevItems.filter(item => item.cart_id !== id));
   };
 
-  // 장바구니 비우기 : token 값 전송
-  const deleteAllItems = () => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart/0`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: 'tokenSample',
-      },
-    })
-      .then(response => response.json())
-      .then(data => console.log(data));
+  // 전체 상품 삭제
+  const handleDeleteAll = async () => {
+    await deleteAllItems();
+    setCartList([]);
   };
 
   // TODO) 전체주문 : cartList에 담긴 모든 cart_id / api 주소 및 method 협의
@@ -91,11 +84,13 @@ function CartTable({ cartList }) {
         </thead>
         <tbody>
           {cartList.map(item => (
-            <CartItem
+            <CartTableItem
               key={item.cart_id}
               item={item}
               isallChecked={isallChecked}
               checkedItemsHandler={checkedItemsHandler}
+              handleDelete={handleDelete}
+              setCartList={setCartList}
             />
           ))}
         </tbody>
@@ -136,7 +131,7 @@ function CartTable({ cartList }) {
           </button>
         </div>
         <div>
-          <button onClick={deleteAllItems}>장바구니 비우기</button>
+          <button onClick={handleDeleteAll}>장바구니 비우기</button>
         </div>
       </div>
       <table className="totalTable">

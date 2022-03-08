@@ -21,11 +21,12 @@ function Cart() {
       .then(data => {
         setCartList(data.cart_info);
         setUserInfoList(data.user_info);
+        console.log(cartList);
       });
   }, []);
 
   const MAPPING_OBJ = {
-    1: <CartTable cartList={cartList} />,
+    1: <CartTable cartList={cartList} setCartList={setCartList} />,
     2: <div>해외배송</div>,
   };
 
@@ -65,10 +66,10 @@ function Cart() {
             {/* CartTable */}
             {MAPPING_OBJ[currentId]}
             <div className="orderBtnArea">
-              <Link to="/order/orderform" className="btn totalBtn">
+              <Link to="/users/order" className="btn totalBtn">
                 전체상품주문
               </Link>
-              <Link to="/order/orderform" className="btn checkBtn">
+              <Link to="/users/order" className="btn checkBtn">
                 선택상품주문
               </Link>
               <Link to="/" className="btn goToMainBtn">
