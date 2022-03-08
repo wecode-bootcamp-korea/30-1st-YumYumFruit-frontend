@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import ProductItem from 'pages/ProductListPage/ProductItem/ProductItem';
-import Pagination from 'components/Pagination/Pagination';
+import Pagination from 'pages/ProductListPage/Pagination/Pagination';
 import { getProducts } from 'api/api';
 import './ProductListPage.scss';
 
 function ProductListPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
-  const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState(1);
 
-  const handleLowPriceClick = () => {
-    setSort('price');
-    navigate(`?category=${searchParams.get('category')}&sort=price`);
+  const makeQuery = ({ sort = 'price', page = 1 }) => {
+    const category = searchParams.get('category');
+    const query = `?category=${category}&sort=${sort}&page=${page}`;
+    return query;
   };
 
-  const handleHighPriceClick = () => {
-    setSort('-price');
-    navigate(`?category=${searchParams.get('category')}&sort=-price`);
-  };
-
-  const handleNameClick = () => {
-    setSort('name');
-    navigate(`?category=${searchParams.get('category')}&sort=name`);
-  };
-
-  const handleNewestClick = () => {
-    setSort('receiving_date');
-    navigate(`?category=${searchParams.get('category')}&sort=receiving_date`);
+  const updateUrl = queryObj => {
+    const query = makeQuery(queryObj);
+    navigate(`${query}`);
   };
 
   const handleLoad = async query => {
@@ -43,8 +33,8 @@ function ProductListPage() {
   };
 
   useEffect(() => {
-    handleLoad({ category: searchParams.get('category'), sort, page });
-  }, [searchParams, sort, page]);
+    handleLoad(location.search);
+  }, [location.search]);
 
   return (
     <div className="productListPage">
@@ -58,16 +48,19 @@ function ProductListPage() {
             <li className="item">ITEMS</li>
           </ul>
           <ul className="sortButtonsBox">
-            <li className="item" onClick={handleLowPriceClick}>
+            <li className="item" onClick={() => updateUrl({ sort: 'price' })}>
               LOW PRICE
             </li>
-            <li className="item" onClick={handleHighPriceClick}>
+            <li className="item" onClick={() => updateUrl({ sort: '-price' })}>
               HIGH PRICE
             </li>
-            <li className="item" onClick={handleNameClick}>
+            <li className="item" onClick={() => updateUrl({ sort: 'name' })}>
               NAME
             </li>
-            <li className="item" onClick={handleNewestClick}>
+            <li
+              className="item"
+              onClick={() => updateUrl({ sort: 'receiving_date' })}
+            >
               NEW
             </li>
           </ul>
@@ -78,7 +71,7 @@ function ProductListPage() {
           ))}
         </section>
         <div className="paging">
-          <Pagination totalPages={totalPages} page={page} setPage={setPage} />
+          <Pagination totalPages={totalPages} updateUrl={updateUrl} />
         </div>
       </div>
     </div>

@@ -1,25 +1,27 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './Pagination.scss';
 
-function Pagination({ totalPages, page, setPage }) {
-  const isFirstBtnValid = page === 1;
-  const isLastBtnValid = page === totalPages;
+function Pagination({ totalPages, updateUrl }) {
+  const [searchParams] = useSearchParams();
+  const sort = searchParams.get('sort');
+  const page = Number(searchParams.get('page'));
 
   return (
     <ol className="pagination">
       <button
         className="arrow"
         onClick={() => {
-          setPage(1);
+          updateUrl({ sort, page: 1 });
         }}
-        disabled={isFirstBtnValid}
+        disabled={page === 1}
       >
         &lt;&lt;
       </button>
       <button
         className="arrow"
-        onClick={() => setPage(page - 1)}
-        disabled={isFirstBtnValid}
+        onClick={() => updateUrl({ sort, page: page - 1 })}
+        disabled={page === 1}
       >
         &lt;
       </button>
@@ -29,7 +31,9 @@ function Pagination({ totalPages, page, setPage }) {
           <button
             key={idx + 1}
             className="pageNum"
-            onClick={() => setPage(idx + 1)}
+            onClick={() => {
+              updateUrl({ sort, page: idx + 1 });
+            }}
             aria-current={page === idx + 1 ? 'page' : null}
           >
             {idx + 1}
@@ -37,15 +41,19 @@ function Pagination({ totalPages, page, setPage }) {
         ))}
       <button
         className="arrow"
-        onClick={() => setPage(page + 1)}
-        disabled={isLastBtnValid}
+        onClick={() => {
+          updateUrl({ sort, page: page + 1 });
+        }}
+        disabled={page === totalPages}
       >
         &gt;
       </button>
       <button
         className="arrow"
-        onClick={() => setPage(totalPages)}
-        disabled={isLastBtnValid}
+        onClick={() => {
+          updateUrl({ sort, page: totalPages });
+        }}
+        disabled={page === totalPages}
       >
         &gt;&gt;
       </button>

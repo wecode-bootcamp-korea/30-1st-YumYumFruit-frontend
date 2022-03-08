@@ -7,8 +7,11 @@ function NavItem({ item }) {
   const navigate = useNavigate();
 
   const updateCategory = id => {
-    const queryString = id === 1 ? `?category=all` : `?category=${id - 1}`;
-    navigate(`/products/list${queryString}`);
+    const queryString =
+      id === 1
+        ? `?category=all&sort=price&page=1`
+        : `?category=${id - 1}&sort=price&page=1`;
+    navigate(`/products${queryString}`);
   };
 
   return (

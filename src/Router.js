@@ -15,7 +15,7 @@ function Router() {
         <Route path="/" element={<Main />} />;
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
-        <Route path="/products/list" element={<ProductListPage />} />
+        <Route path="/products" element={<ProductListPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
