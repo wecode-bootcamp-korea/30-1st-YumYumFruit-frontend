@@ -40,7 +40,7 @@ function CartTable({ cartList }) {
 
   // 선택 상품 삭제 : 1,4,7 스트링 전송 -> 해당하는 cart_id 삭제
   const deleteCheckedItems = items => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart/${items.join}`, {
+    fetch(`http://10.58.1.244:8000/users/shoppingcart/{items.join}`, {
       method: 'DELETE',
     })
       .then(response => response.json())
