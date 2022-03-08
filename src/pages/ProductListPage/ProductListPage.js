@@ -10,7 +10,7 @@ function ProductListPage() {
   const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('price');
   const [productList, setProductList] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
 
@@ -35,10 +35,11 @@ function ProductListPage() {
   };
 
   const handleLoad = async query => {
-    const { results, total_pages, total_items } = await getProducts(query);
-    setProductList(results);
-    setTotalPages(total_pages);
-    setTotalItems(total_items);
+    const { product_offset, total_number_of_pages, total_count } =
+      await getProducts(query);
+    setProductList(product_offset);
+    setTotalPages(total_number_of_pages);
+    setTotalCount(total_count);
   };
 
   useEffect(() => {
@@ -49,10 +50,10 @@ function ProductListPage() {
     <div className="productListPage">
       <div className="inner">
         <header className="menu">
-          <ul className="totalItemsBox">
+          <ul className="totalCountBox">
             <li className="item">TOTAL</li>
             <li className="item">
-              <span className="totalNum">{totalItems}</span>
+              <span className="totalNum">{totalCount}</span>
             </li>
             <li className="item">ITEMS</li>
           </ul>
