@@ -10,7 +10,7 @@ function Login() {
   });
 
   const navigate = useNavigate();
-  const checkInput = loginVlaue.id.length >= 1 && loginVlaue.pw.length >= 1;
+  // const checkInput = loginVlaue.id.length >= 1 && loginVlaue.pw.length >= 1;
 
   const handleInputValue = e => {
     const { name, value } = e.target;
@@ -19,17 +19,15 @@ function Login() {
 
   const idCheck = e => {
     if (!loginVlaue.id.length >= 1) {
-      console.log('입력해주세요');
+      alert('냠냠? 이메일 입력을 해 주셨나요? 💦');
     } else {
-      console.log('ok');
+      return;
     }
   };
 
   const pwCheck = e => {
     if (!loginVlaue.pw.length >= 1) {
-      console.log('입력해주세요');
-    } else {
-      console.log('ok');
+      alert('푸룻? 비밀번호 입력을 해 주셨나요? 💦');
     }
   };
 
@@ -48,14 +46,14 @@ function Login() {
       });
   };
 
-  const inLogin = ({ token, message }) => {
+  const inLogin = ({ token, status }) => {
     if (token) {
       localStorage.setItem('token', token);
       alert('냠냠푸룻! 환영합니다! :) ');
       navigate('/');
-    } else if (!checkInput) {
-      alert('어라? 입력을 해 주셨나요? (ㅇ0ㅇ)');
-    } else if (message === 'INVALID_USER') {
+      // } else if (!checkInput) {
+      //   alert('어라? 입력을 해 주셨나요? (ㅇ0ㅇ)');
+    } else if (status === 404) {
       alert('앗! 아이디 또는 비밀번호를 확인해주세요! :( ');
     }
   };
@@ -89,9 +87,9 @@ function Login() {
                 onChange={handleInputValue}
               />
             </div>
-            {/* <div className="checkText"> */}
-            {/* <span>어라? 입력을 해 주셨나요? 💦</span> */}
-            {/* </div> */}
+            {/* <div className="checkText">
+              <span>어라? 입력을 해 주셨나요? 💦</span>
+            </div> */}
             <div className="loginButton">
               <button>LOGIN </button>
             </div>
