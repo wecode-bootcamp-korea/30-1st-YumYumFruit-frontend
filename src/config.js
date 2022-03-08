@@ -1,3 +1,3 @@
 export const config = {
-  api: 'https://c21f-61-105-107-145.ngrok.io',
+  api: 'http://10.58.4.103:8000',
 };
