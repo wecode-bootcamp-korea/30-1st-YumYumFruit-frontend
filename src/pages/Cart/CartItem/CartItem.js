@@ -33,7 +33,7 @@ function CartItem({ item, isallChecked, checkedItemsHandler }) {
     navigate('/order/orderform');
   };
 
-  // 조건부 렌더링 필요 : messge = cart_id가 없음 -> 장바구니가 비었습니다
+  // 조건부 렌더링 필요 : msg = cart_id가 없음 -> 장바구니가 비었습니다
   return (
     <tr className="cartItem">
       <td className="check">

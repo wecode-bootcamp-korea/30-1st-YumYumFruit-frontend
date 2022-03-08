@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import CartItem from 'pages/Cart/CartItem/CartItem';
 import { TABLE_MENU_LIST } from './tablecolsdata';
 import './CartTable.scss';
 
 function CartTable({ cartList }) {
+  const ref = useRef();
   // totalPrice : cartItem의 price * quantity 전체합 (서버에서 실시간 데이터 불러옴)
   // totalShippingFee : 배송비가 무료가 아닌 cartItem 개수 * 4000
   const totalPrice = 0;
   const totalShippingFee = 4000;
 
-  // 구현 어려움 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
+  // 체크 박스
+  // 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [isallChecked, setIsallChecked] = useState(false);
 
@@ -20,6 +22,8 @@ function CartTable({ cartList }) {
     } else if (!isChecked && checkedItems.has(id)) {
       checkedItems.delete(id);
       setCheckedItems(checkedItems => new Set(checkedItems));
+    } else if (!isChecked && checkedItems.size === 0) {
+      ref.current.checked = false;
     }
   };
 
@@ -67,6 +71,7 @@ function CartTable({ cartList }) {
             <th className="check">
               <input
                 type="checkbox"
+                ref={ref}
                 onChange={e => allCheckedHandler(e.target.checked)}
               />
             </th>
