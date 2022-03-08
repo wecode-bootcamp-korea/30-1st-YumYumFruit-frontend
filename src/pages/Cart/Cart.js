@@ -8,16 +8,20 @@ import './Cart.scss';
 function Cart() {
   const [currentId, setCurrentId] = useState(1);
   const [cartList, setCartList] = useState([]);
+  const [userInfoList, setUserInfoList] = useState([]);
 
   const clickHandler = id => {
     setCurrentId(id);
   };
 
   useEffect(() => {
-    // fetch('http://10.58.1.244:8000/users/shoppingcart')
-    fetch('/data/cartdata.json')
+    fetch('http://10.58.4.85:8000/users/shoppingcart')
+      // fetch('/data/cartdata.json')
       .then(response => response.json())
-      .then(data => setCartList(data.cart_info));
+      .then(data => {
+        setCartList(data.cart_info);
+        setUserInfoList(data.user_info);
+      });
   }, []);
 
   const MAPPING_OBJ = {
@@ -34,10 +38,10 @@ function Cart() {
         <section className="cartArea">
           <div className="userInfoArea">
             <div className="member">
-              <span>김혜진 님의 장바구니</span>
+              <span>{userInfoList.user_name} 님의 장바구니</span>
             </div>
             <ul className="mileage">
-              <li className="item">가용적립금 : 1,000원</li>
+              <li className="item">가용적립금 : {userInfoList.user_point}원</li>
             </ul>
           </div>
           {/* tabMenu */}

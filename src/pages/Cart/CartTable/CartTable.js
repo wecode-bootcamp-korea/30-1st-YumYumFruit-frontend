@@ -1,17 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import CartItem from 'pages/Cart/CartItem/CartItem';
 import { TABLE_MENU_LIST } from './tablecolsdata';
 import './CartTable.scss';
 
 function CartTable({ cartList }) {
-  const ref = useRef();
-  // TODO) totalPrice : cartItem의 price * quantity 전체합 (서버에서 실시간 데이터 불러옴)
   // TODO) totalShippingFee : 배송비가 무료가 아닌 cartItem 개수 * 4000
-  const totalPrice = 0;
+  const packingSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    if (el[packing_option] === '선물포장 있음 (+3000)') {
+      return acc + (price + 3000) * quantity;
+    }
+  }, 0);
+  const noPackingSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    if (el[packing_option] === '선물포장 없음') {
+      return acc + (price + 3000) * quantity;
+    }
+  }, 0);
+  const totalPrice = packingSum + noPackingSum;
   const totalShippingFee = 4000;
 
   // 체크 박스
-  // 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
+  // TODO) 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [isallChecked, setIsallChecked] = useState(false);
 
@@ -22,8 +32,6 @@ function CartTable({ cartList }) {
     } else if (!isChecked && checkedItems.has(id)) {
       checkedItems.delete(id);
       setCheckedItems(checkedItems => new Set(checkedItems));
-    } else if (!isChecked && checkedItems.size === 0) {
-      ref.current.checked = false;
     }
   };
 
@@ -38,7 +46,7 @@ function CartTable({ cartList }) {
     }
   };
 
-  // 선택 상품 삭제 : 1,4,7 스트링 전송 -> 해당하는 cart_id 삭제
+  // 선택 상품 삭제 : 스트링 전송 -> 해당하는 cart_id 삭제
   const deleteCheckedItems = items => {
     fetch(`http://10.58.1.244:8000/users/shoppingcart/${items.join}`, {
       method: 'DELETE',
@@ -49,8 +57,8 @@ function CartTable({ cartList }) {
 
   // 장바구니 비우기 : token 값 전송
   const deleteAllItems = () => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart`, {
-      method: 'PUT',
+    fetch(`http://10.58.1.244:8000/users/shoppingcart/0`, {
+      method: 'DELETE',
       headers: {
         Authorization: 'tokenSample',
       },
@@ -71,7 +79,6 @@ function CartTable({ cartList }) {
             <th className="check">
               <input
                 type="checkbox"
-                ref={ref}
                 onChange={e => allCheckedHandler(e.target.checked)}
               />
             </th>

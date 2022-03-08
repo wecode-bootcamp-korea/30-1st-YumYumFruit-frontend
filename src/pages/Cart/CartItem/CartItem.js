@@ -17,11 +17,14 @@ function CartItem({ item, isallChecked, checkedItemsHandler }) {
   // 변경버튼 onClick : quantity 수정하는 PATCH 함수 넣기
   // 수정 후, cartList를 다시 받아야 하나? setCartList(data.cart_info);
   // 옵션 있을 경우, +3000원 백? 프? 어디서 처리할지 논의하기
+  // PATCH, cart_id, quantity
   const updateQuantity = () => {};
 
   // 삭제버튼 onClick : 현재 cart_id 삭제
+  // 렌더링 2번 되는 이유 살펴보기
+  // 삭제하면 화면 렌더링 되도록 하기 - useEffect!!!!
   const deleteItem = () => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart/${cart_id}`, {
+    fetch(`http://10.58.4.85:8000/users/shoppingcart/${cart_id}`, {
       method: 'DELETE',
     })
       .then(response => response.json())
