@@ -5,8 +5,8 @@ import './CartTable.scss';
 
 function CartTable({ cartList }) {
   const ref = useRef();
-  // totalPrice : cartItem의 price * quantity 전체합 (서버에서 실시간 데이터 불러옴)
-  // totalShippingFee : 배송비가 무료가 아닌 cartItem 개수 * 4000
+  // TODO) totalPrice : cartItem의 price * quantity 전체합 (서버에서 실시간 데이터 불러옴)
+  // TODO) totalShippingFee : 배송비가 무료가 아닌 cartItem 개수 * 4000
   const totalPrice = 0;
   const totalShippingFee = 4000;
 
@@ -40,7 +40,7 @@ function CartTable({ cartList }) {
 
   // 선택 상품 삭제 : 1,4,7 스트링 전송 -> 해당하는 cart_id 삭제
   const deleteCheckedItems = items => {
-    fetch(`http://10.58.1.244:8000/users/shoppingcart/{items.join}`, {
+    fetch(`http://10.58.1.244:8000/users/shoppingcart/${items.join}`, {
       method: 'DELETE',
     })
       .then(response => response.json())
@@ -59,8 +59,8 @@ function CartTable({ cartList }) {
       .then(data => console.log(data));
   };
 
-  // 전체주문 : cartList에 담긴 모든 cart_id / api 주소? method?
-  // 선택주문 : checkedItems에 담긴 cart_id / api 주소? method?
+  // TODO) 전체주문 : cartList에 담긴 모든 cart_id / api 주소 및 method 협의
+  // TODO) 선택주문 : checkedItems에 담긴 cart_id / api 주소 및 method 협의
 
   return (
     <>
