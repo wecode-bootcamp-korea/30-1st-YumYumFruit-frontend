@@ -14,6 +14,7 @@ function Router() {
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/productitempage" element={<ProductItemPage />} />;
+        {/* <Route path="/productitempage/:id" element={<ProductItemPage />} />; */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 @import '/src/styles/variables.scss';
 
-.layout {
+.itemPageLayout {
   main {
     display: flex;
     justify-content: center;
@@ -217,7 +217,12 @@
   }
 
   article {
-    height: 4500px;
-    width: 1200px;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 530px;
+      width: 1200px;
+    }
   }
 }
