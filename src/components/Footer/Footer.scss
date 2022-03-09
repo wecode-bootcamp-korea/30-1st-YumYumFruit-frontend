@@ -1,5 +1,8 @@
+@import 'styles/variables.scss';
+
 .footer {
-  background-color: #f7f7f7;
+  background-color: $theme-background-lightgray;
+  margin-top: 90px;
 
   .inner {
     height: 265px;
@@ -7,7 +10,6 @@
     padding: 50px 0 30px 165px;
     margin: 0 auto;
     display: block;
-    font-size: 10px;
     list-style: disc;
     list-style-position: outside;
 
@@ -16,7 +18,7 @@
       width: auto;
       display: inline;
       text-decoration: none;
-      color: #222222;
+      color: $theme-font-black;
 
       &:hover {
         cursor: pointer;
@@ -44,9 +46,9 @@
     .callCenter {
       height: 70px;
       width: 400px;
-      margin: 0 70px 0 0;
+      margin: 0 90px 0 0;
       display: inline-block;
-      font-size: 11px;
+      font-size: 14px;
 
       h3 {
         height: 20px;
@@ -71,7 +73,7 @@
       span {
         height: 20px;
         display: inline-block;
-        color: #888888;
+        color: $theme-font-gray;
         font-weight: 500;
         letter-spacing: 1px;
         text-align: left;
@@ -80,7 +82,7 @@
 
     .callCenter {
       span {
-        width: 118px;
+        width: 136px;
       }
     }
 
