@@ -12,16 +12,19 @@ function Main() {
   };
 
   useEffect(() => {
-    handleLoad({ category: 'all', sort: 'price', page: 1 });
+    handleLoad(`?category=all&sort=price&page=1`);
   }, []);
 
   return (
     <main className="main">
-      <section className="list">
-        {productList.map(product => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-      </section>
+      <div className="inner">
+        <h2 className="title">BEST ITEM</h2>
+        <section className="list">
+          {productList.map(product => (
+            <ProductItem key={product.id} product={product} />
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

@@ -1,6 +1,19 @@
+@import 'styles/variables.scss';
+
 .main {
-  .list {
-    display: flex;
-    flex-wrap: wrap;
+  .inner {
+    width: 1400px;
+    margin: 0 auto;
+
+    .title {
+      text-align: center;
+      font-size: 22px;
+      @include logoFont;
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }
