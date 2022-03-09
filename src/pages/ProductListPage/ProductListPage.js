@@ -3,6 +3,7 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import ProductItem from 'pages/ProductListPage/ProductItem/ProductItem';
 import Pagination from 'pages/ProductListPage/Pagination/Pagination';
 import { getProducts } from 'api/api';
+import { SORTMENU_LIST } from './sortmenudata';
 import './ProductListPage.scss';
 
 function ProductListPage() {
@@ -48,21 +49,15 @@ function ProductListPage() {
             <li className="item">ITEMS</li>
           </ul>
           <ul className="sortButtonsBox">
-            <li className="item" onClick={() => updateUrl({ sort: 'price' })}>
-              LOW PRICE
-            </li>
-            <li className="item" onClick={() => updateUrl({ sort: '-price' })}>
-              HIGH PRICE
-            </li>
-            <li className="item" onClick={() => updateUrl({ sort: 'name' })}>
-              NAME
-            </li>
-            <li
-              className="item"
-              onClick={() => updateUrl({ sort: 'receiving_date' })}
-            >
-              NEW
-            </li>
+            {SORTMENU_LIST.map(menu => (
+              <li
+                key={menu.id}
+                className="item"
+                onClick={() => updateUrl({ sort: menu.sort })}
+              >
+                {menu.name}
+              </li>
+            ))}
           </ul>
         </header>
         <section className="list">
