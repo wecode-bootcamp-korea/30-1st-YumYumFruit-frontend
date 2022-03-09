@@ -6,14 +6,21 @@ import './CartTableItem.scss';
 
 function CartTableItem({
   item,
+  totalPrice,
   isallChecked,
   checkedItemsHandler,
   handleDelete,
   setCartList,
 }) {
-  const { cart_id, name, price, thumbnail_image_url, quantity, option } = item;
+  const {
+    cart_id,
+    name,
+    price,
+    thumbnail_image_url,
+    quantity,
+    packing_option,
+  } = item;
   const [quantityNum, setQuantityNum] = useState(quantity);
-  const priceSum = price * quantity;
   const navigate = useNavigate();
 
   // 수량 인풋 핸들러
@@ -22,8 +29,8 @@ function CartTableItem({
   };
 
   // 수량 변경
-  // arr.findIndex(element) : 요소의 인덱스 반환
-  const handleUpdateNum = async (cart_id, quantity) => {
+  // TIP) arr.findIndex(element) : 요소의 인덱스 반환
+  const handleUpdateQty = async (cart_id, quantity) => {
     await updateQuantity(cart_id, quantity);
     setCartList(prevItems => {
       const splitIdx = prevItems.findIndex(item => item.cart_id === cart_id);
@@ -35,12 +42,20 @@ function CartTableItem({
     });
   };
 
-  // 주문하기 : 해당 cart_id를 서버에 보낸다? 논의 필요
+  // TODO) 주문하기 : 서버에 보낼 url, body 합의 필요
   const goToOrderForm = () => {
-    navigate('//users/order');
+    navigate('/users/order');
   };
 
-  // 조건부 렌더링 필요 : msg = cart_id가 없음 -> 장바구니가 비었습니다
+  // 포장 유무
+  const isPackingOptionValid =
+    packing_option === '선물포장 있음 (+3000)' ? true : false;
+
+  // 포장 유무에 따른 가격 합계
+  const priceSum = isPackingOptionValid
+    ? (price + 3000) * quantity
+    : price * quantity;
+
   return (
     <tr className="cartTableItem">
       <td className="check">
@@ -55,9 +70,11 @@ function CartTableItem({
       </td>
       <td className="product">
         <p className="name">{name}</p>
-        <p className="option">{option}</p>
+        <p className="packing_option">{packing_option}</p>
       </td>
-      <td className="price">{price.toLocaleString()}원</td>
+      <td className="price">
+        {(isPackingOptionValid ? price + 3000 : price).toLocaleString()}원
+      </td>
       <td className="quantity">
         <input
           type="number"
@@ -68,14 +85,16 @@ function CartTableItem({
         />
         <button
           className="numberBtn"
-          onClick={() => handleUpdateNum(cart_id, quantityNum)}
+          onClick={() => handleUpdateQty(cart_id, quantityNum)}
         >
           변경
         </button>
       </td>
       <td className="mileage">{(priceSum * 0.05).toLocaleString()}원</td>
       <td className="delivery">기본배송</td>
-      <td className="charge">무료</td>
+      <td className="charge">
+        {totalPrice >= 30000 ? '0 (무료)' : '4,000 (조건)'}
+      </td>
       <td className="total">{priceSum.toLocaleString()}원</td>
       <td className="button">
         <button to="/users/order" className="orderBtn" onClick={goToOrderForm}>

@@ -5,11 +5,12 @@ import { deleteProduct, deleteAllItems, deleteCheckedItems } from 'api/api';
 import './CartTable.scss';
 
 function CartTable({ cartList, setCartList }) {
-  // 체크 박스
+  // 상품 체크 박스
   // TODO) 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [isallChecked, setIsallChecked] = useState(false);
 
+  // set에 체크한 상품 추가
   const checkedItemsHandler = (id, isChecked) => {
     if (isChecked) {
       checkedItems.add(id);
@@ -20,6 +21,7 @@ function CartTable({ cartList, setCartList }) {
     }
   };
 
+  // 전체 체크 했을 경우, set에 모든 상품 추가
   const allCheckedHandler = isChecked => {
     if (isChecked) {
       setCheckedItems(new Set(cartList.map(item => item.cart_id)));
@@ -43,28 +45,42 @@ function CartTable({ cartList, setCartList }) {
     setCartList([]);
   };
 
+  // 선택 상품 삭제
+  const handleDeleteChecked = async checkedItems => {
+    await deleteCheckedItems(checkedItems);
+    setCartList(prevItems =>
+      prevItems.filter(item => !checkedItems.includes(item))
+    );
+  };
+
+  // packingPriceSum : 포장 상품 가격 합계
+  const packingPriceSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    let sum =
+      packing_option === '선물포장 있음 (+3000)'
+        ? acc + (price + 3000) * quantity
+        : acc + 0;
+    return sum;
+  }, 0);
+
+  // noPackingPriceSum : 미포장 상품 가격 합계
+  const noPackingPriceSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    let sum =
+      packing_option === '선물포장 없음' ? acc + price * quantity : acc + 0;
+    return sum;
+  }, 0);
+
+  // totalPrice : packing 합계 + noPacking 합계
+  const totalPrice =
+    (!packingPriceSum ? 0 : packingPriceSum) +
+    (!noPackingPriceSum ? 0 : noPackingPriceSum);
+
+  // totalShippingFee : 3만원 이상일 경우 0원, 미만일 경우 상품 개수 * 4000
+  const totalShippingFee = totalPrice >= 30000 ? 0 : cartList.length * 4000;
+
   // TODO) 전체주문 : cartList에 담긴 모든 cart_id / api 주소 및 method 협의
   // TODO) 선택주문 : checkedItems에 담긴 cart_id / api 주소 및 method 협의
-
-  // TODO) totalPrice : packing 합계 + noPacking 합계
-  // TODO) totalShippingFee : 배송비가 무료가 아닌 CartTableItem 개수 * 4000
-  const packingSum = cartList.reduce((acc, el) => {
-    const { price, quantity, packing_option } = el;
-    if (packing_option === '선물포장 있음 (+3000)') {
-      return acc + (price + 3000) * quantity;
-    }
-  }, 0);
-  const noPackingSum = cartList.reduce((acc, el) => {
-    const { price, quantity, packing_option } = el;
-    if (packing_option === '선물포장 없음') {
-      const sum = acc + (price + 3000) * quantity;
-      console.log(acc);
-      console.log(sum);
-      return sum;
-    }
-  }, 0);
-  const totalPrice = packingSum + noPackingSum;
-  const totalShippingFee = 4000;
 
   return (
     <>
@@ -86,16 +102,25 @@ function CartTable({ cartList, setCartList }) {
           </tr>
         </thead>
         <tbody>
-          {cartList.map(item => (
-            <CartTableItem
-              key={item.cart_id}
-              item={item}
-              isallChecked={isallChecked}
-              checkedItemsHandler={checkedItemsHandler}
-              handleDelete={handleDelete}
-              setCartList={setCartList}
-            />
-          ))}
+          {cartList.length === 0 ? (
+            <tr>
+              <td colSpan={10} className="noItem">
+                장바구니가 비었습니다
+              </td>
+            </tr>
+          ) : (
+            cartList.map(item => (
+              <CartTableItem
+                key={item.cart_id}
+                item={item}
+                totalPrice={totalPrice}
+                isallChecked={isallChecked}
+                checkedItemsHandler={checkedItemsHandler}
+                handleDelete={handleDelete}
+                setCartList={setCartList}
+              />
+            ))
+          )}
         </tbody>
         <tfoot>
           <tr>
@@ -129,7 +154,11 @@ function CartTable({ cartList, setCartList }) {
       <div className="selectMenu">
         <div>
           <span>선택상품을</span>
-          <button onClick={() => deleteCheckedItems(checkedItems)}>
+          <button
+            onClick={() => {
+              handleDeleteChecked(checkedItems);
+            }}
+          >
             삭제하기
           </button>
         </div>

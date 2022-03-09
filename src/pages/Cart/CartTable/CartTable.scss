@@ -35,6 +35,11 @@
   tbody {
     border-top: 1px solid $theme-border-lightgray;
     border-bottom: 1px solid $theme-border-lightgray;
+
+    .noItem {
+      padding: 50px 0;
+      text-align: center;
+    }
   }
 
   tfoot {

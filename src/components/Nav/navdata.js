@@ -12,7 +12,7 @@ export const NAV_LIST_DATA = {
     },
     {
       id: 3,
-      name: 'CART',
+      name: `CART (${localStorage.getItem('cartItemCnt')})`,
       url: '/',
     },
     {

@@ -10,6 +10,7 @@ function Cart() {
   const [currentId, setCurrentId] = useState(1);
   const [cartList, setCartList] = useState([]);
   const [userInfoList, setUserInfoList] = useState([]);
+  localStorage.setItem('cartItemCnt', cartList.length);
 
   const clickHandler = id => {
     setCurrentId(id);
