@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from '../../config';
-import JoinButton from './Button/JoinButton';
-import CancButton from './Button/CancButton';
+// import JoinButton from './Button/JoinButton';
+// import CancButton from './Button/CancButton';
 import './Signup.scss';
 
 function Signup() {
@@ -18,7 +18,7 @@ function Signup() {
 
   //이메일 @, . 포함
   const isValidEmail =
-    signupValue.email.includes('@') && signupValue.email.includes('.') === true;
+    signupValue.email.includes('@') && signupValue.email.includes('.');
 
   //비밀번호 특수문자 포함
   const spacialValue = signupValue.password.search(/[!@#$%^&*]/);
@@ -35,15 +35,14 @@ function Signup() {
 
   //length 문자열 1 이상(폰번호 제외)
   const lengthValue =
-    signupValue.email.length >= 1 && signupValue.name.length >= 1;
-  // const isValidPhone = signupValue.phone_number > 0 === true;
+    signupValue.email.length >= 1 &&
+    signupValue.name.length >= 1 &&
+    signupValue.repassword.length >= 1;
 
   const handlesetSignupValue = e => {
-    // const handlesetSignupValue = useCallback(e => {
     const { name, value } = e.target;
     setSignupValue({ ...signupValue, [name]: value });
   };
-  // );
 
   const sendJoinInfo = e => {
     e.preventDefault();
@@ -57,16 +56,36 @@ function Signup() {
       }),
     })
       .then(response => response.json())
-      .then(result => handleJoinButton(result));
+      .then(result => {
+        if (!lengthValue) {
+          alert('양식에 맞게 모두 써 주셨나요?! T_T');
+        } else if (result.message === 'INVAILD_EMAIL') {
+          alert('입력하신 이메일이 양식에 맞지 않아요 T_T');
+        } else if (!checkPw || !rePwcheck) {
+          alert('입력하신 비밀번호&비밀번호 확인이 맞지 않네요! T_T');
+        } else if (!isValidPw || result.message === 'INVALID_PASSWORD') {
+          alert('입력하신 비밀번호가 양식에 맞지 않아요. T_T');
+        } else if (!isValidEmail || result.message === 'DUPLICATE_EMAIL') {
+          alert('이미 사용중인 이메일이예요 다른 푸룻한 메일을 써볼까요? T_T');
+        } else if (result.message === 'SUCCESS') {
+          alert('냠냠푸룻 회원가입 완료! 🍉');
+          navigate('/');
+        } else {
+          alert(
+            '아이쿠 어지러워💦 제 상태가 안 좋아요 잠시 후에 다시 시도해주세요!'
+          );
+        }
+      });
   };
 
-  const handleJoinButton = () => {
-    if (!isValidEmail || !lengthValue || !isValidPw || !checkPw || !rePwcheck) {
-      alert('양식에 맞게 모두 써 주셨나요?! T_T');
-      return false;
-    } else {
-      alert('냠냠푸룻 회원가입 완료! 🍉');
-      navigate('/');
+  const idCheck = e => {
+    if (!signupValue.email.length >= 1) {
+      alert('냠냠? 이메일 입력을 해 주셨나요? 💦');
+    }
+  };
+  const pwCheck = e => {
+    if (!signupValue.password.length >= 1) {
+      alert('냠냠? 비밀번호 입력을 해 주셨나요? 💦');
     }
   };
 
@@ -101,10 +120,10 @@ function Signup() {
                       type="text"
                       name="email"
                       className="inputTypeText"
+                      onBlur={idCheck}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="idMsg"></span>
-                    (영문소문자/숫자, 4~16자)
+                    <span className="idMsg">(영문소문자/숫자, 4~16자)</span>
                   </td>
                 </tr>
                 <tr>
@@ -118,6 +137,7 @@ function Signup() {
                       name="password"
                       className="inputTypeText"
                       maxLength={16}
+                      onBlur={pwCheck}
                       onChange={handlesetSignupValue}
                     />
                     (영문 대소문자/숫자 조합, 8자~16자)
@@ -134,12 +154,12 @@ function Signup() {
                       name="repassword"
                       className="inputTypeText"
                       autoComplete="off"
-                      // disabled={0}
                       maxLength={16}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="pwConfirmMsg"></span>
-                    입력하신 비밀번호와 동일하게 입력해주세요
+                    <span className="pwConfirmMsg">
+                      입력하신 비밀번호와 동일하게 입력해주세요
+                    </span>
                   </td>
                 </tr>
                 <tr>
@@ -155,8 +175,7 @@ function Signup() {
                       maxLength={21}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="pwMsg"></span>
-                    핸드폰 번호를 입력해주세요
+                    <span className="pwMsg">핸드폰 번호를 입력해주세요</span>
                   </td>
                 </tr>
                 <tr className="phoneNumber">
@@ -205,6 +224,7 @@ function Signup() {
               >
                 취소
               </button>
+              {/* Todo : 추후 버튼 수정 예정 */}
               {/* <JoinButton className="joinBtn" type="button">
                   회원가입
                 </JoinButton> */}
