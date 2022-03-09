@@ -1,5 +1,5 @@
 {
-  "results": [
+  "product_offset": [
     {
       "id": 1,
       "name": "감귤 마말랭 165g",
@@ -120,5 +120,7 @@
       "thumbnail_image_url": "/images/product.jpg",
       "category_id": 4
     }
-  ]
+  ],
+  "total_number_of_pages": 2,
+  "total_count": 12
 }
