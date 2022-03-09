@@ -11,11 +11,9 @@ export async function getProducts(query) {
 export async function getCartList() {
   const response = await fetch(`${BASE_URL}/users/shoppingcart`, {
     headers: {
-      Authorization:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+      Authorization: localStorage.getItem('token'),
     },
   });
-  // const response = await fetch('/data/cartdata.json');
   const body = await response.json();
   return body;
 }
@@ -25,8 +23,7 @@ export async function updateQuantity(cart_id, quantity) {
   await fetch(`${BASE_URL}/users/shoppingcart`, {
     method: 'PATCH',
     headers: {
-      Authorization:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+      Authorization: localStorage.getItem('token'),
     },
     body: JSON.stringify({
       cart_id,
@@ -40,8 +37,7 @@ export async function deleteProduct(cart_id) {
   await fetch(`${BASE_URL}/users/shoppingcart?cart_id=${cart_id}`, {
     method: 'DELETE',
     headers: {
-      Authorization:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+      Authorization: localStorage.getItem('token'),
     },
   });
 }
@@ -52,8 +48,7 @@ export async function deleteCheckedItems(checkedItems) {
   await fetch(`${BASE_URL}/users/shoppingcart?cart_id=${checkedItems}`, {
     method: 'DELETE',
     headers: {
-      Authorization:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+      Authorization: localStorage.getItem('token'),
     },
   });
 }
@@ -63,8 +58,7 @@ export async function deleteAllItems() {
   await fetch(`${BASE_URL}/users/shoppingcart?cart_id=0`, {
     method: 'DELETE',
     headers: {
-      Authorization:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+      Authorization: localStorage.getItem('token'),
     },
   });
 }
