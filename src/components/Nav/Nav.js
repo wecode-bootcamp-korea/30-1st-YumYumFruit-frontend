@@ -1,11 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavItem from './NavItem';
 import { NAV_LIST_DATA } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
+  const navigate = useNavigate();
   const ref = useRef();
+
+  const updateCategory = id => {
+    const queryString = id === 1 ? `?category=all` : `?category=${id - 1}`;
+    navigate(`/products/list${queryString}`);
+  };
 
   useEffect(() => {
     const menu = ref.current;
@@ -33,9 +39,17 @@ function Nav() {
               <li className="item">(+) ADD BOOKMARK</li>
             </ul>
             <ul className="rightMenu">
-              {NAV_LIST_DATA.userPageLinks.map(item => (
-                <NavItem key={item.id} item={item} />
-              ))}
+              {NAV_LIST_DATA.userPageLinks.map(item =>
+                localStorage.getItem('token') &&
+                item.name !== 'LOGIN' &&
+                item.name !== 'JOIN' ? (
+                  <NavItem key={item.id} item={item} />
+                ) : !localStorage.getItem('token') && item.name !== 'LOGOUT' ? (
+                  <NavItem key={item.id} item={item} />
+                ) : (
+                  ''
+                )
+              )}
             </ul>
           </div>
           <div className="topLogo">
@@ -50,7 +64,13 @@ function Nav() {
           <div className="menuList">
             <ul className="leftMenu">
               {NAV_LIST_DATA.productPageLinks.map(item => (
-                <NavItem key={item.id} item={item} />
+                <li
+                  key={item.id}
+                  className="navItem"
+                  onClick={() => updateCategory(item.id)}
+                >
+                  {item.name}
+                </li>
               ))}
             </ul>
             <ul className="rightMenu">

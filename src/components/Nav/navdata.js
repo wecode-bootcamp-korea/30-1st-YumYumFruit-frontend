@@ -13,7 +13,7 @@ export const NAV_LIST_DATA = {
     {
       id: 3,
       name: 'CART',
-      url: '/',
+      url: '/users/shoppingcart',
     },
     {
       id: 4,
