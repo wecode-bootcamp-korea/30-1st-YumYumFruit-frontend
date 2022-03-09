@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-const Option = ({ name, status, pck, total, setTotal }) => {
-  const increase = () => {
+const Option = ({
+  name,
+  status,
+  pck,
+  total,
+  setTotal,
+  optionList,
+  setOptionList,
+}) => {
+  const increase = e => {
     setTotal({
       ...total,
       [pck]: {
@@ -12,7 +20,7 @@ const Option = ({ name, status, pck, total, setTotal }) => {
   };
 
   const decrease = () => {
-    if (total[pck].quantity >= 1) {
+    if (total[pck].quantity >= 2) {
       setTotal({
         ...total,
         [pck]: {
@@ -21,6 +29,21 @@ const Option = ({ name, status, pck, total, setTotal }) => {
         },
       });
     }
+  };
+
+  const deleteList = e => {
+    const add = optionList.filter(x => {
+      return x.pck !== e.target.getAttribute('pck');
+    });
+
+    setOptionList([...add]);
+    setTotal({
+      ...total,
+      [pck]: {
+        quantity: 0,
+        option: pck,
+      },
+    });
   };
 
   return (
@@ -39,7 +62,9 @@ const Option = ({ name, status, pck, total, setTotal }) => {
             -
           </button>
         </div>
-        <button className="btnDelete">x</button>
+        <button className="btnDelete" onClick={deleteList} pck={pck}>
+          x
+        </button>
       </div>
     </div>
   );

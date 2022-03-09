@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Option from './Option';
+import { config } from '../../config';
 import './ProductItemPage.scss';
+// import { toBeInTheDOM } from '@testing-library/jest-dom/dist/matchers';
 
 const ProductItemPage = () => {
   const [productItem, setProductItem] = useState([]); //상세페이지 아이템
@@ -17,30 +19,32 @@ const ProductItemPage = () => {
     },
   });
 
-  // const params = useParams();
-  // const navigate = useNavigate();
+  const test = 7;
 
-  // back-end와 통신
+  // TODO: back-end와 통신준비중
+  // const params = useParams();
+  const navigate = useNavigate();
+
   // useEffect(() => {
-  //   fetch()
-  //     .then(res => res.json())
-  //     .then(res => setData(res));
+  //   fetch(`${config.productList}/${params.id}`)
+  //     .then(response => response.json())
+  //     .then(data => setProductItem(data.data));
   // }, []);
 
   useEffect(() => {
-    // fetch('http://10.58.1.244:8000/products/7')
-    fetch('http://10.58.4.85:8000/products/7')
+    // fetch('http://10.58.6.197:8000/products/7')
+    // fetch(`${config.productList}/7`)
+    fetch(`${config.productList}/${test}`)
       .then(response => response.json())
-      // .then(data => setProductItem(data.data));
       .then(data => setProductItem(data.data));
   }, []);
 
   // mockData 연결용 useEffect
   // useEffect(() => {
-  //   fetch('http://localhost:3000/data/ProductItemPages.json')
+  //   fetch('http://localhost:3001/data/ProductItemPages.json')
   //     .then(response => response.json())
   //     .then(data => setProductItem(data));
-  // }, []);
+  // }, []
 
   const addList = e => {
     if (
@@ -56,15 +60,22 @@ const ProductItemPage = () => {
           pck: e.target.getAttribute('pck'),
         })
       );
+      setTotal({
+        ...total,
+        [e.target.getAttribute('pck')]: {
+          quantity: total[e.target.getAttribute('pck')].quantity + 1,
+          option: e.target.getAttribute('pck'),
+        },
+      });
     }
   };
 
   const postCartInfo = () => {
-    fetch('http://10.58.1.244:8000/users/shoppingcart', {
+    fetch(`${config.cart}`, {
       method: 'POST',
       headers: {
         Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTZ9.Uvl7_ZDwmPHKd-av0nQG5pf5-F29Hv8Tb1fjhZp_o6U',
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
       },
       body: JSON.stringify([
         {
@@ -82,10 +93,10 @@ const ProductItemPage = () => {
       .then(res => res.json())
       .then(alert('장바구니에 담겼습니다.'));
 
-    // const goToCart = () => {
-    //   navigate('/');
-    // };
-    // goToCart();
+    const goToCart = () => {
+      navigate('/');
+    };
+    goToCart();
   };
 
   const postBuyNowInfo = () => {
@@ -93,7 +104,7 @@ const ProductItemPage = () => {
       method: 'POST',
       headers: {
         Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTZ9.Uvl7_ZDwmPHKd-av0nQG5pf5-F29Hv8Tb1fjhZp_o6U',
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
       },
       body: JSON.stringify([
         {
@@ -109,12 +120,12 @@ const ProductItemPage = () => {
       ]),
     })
       .then(res => res.json())
-      .then(alert('장바구니에 담겼습니다.'));
+      .then(alert('바로 구매로 이동합니다.'));
 
-    // const goToCart = () => {
-    //   navigate('/');
-    // };
-    // goToCart();
+    const goToCart = () => {
+      navigate('/');
+    };
+    goToCart();
   };
 
   if (!productItem.name) {
