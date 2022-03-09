@@ -5,23 +5,6 @@ import { deleteProduct, deleteAllItems, deleteCheckedItems } from 'api/api';
 import './CartTable.scss';
 
 function CartTable({ cartList, setCartList }) {
-  // TODO) totalPrice : packing 합계 + noPacking 합계
-  // TODO) totalShippingFee : 배송비가 무료가 아닌 CartTableItem 개수 * 4000
-  const packingSum = cartList.reduce((acc, el) => {
-    const { price, quantity, packing_option } = el;
-    if (el[packing_option] === '선물포장 있음 (+3000)') {
-      return acc + (price + 3000) * quantity;
-    }
-  }, 0);
-  const noPackingSum = cartList.reduce((acc, el) => {
-    const { price, quantity, packing_option } = el;
-    if (el[packing_option] === '선물포장 없음') {
-      return acc + (price + 3000) * quantity;
-    }
-  }, 0);
-  const totalPrice = packingSum + noPackingSum;
-  const totalShippingFee = 4000;
-
   // 체크 박스
   // TODO) 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
@@ -62,6 +45,26 @@ function CartTable({ cartList, setCartList }) {
 
   // TODO) 전체주문 : cartList에 담긴 모든 cart_id / api 주소 및 method 협의
   // TODO) 선택주문 : checkedItems에 담긴 cart_id / api 주소 및 method 협의
+
+  // TODO) totalPrice : packing 합계 + noPacking 합계
+  // TODO) totalShippingFee : 배송비가 무료가 아닌 CartTableItem 개수 * 4000
+  const packingSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    if (packing_option === '선물포장 있음 (+3000)') {
+      return acc + (price + 3000) * quantity;
+    }
+  }, 0);
+  const noPackingSum = cartList.reduce((acc, el) => {
+    const { price, quantity, packing_option } = el;
+    if (packing_option === '선물포장 없음') {
+      const sum = acc + (price + 3000) * quantity;
+      console.log(acc);
+      console.log(sum);
+      return sum;
+    }
+  }, 0);
+  const totalPrice = packingSum + noPackingSum;
+  const totalShippingFee = 4000;
 
   return (
     <>

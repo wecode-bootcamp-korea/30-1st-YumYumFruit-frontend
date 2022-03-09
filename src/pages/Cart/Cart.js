@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import CartTable from 'pages/Cart/CartTable/CartTable';
 import { GUIDE_LIST } from './guidedata';
 import { TABMENU_DATA } from './tabmenudata';
+import { getCartList } from 'api/api';
 import './Cart.scss';
 
 function Cart() {
@@ -14,15 +15,14 @@ function Cart() {
     setCurrentId(id);
   };
 
+  const handleLoad = async () => {
+    const { user_info, cart_info } = await getCartList();
+    setUserInfoList(user_info);
+    setCartList(cart_info);
+  };
+
   useEffect(() => {
-    fetch('http://10.58.4.85:8000/users/shoppingcart')
-      // fetch('/data/cartdata.json')
-      .then(response => response.json())
-      .then(data => {
-        setCartList(data.cart_info);
-        setUserInfoList(data.user_info);
-        console.log(cartList);
-      });
+    handleLoad();
   }, []);
 
   const MAPPING_OBJ = {

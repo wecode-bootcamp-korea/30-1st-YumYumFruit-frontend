@@ -1,4 +1,8 @@
 {
+  "user_info": {
+    "user_name": "김혜진",
+    "user_point": 10000
+  },
   "cart_info": [
     {
       "cart_id": 1,
@@ -7,7 +11,7 @@
       "price": 18000,
       "thumbnail_image_url": "/images/test.jpg",
       "quantity": 1,
-      "option": "선물포장 있음 (+3000)"
+      "packing_option": "선물포장 있음 (+3000)"
     },
     {
       "cart_id": 4,
@@ -16,7 +20,7 @@
       "price": 18000,
       "thumbnail_image_url": "/images/test.jpg",
       "quantity": 5,
-      "option": "선물포장 있음 (+3000)"
+      "packing_option": "선물포장 있음 (+3000)"
     },
     {
       "cart_id": 7,
@@ -25,7 +29,7 @@
       "price": 18000,
       "thumbnail_image_url": "/images/test.jpg",
       "quantity": 3,
-      "option": "선물포장 없음"
+      "packing_option": "선물포장 없음"
     }
   ]
 }
