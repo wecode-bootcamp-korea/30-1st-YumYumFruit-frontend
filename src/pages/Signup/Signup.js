@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from '../../config';
-// import JoinButton from './Button/JoinButton';
-// import CancButton from './Button/CancButton';
+import JoinButton from './Button/JoinButton';
+import CancleButton from './Button/CancleButton';
 import './Signup.scss';
 
 function Signup() {
@@ -89,7 +89,7 @@ function Signup() {
     }
   };
 
-  const CancleButton = () => {
+  const goToMain = () => {
     navigate('/');
   };
 
@@ -107,7 +107,7 @@ function Signup() {
               필수 입력사항
             </p>
           </div>
-          <form className="boardWrite" onSubmit={sendJoinInfo}>
+          <form id="formInfo" className="boardWrite" onSubmit={sendJoinInfo}>
             <table>
               <tbody>
                 <tr>
@@ -214,27 +214,8 @@ function Signup() {
               </tbody>
             </table>
             <div className="joinButtons">
-              <button className="joinBtn" type="button" onClick={sendJoinInfo}>
-                회원가입
-              </button>
-              <button
-                className="cancleBtn"
-                type="button"
-                onClick={CancleButton}
-              >
-                취소
-              </button>
-              {/* Todo : 추후 버튼 수정 예정 */}
-              {/* <JoinButton className="joinBtn" type="button">
-                  회원가입
-                </JoinButton> */}
-              {/* <CancButton
-                  className="cancleBtn"
-                  type="button"
-                  onClick={CancleButton}
-                >
-                  취소
-                </CancButton> */}
+              <JoinButton form="formInfo" type="submit" />
+              <CancleButton onClick={goToMain} />
             </div>
           </form>
         </div>
