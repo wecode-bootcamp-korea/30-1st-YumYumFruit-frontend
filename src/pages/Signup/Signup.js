@@ -66,7 +66,9 @@ function Signup() {
         } else if (!isValidPw || result.message === 'INVALID_PASSWORD') {
           alert('입력하신 비밀번호가 양식에 맞지 않아요. T_T');
         } else if (!isValidEmail || result.message === 'DUPLICATE_EMAIL') {
-          alert('이미 사용중인 이메일이예요 다른 푸룻한 메일을 써볼까요? T_T');
+          alert(
+            '이미 사용중인 이메일이예요 다른 푸룻🌱한 메일을 써볼까요? T_T'
+          );
         } else if (result.message === 'SUCCESS') {
           alert('냠냠푸룻 회원가입 완료! 🍉');
           navigate('/');
@@ -107,6 +109,7 @@ function Signup() {
               필수 입력사항
             </p>
           </div>
+          {/* form 리팩토링 map수정하기 */}
           <form id="formInfo" className="boardWrite" onSubmit={sendJoinInfo}>
             <table>
               <tbody>
