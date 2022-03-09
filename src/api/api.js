@@ -22,22 +22,28 @@ export async function getCartList() {
 
 // 수량 변경
 export async function updateQuantity(cart_id, quantity) {
-  await fetch(`${BASE_URL}/users/shoppingcart`, {
+  console.log(cart_id);
+  console.log(typeof cart_id);
+  console.log(quantity);
+  console.log(typeof quantity);
+  const response = await fetch(`${BASE_URL}/users/shoppingcart`, {
     method: 'PATCH',
     headers: {
       Authorization:
         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
     },
     body: {
-      cart_id,
-      quantity,
+      cart_id: cart_id,
+      quantity: quantity,
     },
   });
+  const body = response.json();
+  console.log(body);
 }
 
 // 개별 상품 삭제
 export async function deleteProduct(cart_id) {
-  await fetch(`${BASE_URL}/users/shoppingcart/${cart_id}`, {
+  await fetch(`${BASE_URL}/users/shoppingcart?cart_id=${cart_id}`, {
     method: 'DELETE',
     headers: {
       Authorization:
@@ -60,7 +66,7 @@ export async function deleteCheckedItems(items) {
 
 // 장바구니 비우기
 export async function deleteAllItems() {
-  await fetch(`${BASE_URL}/users/shoppingcart/0`, {
+  await fetch(`${BASE_URL}/users/shoppingcart?cart_id=0`, {
     method: 'DELETE',
     headers: {
       Authorization:

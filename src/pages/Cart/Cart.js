@@ -9,7 +9,7 @@ import './Cart.scss';
 function Cart() {
   const [currentId, setCurrentId] = useState(1);
   const [cartList, setCartList] = useState([]);
-  const [userInfoList, setUserInfoList] = useState([]);
+  const [userInfoList, setUserInfoList] = useState({});
   localStorage.setItem('cartItemCnt', cartList.length);
 
   const clickHandler = id => {
@@ -31,7 +31,14 @@ function Cart() {
     2: <div>해외배송</div>,
   };
 
+  if (
+    !(userInfoList.user_name && userInfoList.user_point && cartList.length > 0)
+  ) {
+    return;
+  }
+
   return (
+    { userInfoList.user_name && userInfoList.user_point && cartList.length > 0 && (
     <div className="cart">
       <div className="container">
         <header className="titleArea">
@@ -102,7 +109,8 @@ function Cart() {
         </section>
       </div>
     </div>
-  );
+    // )}
+  // );
 }
 
 export default Cart;

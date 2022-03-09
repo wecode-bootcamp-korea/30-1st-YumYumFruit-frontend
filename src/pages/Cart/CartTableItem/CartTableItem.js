@@ -72,9 +72,7 @@ function CartTableItem({
         <p className="name">{name}</p>
         <p className="packing_option">{packing_option}</p>
       </td>
-      <td className="price">
-        {(isPackingOptionValid ? price + 3000 : price).toLocaleString()}원
-      </td>
+      <td className="price">{isPackingOptionValid ? price + 3000 : price}원</td>
       <td className="quantity">
         <input
           type="number"

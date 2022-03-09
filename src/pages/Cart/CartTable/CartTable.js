@@ -47,10 +47,12 @@ function CartTable({ cartList, setCartList }) {
 
   // 선택 상품 삭제
   const handleDeleteChecked = async checkedItems => {
-    await deleteCheckedItems(checkedItems);
-    setCartList(prevItems =>
-      prevItems.filter(item => !checkedItems.includes(item))
-    );
+    if (checkedItems.size !== 0) {
+      await deleteCheckedItems(checkedItems);
+      // setCartList(prevItems =>
+      //   prevItems.filter(item => !checkedItems.includes(item))
+      // );
+    }
   };
 
   // packingPriceSum : 포장 상품 가격 합계
