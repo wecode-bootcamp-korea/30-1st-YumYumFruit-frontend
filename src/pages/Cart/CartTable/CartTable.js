@@ -46,30 +46,26 @@ function CartTable({ cartList, setCartList }) {
   };
 
   // 선택 상품 삭제
-  const handleDeleteChecked = async checkedItems => {
-    if (checkedItems.size !== 0) {
-      await deleteCheckedItems(checkedItems);
-      // setCartList(prevItems =>
-      //   prevItems.filter(item => !checkedItems.includes(item))
-      // );
-    }
+  const handleDeleteChecked = async items => {
+    const array = [...items];
+    await deleteCheckedItems(array);
+    setCartList(prevItems =>
+      prevItems.filter(item => !array.includes(item.cart_id))
+    );
+    setCheckedItems(new Set());
   };
 
   // packingPriceSum : 포장 상품 가격 합계
   const packingPriceSum = cartList.reduce((acc, el) => {
     const { price, quantity, packing_option } = el;
-    let sum =
-      packing_option === '선물포장 있음 (+3000)'
-        ? acc + (price + 3000) * quantity
-        : acc + 0;
+    let sum = packing_option ? acc + (price + 3000) * quantity : acc + 0;
     return sum;
   }, 0);
 
   // noPackingPriceSum : 미포장 상품 가격 합계
   const noPackingPriceSum = cartList.reduce((acc, el) => {
     const { price, quantity, packing_option } = el;
-    let sum =
-      packing_option === '선물포장 없음' ? acc + price * quantity : acc + 0;
+    let sum = !packing_option ? acc + price * quantity : acc + 0;
     return sum;
   }, 0);
 

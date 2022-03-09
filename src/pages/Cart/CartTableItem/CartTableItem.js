@@ -30,29 +30,27 @@ function CartTableItem({
 
   // 수량 변경
   // TIP) arr.findIndex(element) : 요소의 인덱스 반환
+  // TIP) newItem : 아이템 기존 정보 + cart_id, quantity
   const handleUpdateQty = async (cart_id, quantity) => {
     await updateQuantity(cart_id, quantity);
     setCartList(prevItems => {
       const splitIdx = prevItems.findIndex(item => item.cart_id === cart_id);
+      const newItem = { ...prevItems[splitIdx], cart_id, quantity };
       return [
         ...prevItems.slice(0, splitIdx),
-        { cart_id, quantity },
+        newItem,
         ...prevItems.slice(splitIdx + 1),
       ];
     });
   };
 
-  // TODO) 주문하기 : 서버에 보낼 url, body 합의 필요
+  // TODO) 주문하기 : 서버에 보낼 url, body 논의 필요
   const goToOrderForm = () => {
     navigate('/users/order');
   };
 
-  // 포장 유무
-  const isPackingOptionValid =
-    packing_option === '선물포장 있음 (+3000)' ? true : false;
-
   // 포장 유무에 따른 가격 합계
-  const priceSum = isPackingOptionValid
+  const priceSum = packing_option
     ? (price + 3000) * quantity
     : price * quantity;
 
@@ -70,9 +68,13 @@ function CartTableItem({
       </td>
       <td className="product">
         <p className="name">{name}</p>
-        <p className="packing_option">{packing_option}</p>
+        <p className="packing_option">
+          {packing_option ? '선물포장 있음 (+3000)' : '선물포장 없음'}
+        </p>
       </td>
-      <td className="price">{isPackingOptionValid ? price + 3000 : price}원</td>
+      <td className="price">
+        {(packing_option ? price + 3000 : price).toLocaleString()}원
+      </td>
       <td className="quantity">
         <input
           type="number"
