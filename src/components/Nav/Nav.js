@@ -9,7 +9,10 @@ function Nav() {
   const ref = useRef();
 
   const updateCategory = id => {
-    const queryString = id === 1 ? `?category=all` : `?category=${id - 1}`;
+    const queryString =
+      id === 1
+        ? `?category=all&sort=price&page=1`
+        : `?category=${id - 1}&sort=price&page=1`;
     navigate(`/products/list${queryString}`);
   };
 
