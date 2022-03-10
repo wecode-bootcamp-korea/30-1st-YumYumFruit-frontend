@@ -7,16 +7,21 @@ export const NAV_LIST_DATA = {
     },
     {
       id: 2,
+      name: 'LOGOUT',
+      url: '/',
+    },
+    {
+      id: 3,
       name: 'JOIN',
       url: '/signup',
     },
     {
-      id: 3,
+      id: 4,
       name: 'CART',
       url: '/users/shoppingcart',
     },
     {
-      id: 4,
+      id: 5,
       name: 'MYPAGE',
       url: '/',
     },
