@@ -18,19 +18,17 @@ const ProductItemPage = () => {
     },
   });
 
-  // TODO: back-end와 통신준비중
-  // const params = useParams();
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   fetch(API.productDetail + `/${params.id}`)
-  //     .then(response => response.json())
-  //     .then(data => setProductItem(data.data));
-  // }, []);
+  const params = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(`${API.productDetail}/7`)
+  const handleLoad = () => {
+    fetch(`${API.productDetail}/${params.id}`)
       .then(response => response.json())
       .then(data => setProductItem(data.data));
+  };
+
+  useEffect(() => {
+    handleLoad();
   }, []);
 
   const addList = e => {
@@ -58,7 +56,7 @@ const ProductItemPage = () => {
   };
 
   const goToPurchase = name => {
-    navigator(name === 'buyBtn' ? '/productitempage' : '/productitempage');
+    navigate(name === 'buyBtn' ? '/' : '/users/shoppingcart');
   };
 
   //TODO) 수량이 0일 때, 보내지 않는 필터가 필요
@@ -66,26 +64,27 @@ const ProductItemPage = () => {
     fetch(`${API.cart}`, {
       method: 'POST',
       headers: {
-        Authorization: localStorage.getItem('totken'),
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        product_id: productItem.id,
+        product_id: Number(params.id),
         packing_options: [
           {
             quantity: total.true.quantity,
-            packing_option: total.true.option,
+            packing_option: Boolean(total.true.option),
           },
           {
             quantity: total.false.quantity,
-            packing_option: total.false.option,
+            packing_option: Boolean(total.false.option),
           },
         ],
       }),
     })
       .then(res => res.json())
-      .then(json => {
-        if (json === true) {
+      .then(result => {
+        if (result.message === 'SUCCESS') {
           alert('장바구니에 담겼어요!');
+          handleLoad();
         } else {
           alert('다시 시도해주세요!');
         }
@@ -98,7 +97,7 @@ const ProductItemPage = () => {
     fetch(`${API.cart}`, {
       method: 'POST',
       headers: {
-        Authorization: localStorage.getItem('totken'),
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         product_id: productItem.id,
