@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from '../../config';
+import { SIGNUP_INPUT_DATA } from './SignupData';
+import SinupInputList from './SignupInputList';
 import JoinButton from './Button/JoinButton';
 import CancleButton from './Button/CancleButton';
 import './Signup.scss';
@@ -16,24 +18,18 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  //이메일 @, . 포함
   const isValidEmail =
     signupValue.email.includes('@') && signupValue.email.includes('.');
 
-  //비밀번호 특수문자 포함
   const spacialValue = signupValue.password.search(/[!@#$%^&*]/);
 
-  //비밀번호 === 비밀번호 확인
   const checkPw = signupValue.password;
   const checkRePw = signupValue.repassword;
 
-  //비밀번호 8자 이상 포함 & 특수문자 포함
   const isValidPw = signupValue.password.length >= 8 && spacialValue >= 1;
 
-  //비밀번호 확인
   const rePwcheck = checkPw === checkRePw;
 
-  //length 문자열 1 이상(폰번호 제외)
   const lengthValue =
     signupValue.email.length >= 1 &&
     signupValue.name.length >= 1 &&
@@ -59,6 +55,7 @@ function Signup() {
       .then(result => {
         if (!lengthValue) {
           alert('양식에 맞게 모두 써 주셨나요?! T_T');
+          return;
         } else if (result.message === 'INVAILD_EMAIL') {
           alert('입력하신 이메일이 양식에 맞지 않아요 T_T');
         } else if (!checkPw || !rePwcheck) {
@@ -80,14 +77,11 @@ function Signup() {
       });
   };
 
-  const idCheck = e => {
+  const onBlur = e => {
     if (!signupValue.email.length >= 1) {
       alert('냠냠? 이메일 입력을 해 주셨나요? 💦');
-    }
-  };
-  const pwCheck = e => {
-    if (!signupValue.password.length >= 1) {
-      alert('냠냠? 비밀번호 입력을 해 주셨나요? 💦');
+    } else if (!signupValue.password.length >= 1) {
+      alert('푸룻? 비밀번호 입력을 해 주셨나요? 💦');
     }
   };
 
@@ -109,66 +103,20 @@ function Signup() {
               필수 입력사항
             </p>
           </div>
-          {/* form 리팩토링 map수정하기 */}
           <form id="formInfo" className="boardWrite" onSubmit={sendJoinInfo}>
             <table>
               <tbody>
-                <tr>
-                  <th scope="row">
-                    아이디(EMAIL)
-                    <img alt="checkImg" src="./images/checked.png" />
-                  </th>
-                  <td>
-                    <input
-                      type="text"
-                      name="email"
-                      className="inputTypeText"
-                      onBlur={idCheck}
-                      onChange={handlesetSignupValue}
-                    />
-                    <span className="idMsg">(영문소문자/숫자, 4~16자)</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    비밀번호
-                    <img alt="checkImg" src="./images/checked.png" />
-                  </th>
-                  <td>
-                    <input
-                      type="password"
-                      name="password"
-                      className="inputTypeText"
-                      maxLength={16}
-                      onBlur={pwCheck}
-                      onChange={handlesetSignupValue}
-                    />
-                    (영문 대소문자/숫자 조합, 8자~16자)
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    비밀번호 확인
-                    <img alt="checkImg" src="./images/checked.png" />
-                  </th>
-                  <td>
-                    <input
-                      type="password"
-                      name="repassword"
-                      className="inputTypeText"
-                      autoComplete="off"
-                      maxLength={16}
-                      onChange={handlesetSignupValue}
-                    />
-                    <span className="pwConfirmMsg">
-                      입력하신 비밀번호와 동일하게 입력해주세요
-                    </span>
-                  </td>
-                </tr>
+                {SIGNUP_INPUT_DATA.map(item => (
+                  <SinupInputList
+                    key={item.id}
+                    item={item}
+                    onChange={handlesetSignupValue}
+                    onBlur={onBlur}
+                  />
+                ))}
                 <tr>
                   <th scope="row" className="nameTitle" id="name">
                     이름
-                    <img alt="checkImg" src="./images/checked.png" />
                   </th>
                   <td>
                     <input
@@ -178,7 +126,6 @@ function Signup() {
                       maxLength={21}
                       onChange={handlesetSignupValue}
                     />
-                    <span className="pwMsg">핸드폰 번호를 입력해주세요</span>
                   </td>
                 </tr>
                 <tr className="phoneNumber">

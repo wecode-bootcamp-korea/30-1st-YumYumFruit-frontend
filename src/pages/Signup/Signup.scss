@@ -1,14 +1,12 @@
 @import '/src/styles/variables.scss';
 
 .signup {
-  height: 100%;
   width: 100%;
   margin-top: 40px;
   position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  // font-size: 13px;
   font-weight: 500;
 
   img {
@@ -21,20 +19,22 @@
     height: 18px;
     width: 1200px;
     text-align: center;
+    margin-top: 60px;
 
     h2 {
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 600;
       letter-spacing: 3px;
     }
   }
 
   .joinForm {
     .memberJoin {
-      height: 1386px;
       width: 1200px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 20px 0 208px 0;
 
       .boardWriteTop {
         height: 12px;
@@ -42,19 +42,22 @@
         padding: 50px 0 20px 0;
 
         h3 {
-          font-size: 11px;
           font-weight: 700;
         }
       }
 
       p {
-        margin: -10px 0 10px 0;
+        margin: -15px 0 10px 0;
         text-align: end;
       }
 
       .boardWrite {
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        border-top: 1px solid $theme-border-lightgray;
+        margin-top: 5px;
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         table {
           margin: 10px 0 0 0;
@@ -72,7 +75,7 @@
             input {
               height: 15px;
               width: 133px;
-              border: 1px solid #dddddd;
+              border: 1px solid $theme-border-lightgray;
               margin: -1px 0 0 0;
               padding: 4px;
               display: inline-block;
@@ -100,7 +103,7 @@
               input {
                 height: 15px;
                 width: 50px;
-                border: 1px solid #dddddd;
+                border: 1px solid $theme-border-lightgray;
                 margin: 0 4px 0 4px;
                 padding: 4px;
                 display: inline-block;
