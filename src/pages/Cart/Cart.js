@@ -46,7 +46,7 @@ function Cart() {
               </div>
               <ul className="mileage">
                 <li className="item">
-                  가용적립금 : {userInfo.user_point.toLocaleString()}원
+                  가용적립금 : {userInfo.user_point || 0}원
                 </li>
               </ul>
             </div>

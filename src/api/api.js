@@ -11,7 +11,9 @@ export async function getProducts(query) {
 export async function getCartList() {
   const response = await fetch(`${BASE_URL}/users/shoppingcart`, {
     headers: {
-      Authorization: localStorage.getItem('token'),
+      // Authorization: localStorage.getItem('token'),
+      Authorization:
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
     },
   });
   const body = await response.json();
