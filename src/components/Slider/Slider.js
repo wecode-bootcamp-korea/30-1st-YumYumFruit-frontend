@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Slide from './Slide';
+import { SLIDE_LIST } from './slidedata';
 import './Slider.scss';
 
 const TOTAL_SLIDES = 2;
@@ -28,9 +29,9 @@ function Slider() {
   return (
     <section className="slider">
       <ul className="container" ref={ref}>
-        <Slide img="/images/slide1.jpg" />
-        <Slide img="/images/slide2.jpg" />
-        <Slide img="/images/slide3.jpg" />
+        {SLIDE_LIST.map(item => (
+          <Slide key={item.id} src={item.src} />
+        ))}
       </ul>
       <button className="leftBtn" onClick={prevSlide}>
         <span className="arrow">&lang;</span>
