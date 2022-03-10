@@ -1,50 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Option from './Option';
-import { config } from '../../config';
+import API from '../../config';
 import './ProductItemPage.scss';
-// import { toBeInTheDOM } from '@testing-library/jest-dom/dist/matchers';
 
 const ProductItemPage = () => {
-  const [productItem, setProductItem] = useState([]); //상세페이지 아이템
-  const [optionList, setOptionList] = useState([]); //packaging option
+  const [productItem, setProductItem] = useState([]);
+  const [optionList, setOptionList] = useState([]);
   const [total, setTotal] = useState({
-    noPackaging: {
+    false: {
       quantity: 0,
-      option: 'noPackaging',
+      option: 'False',
     },
-    packaging: {
+    true: {
       quantity: 0,
-      option: 'packaging',
+      option: 'True',
     },
   });
 
-  const test = 7;
-
   // TODO: back-end와 통신준비중
   // const params = useParams();
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
   // useEffect(() => {
-  //   fetch(`${config.productList}/${params.id}`)
+  //   fetch(API.productDetail + `/${params.id}`)
   //     .then(response => response.json())
   //     .then(data => setProductItem(data.data));
   // }, []);
 
   useEffect(() => {
-    // fetch('http://10.58.6.197:8000/products/7')
-    // fetch(`${config.productList}/7`)
-    fetch(`${config.productList}/${test}`)
+    fetch(`${API.productDetail}/7`)
       .then(response => response.json())
       .then(data => setProductItem(data.data));
   }, []);
-
-  // mockData 연결용 useEffect
-  // useEffect(() => {
-  //   fetch('http://localhost:3001/data/ProductItemPages.json')
-  //     .then(response => response.json())
-  //     .then(data => setProductItem(data));
-  // }, []
 
   const addList = e => {
     if (
@@ -57,75 +44,86 @@ const ProductItemPage = () => {
           name: productItem.name,
           price: productItem.price,
           status: e.target.getAttribute('status'),
-          pck: e.target.getAttribute('pck'),
+          packaged: e.target.getAttribute('packaged'),
         })
       );
       setTotal({
         ...total,
-        [e.target.getAttribute('pck')]: {
-          quantity: total[e.target.getAttribute('pck')].quantity + 1,
-          option: e.target.getAttribute('pck'),
+        [e.target.getAttribute('packaged')]: {
+          quantity: total[e.target.getAttribute('packaged')].quantity + 1,
+          option: e.target.getAttribute('packaged'),
         },
       });
     }
   };
 
-  const postCartInfo = () => {
-    fetch(`${config.cart}`, {
-      method: 'POST',
-      headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
-      },
-      body: JSON.stringify([
-        {
-          product_id: productItem.product_id,
-          quantity: total.packaging.quantity,
-          packing_option: total.packaging.option,
-        },
-        {
-          product_id: productItem.product_id,
-          quantity: total.noPackaging.quantity,
-          packing_option: total.noPackaging.option,
-        },
-      ]),
-    })
-      .then(res => res.json())
-      .then(alert('장바구니에 담겼습니다.'));
-
-    const goToCart = () => {
-      navigate('/');
-    };
-    goToCart();
+  const goToPurchase = name => {
+    navigator(name === 'buyBtn' ? '/productitempage' : '/productitempage');
   };
 
-  const postBuyNowInfo = () => {
-    fetch('http://10.58.1.244:8000/users/shoppingcart', {
+  //TODO) 수량이 0일 때, 보내지 않는 필터가 필요
+  const postCartInfo = e => {
+    fetch(`${API.cart}`, {
       method: 'POST',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImV4cCI6MTY0Njk3Nzg5NH0.x1wMu386hjwvkFgzuNVjolDHcyE-1bwOVIvU_3Iihlc',
+        Authorization: localStorage.getItem('totken'),
       },
-      body: JSON.stringify([
-        {
-          product_id: productItem.product_id,
-          quantity: total.packaging.quantity,
-          packing_option: total.packaging.option,
-        },
-        {
-          product_id: productItem.product_id,
-          quantity: total.noPackaging.quantity,
-          packing_option: total.noPackaging.option,
-        },
-      ]),
+      body: JSON.stringify({
+        product_id: productItem.id,
+        packing_options: [
+          {
+            quantity: total.true.quantity,
+            packing_option: total.true.option,
+          },
+          {
+            quantity: total.false.quantity,
+            packing_option: total.false.option,
+          },
+        ],
+      }),
     })
       .then(res => res.json())
-      .then(alert('바로 구매로 이동합니다.'));
+      .then(json => {
+        if (json === true) {
+          alert('장바구니에 담겼어요!');
+        } else {
+          alert('다시 시도해주세요!');
+        }
+      });
 
-    const goToCart = () => {
-      navigate('/');
-    };
-    goToCart();
+    goToPurchase(e.target.className);
+  };
+
+  const postBuyNowInfo = e => {
+    fetch(`${API.cart}`, {
+      method: 'POST',
+      headers: {
+        Authorization: localStorage.getItem('totken'),
+      },
+      body: JSON.stringify({
+        product_id: productItem.id,
+        packing_options: [
+          {
+            quantity: total.true.quantity,
+            packing_option: total.true.option,
+          },
+          {
+            quantity: total.false.quantity,
+            packing_option: total.false.option,
+          },
+        ],
+      }),
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json === true) {
+          alert('바로구매로 이동합니다!');
+        } else {
+          alert('다시 시도해주세요!');
+        }
+      });
+
+    goToPurchase(e.target.className);
   };
 
   if (!productItem.name) {
@@ -164,7 +162,7 @@ const ProductItemPage = () => {
                   name="option"
                   type="radio"
                   status="선물포장 없음"
-                  pck="noPackaging"
+                  packaged="false"
                   onClick={addList}
                 />
                 선물포장 없음
@@ -174,7 +172,7 @@ const ProductItemPage = () => {
                   name="option"
                   type="radio"
                   status="- 포장 있음(+3,000원)"
-                  pck="packaging"
+                  packaged="true"
                   onClick={addList}
                 />
                 선물포장 있음(+ 3,000원)
@@ -188,7 +186,7 @@ const ProductItemPage = () => {
                 name={option.name}
                 price={option.price}
                 status={option.status}
-                pck={option.pck}
+                packaged={option.packaged}
                 total={total}
                 setTotal={setTotal}
                 optionList={optionList}
@@ -199,11 +197,11 @@ const ProductItemPage = () => {
           <div className="totalProducts">
             <span>
               {(
-                total.noPackaging.quantity * productItem.price +
-                total.packaging.quantity * (productItem.price + 3000)
+                total.false.quantity * productItem.price +
+                total.true.quantity * (productItem.price + 3000)
               ).toLocaleString()}
               원(
-              {total.noPackaging.quantity + total.packaging.quantity}개)
+              {total.false.quantity + total.true.quantity}개)
             </span>
             <div>
               <button className="buyBtn" onClick={postBuyNowInfo} />

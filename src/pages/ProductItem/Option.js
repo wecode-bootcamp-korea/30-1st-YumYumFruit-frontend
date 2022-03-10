@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import './Option.scss';
 
 const Option = ({
   name,
   status,
-  pck,
+  packaged,
   total,
   setTotal,
   optionList,
@@ -12,20 +13,20 @@ const Option = ({
   const increase = e => {
     setTotal({
       ...total,
-      [pck]: {
-        quantity: total[pck].quantity + 1,
-        option: pck,
+      [packaged]: {
+        quantity: total[packaged].quantity + 1,
+        option: packaged,
       },
     });
   };
 
   const decrease = () => {
-    if (total[pck].quantity >= 2) {
+    if (total[packaged].quantity >= 2) {
       setTotal({
         ...total,
-        [pck]: {
-          quantity: total[pck].quantity - 1,
-          option: pck,
+        [packaged]: {
+          quantity: total[packaged].quantity - 1,
+          option: packaged,
         },
       });
     }
@@ -33,15 +34,15 @@ const Option = ({
 
   const deleteList = e => {
     const add = optionList.filter(x => {
-      return x.pck !== e.target.getAttribute('pck');
+      return x.packaged !== e.target.getAttribute('packaged');
     });
 
     setOptionList([...add]);
     setTotal({
       ...total,
-      [pck]: {
+      [packaged]: {
         quantity: 0,
-        option: pck,
+        option: packaged,
       },
     });
   };
@@ -52,17 +53,17 @@ const Option = ({
         <span>{name}</span>
         <span>{status}</span>
       </div>
-      <span>{total[pck].quantity}</span>
+      <span>{total[packaged].quantity}</span>
       <div className="amountSelect">
         <div>
-          <button className="btnPlus" onClick={increase} pck={pck}>
+          <button className="btnPlus" onClick={increase} packaged={packaged}>
             +
           </button>
-          <button className="btnMinus" onClick={decrease} pck={pck}>
+          <button className="btnMinus" onClick={decrease} packaged={packaged}>
             -
           </button>
         </div>
-        <button className="btnDelete" onClick={deleteList} pck={pck}>
+        <button className="btnDelete" onClick={deleteList} packaged={packaged}>
           x
         </button>
       </div>
