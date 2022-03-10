@@ -1,11 +1,19 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavItem from './NavItem';
 import { NAV_LIST_DATA } from './navdata.js';
 import './Nav.scss';
 
 function Nav() {
+  const navigate = useNavigate();
   const ref = useRef();
+
+  const updateCategory = id => {
+    const queryString = `?category=${
+      id === 1 ? 'all' : id - 1
+    }&sort=price&page=1`;
+    navigate(`/products${queryString}`);
+  };
 
   useEffect(() => {
     const menu = ref.current;
@@ -24,23 +32,26 @@ function Nav() {
     };
   }, []);
 
+  const token = localStorage.getItem('token');
+
   return (
     <nav className="nav">
       <div className="top">
         <div className="topInner">
           <div className="menuList">
-            <div className="halfBox">
-              <ul className="leftBox">
-                <li className="item">(+) ADD BOOKMARK</li>
-              </ul>
-            </div>
-            <div className="halfBox">
-              <ul className="rightBox">
-                {NAV_LIST_DATA.userPageLinks.map(item => (
+            <ul className="leftMenu">
+              <li className="item">(+) ADD BOOKMARK</li>
+            </ul>
+            <ul className="rightMenu">
+              {NAV_LIST_DATA.userPageLinks.map(item =>
+                (token && item.name !== 'LOGIN' && item.name !== 'JOIN') ||
+                (!token && item.name !== 'LOGOUT') ? (
                   <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
+                ) : (
+                  ''
+                )
+              )}
+            </ul>
           </div>
           <div className="topLogo">
             <Link className="link" to="/">
@@ -52,20 +63,22 @@ function Nav() {
       <div className="menu" ref={ref}>
         <div className="menuInner">
           <div className="menuList">
-            <div className="halfBox">
-              <ul className="leftBox">
-                {NAV_LIST_DATA.productPageLinks.map(item => (
-                  <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
-            <div className="halfBox">
-              <ul className="rightBox">
-                {NAV_LIST_DATA.boardPageLinks.map(item => (
-                  <NavItem key={item.id} item={item} />
-                ))}
-              </ul>
-            </div>
+            <ul className="leftMenu">
+              {NAV_LIST_DATA.productPageLinks.map(item => (
+                <li
+                  key={item.id}
+                  className="navItem"
+                  onClick={() => updateCategory(item.id)}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+            <ul className="rightMenu">
+              {NAV_LIST_DATA.boardPageLinks.map(item => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -2,77 +2,77 @@
 
 .nav {
   margin-bottom: 90px;
+  background-color: white;
   z-index: 10;
 
   .menuList {
     display: flex;
+    justify-content: space-between;
     padding: 20px 0;
 
-    .halfBox {
-      width: 50%;
+    .leftMenu {
+      display: flex;
+      justify-content: left;
+      align-items: center;
 
-      .leftBox {
-        display: flex;
-        justify-content: left;
-        align-items: center;
-
-        .item {
-          margin-right: 25px;
-        }
+      .item {
+        margin-right: 25px;
       }
+    }
 
-      .rightBox {
-        display: flex;
-        justify-content: right;
-        align-items: center;
+    .rightMenu {
+      display: flex;
+      justify-content: right;
+      align-items: center;
 
-        .item {
-          margin-left: 25px;
-        }
+      .item {
+        margin-left: 25px;
       }
+    }
 
-      .link {
-        text-decoration: none;
-        color: $theme-font-black;
-        cursor: pointer;
-      }
-      .link:hover {
+    .link {
+      text-decoration: none;
+      color: $theme-font-black;
+      cursor: pointer;
+
+      &:hover {
         color: $theme-font-lightgray;
       }
     }
   }
+}
 
-  .top {
-    .topInner {
-      width: 1400px;
-      margin: 0 auto;
-      padding-bottom: 40px;
+.top {
+  .topInner {
+    width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
 
-      .topLogo {
-        text-align: center;
+    .topLogo {
+      text-align: center;
 
-        .logo {
-          width: 30%;
-        }
+      .logo {
+        width: 30%;
       }
     }
   }
+}
 
-  .fixed {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
-  .menu {
-    padding: 10px 0;
-    background-color: white;
-    border-top: 1px solid $theme-border-lightgray;
-    border-bottom: 1px solid $theme-border-lightgray;
+.menu {
+  padding: 10px 0;
+  background-color: white;
+  border-top: 1px solid $theme-border-lightgray;
+  border-bottom: 1px solid $theme-border-lightgray;
+  z-index: 10;
 
-    .menuInner {
-      width: 1400px;
-      margin: 0 auto;
-    }
+  .menuInner {
+    width: 1200px;
+    margin: 0 auto;
   }
 }
