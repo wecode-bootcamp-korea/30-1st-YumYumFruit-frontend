@@ -1,0 +1,14 @@
+{
+  "loginData": [
+    {
+      "id": 1,
+      "email": "yookiki@gmail.com",
+      "password": "yookiki1993"
+    },
+    {
+      "id": 2,
+      "email": "kiki@gmail.com",
+      "password": "kiki19931993"
+    }
+  ]
+}

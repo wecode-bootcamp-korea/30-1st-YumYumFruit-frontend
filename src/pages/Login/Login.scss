@@ -1,1 +1,137 @@
-/* hi */
+@import '../../styles/variables.scss';
+
+.login {
+  background-color: #ffffff;
+  color: $theme-font-black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  font-weight: 500;
+
+  .titleArea {
+    height: 18px;
+    width: 1200px;
+    text-align: center;
+
+    h2 {
+      height: auto;
+      width: auto;
+      display: inline;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      @include logoFont;
+    }
+  }
+
+  .loginWarp {
+    height: 360px;
+    width: 1200px;
+    padding: 40px 0 30px 0;
+    text-align: center;
+
+    .login {
+      height: 259.8px;
+      width: 310px;
+      margin: 0 445px 0 445px;
+      position: relative;
+      text-align: center;
+      @include logoFont;
+
+      h3 {
+        height: 12px;
+        width: 310px;
+        margin: 0 0 10px 0;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-align: left;
+      }
+
+      .loginBox {
+        height: 215px;
+        width: 312px;
+        margin: 1 -2px 0 0;
+        min-width: min-content;
+
+        .id,
+        .password {
+          background-color: #ffffff;
+          height: 40px;
+          width: 290px;
+          display: flex;
+          align-items: center;
+          border: 1px solid #dddddd;
+          border-radius: 3px;
+          margin: 10px 0 0 0;
+          padding: 7px 10px;
+          overflow: hidden;
+          text-decoration: none solid rgb(34, 34, 34);
+          text-align: center;
+
+          span {
+            height: 30px;
+            width: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+          }
+
+          input {
+            border-style: none;
+            cursor: text;
+
+            &:focus {
+              outline: 0;
+            }
+          }
+        }
+
+        .securityCheck {
+          height: 12px;
+          width: 312px;
+          margin: 15px 0 15px 0;
+          text-align: end;
+
+          span {
+            height: 12px;
+            width: 68px;
+          }
+        }
+
+        .checkText {
+          margin-top: 10px;
+          font-size: 13px;
+          color: crimson;
+          font-weight: bold;
+        }
+
+        .loginButton {
+          height: 14px;
+          width: 310px;
+          margin: 0 0 5px 0;
+          padding: 30px 0 20px 0;
+          display: inline-block;
+
+          button {
+            margin: 5px;
+            color: rgb(255, 255, 255);
+            background-color: rgb(53, 53, 53);
+            padding: 12px 18px;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 0.25rem;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.5;
+
+            &:hover {
+              cursor: pointer;
+              background-color: rgb(0, 0, 0);
+            }
+          }
+        }
+      }
+    }
+  }
+}
