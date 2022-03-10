@@ -4,6 +4,7 @@ import Nav from 'components/Nav/Nav';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
+import Footer from './components/Footer/Footer';
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
         <Route path="/signup" element={<Signup />} />;
         <Route path="/login" element={<Login />} />;
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
