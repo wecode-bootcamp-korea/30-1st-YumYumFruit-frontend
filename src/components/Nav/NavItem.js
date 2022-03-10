@@ -1,23 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './NavItem.scss';
 
 function NavItem({ item }) {
-  const { id, name } = item;
-  const navigate = useNavigate();
-
-  const updateCategory = id => {
-    const queryString =
-      id === 1
-        ? `?category=all&sort=price&page=1`
-        : `?category=${id - 1}&sort=price&page=1`;
-    navigate(`/products${queryString}`);
-  };
+  const { url, name } = item;
 
   return (
-    <li className="navItem" onClick={() => updateCategory(id)}>
+    <Link to={url} className="navItem">
       {name}
-    </li>
+    </Link>
   );
 }
 
