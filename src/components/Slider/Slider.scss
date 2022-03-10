@@ -2,13 +2,13 @@
 
 .slider {
   position: relative;
+  overflow: hidden;
 
   .container {
     display: flex;
     width: 100%;
     padding-top: 30px;
     transition: transform 0.5s;
-    // overflow: hidden;
   }
 
   .leftBtn,
