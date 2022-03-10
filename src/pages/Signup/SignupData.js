@@ -1,0 +1,32 @@
+export const SIGNUP_INPUT_DATA = [
+  {
+    id: '1',
+    src: './images/checked.png',
+    type: 'text',
+    name: 'email',
+    className: 'inputTypeText',
+    maxLength: 16,
+    title: '아이디(EMAIL)',
+    content: '(영문 소문자/숫자 이메일형식(@,.), 4~16자)',
+  },
+  {
+    id: '2',
+    src: './images/checked.png',
+    type: 'password',
+    name: 'password',
+    className: 'inputTypeText',
+    maxLength: 16,
+    title: '비밀번호',
+    content: '(영문 대소문자/숫자 조합, 8자~16자)',
+  },
+  {
+    id: '3',
+    src: './images/checked.png',
+    type: 'password',
+    name: 'repassword',
+    className: 'inputTypeText',
+    maxLength: 16,
+    title: '비밀번호 확인',
+    content: '입력하신 비밀번호와 동일하게 입력해주세요',
+  },
+];
