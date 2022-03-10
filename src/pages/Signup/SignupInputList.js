@@ -1,7 +1,6 @@
 import React from 'react';
 import './Signup.scss';
 
-// 온블러 아니고 다른걸로 하면 됨
 function SinupInputList({ onBlur, onChange, item }) {
   const { type, name, className, maxLength, content, title, src } = item;
   return (
