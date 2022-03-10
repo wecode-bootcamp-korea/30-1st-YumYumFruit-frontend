@@ -1,1 +1,21 @@
-/* hi */
+@import 'styles/variables.scss';
+
+.main {
+  .inner {
+    width: 1200px;
+    margin: 0 auto;
+
+    .title {
+      text-align: center;
+      margin-top: 160px;
+      margin-bottom: 50px;
+      font-size: 25px;
+      @include logoFont;
+    }
+
+    .productList {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import 'styles/variables.scss';
+
+.pagination {
+  @include flexbox;
+
+  .pageNum,
+  .arrow {
+    width: 35px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid $theme-border-lightgray;
+    color: $theme-font-lightgray;
+  }
+
+  .pageNum {
+    &:hover {
+      color: $theme-font-black;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    &[aria-current] {
+      background-color: $theme-background-lightgray;
+      color: $theme-font-black;
+    }
+  }
+
+  .arrow {
+    &:hover {
+      color: $theme-font-black;
+      cursor: pointer;
+    }
+
+    &[disabled] {
+      color: $theme-font-lightgray;
+      cursor: default;
+    }
+  }
+}
+
+// 다른 카테고리 넘어갈 경우, page 없거나 1이 되어야 한다
