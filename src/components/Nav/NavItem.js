@@ -4,8 +4,15 @@ import './NavItem.scss';
 
 function NavItem({ item }) {
   const { url, name } = item;
-
-  return (
+  return { name } === 'LOGOUT' ? (
+    <Link
+      to={url}
+      className="navItem"
+      onClick={() => localStorage.removeItem('token')}
+    >
+      {name}
+    </Link>
+  ) : (
     <Link to={url} className="navItem">
       {name}
     </Link>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { config } from '../../config';
+import { API } from '../../config';
 import { SIGNUP_INPUT_DATA } from './SignupData';
 import SinupInputList from './SignupInputList';
 import JoinButton from './Button/JoinButton';
@@ -42,7 +42,7 @@ function Signup() {
 
   const sendJoinInfo = e => {
     e.preventDefault();
-    fetch(`${config.api}/users/signup`, {
+    fetch(API.signUp, {
       method: 'POST',
       body: JSON.stringify({
         email: signupValue.email,
