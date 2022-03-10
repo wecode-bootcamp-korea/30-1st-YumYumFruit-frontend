@@ -1,0 +1,176 @@
+@import 'styles/variables.scss';
+
+.cart {
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+
+    .titleArea {
+      text-align: center;
+
+      .title {
+        font-size: 25px;
+        @include logoFont;
+      }
+    }
+
+    .userInfoArea {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 50px;
+      padding: 25px 0;
+      border-top: 1px solid $theme-border-lightgray;
+      border-bottom: 1px solid $theme-border-lightgray;
+
+      .mileage {
+        display: flex;
+
+        .item {
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .tabs {
+      display: flex;
+      margin-top: 55px;
+      margin-bottom: 45px;
+      border-bottom: 1px solid $theme-border-lightgray;
+
+      .tabMenu {
+        padding: 20px 80px;
+        border-top: 1px solid $theme-border-lightgray;
+        border-left: 1px solid $theme-border-lightgray;
+
+        &:last-child {
+          border-right: 1px solid $theme-border-lightgray;
+        }
+
+        .link {
+          text-decoration: none;
+          color: $theme-font-black;
+        }
+      }
+    }
+
+    .cartTableArea {
+      .cartTableTitle {
+        padding: 15px 0;
+        font-weight: 700;
+      }
+
+      .priceGuide {
+        padding: 15px 10px;
+        border-bottom: 1px solid $theme-border-lightgray;
+        color: $theme-font-gray;
+      }
+
+      .selectMenu {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 10px;
+        margin-bottom: 50px;
+
+        button {
+          padding: 8px 10px 6px;
+          margin-left: 10px;
+          background-color: white;
+          border: 1px solid $theme-border-lightgray;
+          border-radius: 3px;
+          font-size: 16px;
+
+          &:hover {
+            border: 1px solid $theme-border-gray;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .totalTable {
+        width: 100%;
+        border: 1px solid $theme-border-lightgray;
+        border-collapse: collapse;
+
+        th,
+        td {
+          width: 33%;
+        }
+
+        th {
+          padding: 10px 0;
+          background-color: $theme-background-lightgray;
+          border: 1px solid $theme-border-lightgray;
+          font-weight: 700;
+        }
+
+        td {
+          padding: 20px 0;
+          border: 1px solid $theme-border-lightgray;
+          text-align: center;
+          font-size: 25px;
+        }
+
+        .num {
+          font-weight: 700;
+        }
+
+        .total {
+          color: $theme-font-red;
+        }
+      }
+
+      .orderBtnArea {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin: 20px 0 50px;
+
+        .btn {
+          display: block;
+          padding: 15px 20px 17px;
+          border-radius: 3px;
+          text-decoration: none;
+          margin: 0 6px;
+        }
+
+        .totalBtn {
+          background-color: $theme-background-black;
+          color: white;
+        }
+
+        .checkBtn {
+          background-color: $theme-background-gray;
+          color: white;
+        }
+
+        .goToMainBtn {
+          position: absolute;
+          right: 0;
+          border: 1px solid $theme-border-lightgray;
+          color: $theme-font-black;
+        }
+      }
+
+      .cartGuide {
+        padding: 30px 15px;
+        border: 1px solid $theme-border-lightgray;
+
+        .title {
+          font-weight: 500;
+        }
+        .content {
+          .subTitle {
+            margin-top: 30px;
+          }
+
+          .item {
+            padding-top: 10px;
+            color: $theme-font-gray;
+          }
+        }
+      }
+    }
+  }
+}
