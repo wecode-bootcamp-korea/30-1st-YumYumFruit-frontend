@@ -1,0 +1,30 @@
+@import 'styles/variables.scss';
+
+.productItem {
+  margin-bottom: 60px;
+
+  &:not(:nth-child(4n)) {
+    margin-right: 33px;
+  }
+
+  .img {
+    width: 275px;
+    height: 290px;
+  }
+
+  .info {
+    .item {
+      margin: 16px 0;
+
+      .link {
+        text-decoration: none;
+        color: $theme-font-black;
+      }
+
+      .price {
+        color: $theme-font-blue;
+        font-weight: 700;
+      }
+    }
+  }
+}
