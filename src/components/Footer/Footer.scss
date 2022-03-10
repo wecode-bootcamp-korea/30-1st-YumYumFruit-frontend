@@ -7,7 +7,7 @@
   .inner {
     height: 265px;
     width: 1200px;
-    padding: 50px 0 30px 165px;
+    padding: 50px 0 30px 0;
     margin: 0 auto;
     display: block;
     list-style: disc;
@@ -29,7 +29,7 @@
     .guide {
       ul {
         height: 51px;
-        width: 2100px;
+        width: 1200px;
         display: flex;
         flex-direction: row;
       }
