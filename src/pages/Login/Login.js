@@ -30,7 +30,7 @@ function Login() {
 
   const sendLoginInfo = e => {
     e.preventDefault();
-    fetch(API.signIn, {
+    fetch(`${API.signIn}`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginVlaue.id,
