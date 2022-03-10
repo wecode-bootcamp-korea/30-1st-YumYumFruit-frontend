@@ -9,11 +9,10 @@ function Nav() {
   const ref = useRef();
 
   const updateCategory = id => {
-    const queryString =
-      id === 1
-        ? `?category=all&sort=price&page=1`
-        : `?category=${id - 1}&sort=price&page=1`;
-    navigate(`/products/list${queryString}`);
+    const queryString = `?category=${
+      id === 1 ? 'all' : id - 1
+    }&sort=price&page=1`;
+    navigate(`/products${queryString}`);
   };
 
   useEffect(() => {
@@ -33,6 +32,8 @@ function Nav() {
     };
   }, []);
 
+  const token = localStorage.getItem('token');
+
   return (
     <nav className="nav">
       <div className="top">
@@ -43,11 +44,8 @@ function Nav() {
             </ul>
             <ul className="rightMenu">
               {NAV_LIST_DATA.userPageLinks.map(item =>
-                localStorage.getItem('token') &&
-                item.name !== 'LOGIN' &&
-                item.name !== 'JOIN' ? (
-                  <NavItem key={item.id} item={item} />
-                ) : !localStorage.getItem('token') && item.name !== 'LOGOUT' ? (
+                (token && item.name !== 'LOGIN' && item.name !== 'JOIN') ||
+                (!token && item.name !== 'LOGOUT') ? (
                   <NavItem key={item.id} item={item} />
                 ) : (
                   ''
