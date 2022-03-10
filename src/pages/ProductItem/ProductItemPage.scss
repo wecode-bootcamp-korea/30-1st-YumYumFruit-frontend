@@ -1,0 +1,186 @@
+@import '/src/styles/variables.scss';
+
+.itemPageLayout {
+  main {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 70px;
+    margin-top: 50px;
+    border-bottom: 1px solid $theme-border-lightgray;
+
+    .itemImage {
+      margin-right: 65px;
+
+      img {
+        height: 530px;
+        width: 1000px;
+      }
+    }
+
+    div.infoArea {
+      height: 450px;
+      width: 340px;
+
+      h3 {
+        font-size: 17px;
+        border-bottom: 1px solid $theme-border-lightgray;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+
+      div {
+        display: flex;
+
+        ul {
+          li {
+            font-size: 12px;
+            margin-bottom: 20px;
+
+            span {
+              margin-right: 50px;
+            }
+          }
+
+          .price {
+            color: $theme-font-blue;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .packagingOptions {
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      border-bottom: 1px solid $theme-border-lightgray;
+      padding-bottom: 5px;
+
+      span {
+        margin-right: 30px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          margin-bottom: 5px;
+          cursor: pointer;
+
+          input {
+            margin-top: -1px;
+            vertical-align: middle;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .totalProducts {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+
+      span {
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        margin: 40px 0;
+
+        button {
+          width: 340px;
+          height: 60px;
+          font-size: 11px;
+          background-color: $theme-background-lightgray;
+        }
+
+        .buyBtn {
+          border: 2px solid $theme-font-black;
+          background-color: $theme-background-lightgray;
+        }
+
+        .buyBtn::before {
+          content: 'BUY IT NOW';
+          color: $theme-font-black;
+        }
+
+        .buyBtn:hover {
+          animation-play-state: paused;
+          background-color: $theme-font-black;
+          cursor: pointer;
+        }
+
+        .buyBtn:hover::before {
+          content: '바로 구매하기';
+          color: $theme-background-lightgray;
+        }
+
+        div {
+          display: flex;
+          flex-direction: row;
+          margin-top: 5px;
+
+          button {
+            border: 1px solid $theme-border-lightgray;
+            margin-right: 1px;
+          }
+
+          .cartBtn {
+            background-color: $theme-background-lightgray;
+          }
+
+          .cartBtn::before {
+            content: 'CART';
+            color: $theme-font-black;
+          }
+
+          .cartBtn:hover {
+            background-color: $theme-border-lightgray;
+            cursor: pointer;
+          }
+
+          .cartBtn:hover::before {
+            content: '장바구니 담기';
+            color: $theme-font-black;
+          }
+
+          .wishBtn {
+            background-color: $theme-background-lightgray;
+          }
+
+          .wishBtn::before {
+            content: 'WISH';
+            color: $theme-font-black;
+          }
+
+          .wishBtn:hover {
+            animation-play-state: paused;
+            background-color: $theme-border-lightgray;
+            cursor: pointer;
+          }
+
+          .wishBtn:hover::before {
+            content: '관심상품 등록';
+            color: $theme-font-black;
+          }
+        }
+      }
+    }
+  }
+
+  article {
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 530px;
+      width: 1400px;
+    }
+  }
+}
