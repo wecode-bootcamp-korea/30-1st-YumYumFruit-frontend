@@ -7,12 +7,13 @@ import JoinButton from './Button/JoinButton';
 import CancleButton from './Button/CancleButton';
 import './Signup.scss';
 
-// const MESSAGE_TO_ALERT = {
-//   INVAILD_EMAIL: '입력하신 이메일이 양식에 맞지 않아요 T_T',
-//   INVALID_PASSWORD: '입력하신 비밀번호가 양식에 맞지 않아요. T_T',
-//   DUPLICATE_EMAIL: '이미 사용중인 이메일이예요 다른 푸룻🌱한 메일을 써볼까요? T_T',
-//   SUCCESS: '냠냠푸룻 회원가입 완료! 🍉'
-// }
+const MESSAGE_TO_ALERT = {
+  INVAILD_EMAIL: '입력하신 이메일이 양식에 맞지 않아요 T_T',
+  INVALID_PASSWORD: '입력하신 비밀번호가 양식에 맞지 않아요. T_T',
+  DUPLICATE_EMAIL:
+    '이미 사용중인 이메일이예요 다른 푸룻🌱한 메일을 써볼까요? T_T',
+  SUCCESS: '냠냠푸룻 회원가입 완료! 🍉',
+};
 
 function Signup() {
   const [signupValue, setSignupValue] = useState({
@@ -25,8 +26,8 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const isValidEmail =
-    signupValue.email.includes('@') && signupValue.email.includes('.');
+  // const isValidEmail =
+  //   signupValue.email.includes('@') && signupValue.email.includes('.');
 
   const spacialValue = signupValue.password.search(/[!@#$%^&*]/);
 
@@ -48,6 +49,12 @@ function Signup() {
   };
 
   const sendJoinInfo = e => {
+    if (!lengthValue || !isValidPw) {
+      return alert('양식에 맞게 모두 써 주셨나요?! T_T');
+    } else if (!checkPw || !rePwcheck) {
+      return alert('입력하신 비밀번호&비밀번호 확인이 맞지 않네요! T_T');
+    }
+
     e.preventDefault();
     fetch(API.signup, {
       method: 'POST',
@@ -60,19 +67,8 @@ function Signup() {
     })
       .then(response => response.json())
       .then(result => {
-        // alert(MESSAGE_TO_ALERT[result.message]);
-        if (result.message === 'INVAILD_EMAIL') {
-          alert('입력하신 이메일이 양식에 맞지 않아요 T_T');
-        } else if (result.message === 'INVALID_PASSWORD') {
-          alert('입력하신 비밀번호가 양식에 맞지 않아요. T_T');
-        } else if (result.message === 'DUPLICATE_EMAIL') {
-          alert(
-            '이미 사용중인 이메일이예요 다른 푸룻🌱한 메일을 써볼까요? T_T'
-          );
-        } else if (result.message === 'SUCCESS') {
-          alert('냠냠푸룻 회원가입 완료! 🍉');
-          navigate('/');
-        }
+        alert(MESSAGE_TO_ALERT[result.message]);
+        if (result.message === 'SUCCESS') navigate('/');
       });
   };
   const onBlur = e => {
