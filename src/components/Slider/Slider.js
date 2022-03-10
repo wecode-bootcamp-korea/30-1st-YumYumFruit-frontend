@@ -3,7 +3,7 @@ import Slide from './Slide';
 import { SLIDE_LIST } from './slidedata';
 import './Slider.scss';
 
-const TOTAL_SLIDES = 2;
+const TOTAL_SLIDES = SLIDE_LIST.length - 1;
 
 function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
