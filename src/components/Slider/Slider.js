@@ -22,6 +22,7 @@ function Slider() {
   };
 
   // TODO) 일정 시간 이후 자동으로 슬라이드 전환
+  // TODO) 00% -> px 방식으로 바꿔보기
   useEffect(() => {
     ref.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
