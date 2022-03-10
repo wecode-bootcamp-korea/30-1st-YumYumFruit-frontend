@@ -11,6 +11,7 @@ function CartTableItem({
   checkedItemsHandler,
   handleDelete,
   setCartList,
+  isLoading,
 }) {
   const {
     cart_id,
@@ -28,16 +29,8 @@ function CartTableItem({
   };
 
   const handleUpdateQty = async (cart_id, quantity) => {
-    await updateQuantity(cart_id, quantity);
-    setCartList(prevItems => {
-      const splitIdx = prevItems.findIndex(item => item.cart_id === cart_id);
-      const newItem = { ...prevItems[splitIdx], cart_id, quantity };
-      return [
-        ...prevItems.slice(0, splitIdx),
-        newItem,
-        ...prevItems.slice(splitIdx + 1),
-      ];
-    });
+    const { cart_info } = await updateQuantity(cart_id, quantity);
+    setCartList(cart_info);
   };
 
   // TODO) 주문하기 : 서버에 보낼 url, body 논의 필요
@@ -80,6 +73,7 @@ function CartTableItem({
         />
         <button
           className="numberBtn"
+          disabled={isLoading}
           onClick={() => handleUpdateQty(cart_id, quantityNum)}
         >
           변경
@@ -92,10 +86,19 @@ function CartTableItem({
       </td>
       <td className="total">{priceSum.toLocaleString()}원</td>
       <td className="button">
-        <button to="/users/order" className="orderBtn" onClick={goToOrderForm}>
+        <button
+          to="/users/order"
+          className="orderBtn"
+          disabled={isLoading}
+          onClick={goToOrderForm}
+        >
           주문하기
         </button>
-        <button className="deleteBtn" onClick={() => handleDelete(cart_id)}>
+        <button
+          className="deleteBtn"
+          disabled={isLoading}
+          onClick={() => handleDelete(cart_id)}
+        >
           삭제하기
         </button>
       </td>

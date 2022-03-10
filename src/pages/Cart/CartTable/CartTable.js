@@ -4,7 +4,7 @@ import { TABLE_MENU_LIST } from './tablecolsdata';
 import { deleteProduct, deleteAllItems, deleteCheckedItems } from 'api/api';
 import './CartTable.scss';
 
-function CartTable({ cartList, setCartList }) {
+function CartTable({ cartList, setCartList, isLoading }) {
   // TODO) 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [isallChecked, setIsallChecked] = useState(false);
@@ -31,21 +31,19 @@ function CartTable({ cartList, setCartList }) {
   };
 
   const handleDelete = async id => {
-    await deleteProduct(id);
-    setCartList(prevItems => prevItems.filter(item => item.cart_id !== id));
+    const { cart_info } = await deleteProduct(id);
+    setCartList(cart_info);
   };
 
   const handleDeleteAll = async () => {
-    await deleteAllItems();
-    setCartList([]);
+    const { cart_info } = await deleteAllItems();
+    setCartList(cart_info);
   };
 
   const handleDeleteChecked = async items => {
     const array = [...items];
-    await deleteCheckedItems(array);
-    setCartList(prevItems =>
-      prevItems.filter(item => !array.includes(item.cart_id))
-    );
+    const { cart_info } = await deleteCheckedItems(array);
+    setCartList(cart_info);
     setCheckedItems(new Set());
   };
 
@@ -106,6 +104,7 @@ function CartTable({ cartList, setCartList }) {
                 checkedItemsHandler={checkedItemsHandler}
                 handleDelete={handleDelete}
                 setCartList={setCartList}
+                isLoading={isLoading}
               />
             ))
           )}
@@ -143,6 +142,7 @@ function CartTable({ cartList, setCartList }) {
         <div>
           <span>선택상품을</span>
           <button
+            disabled={isLoading}
             onClick={() => {
               handleDeleteChecked(checkedItems);
             }}
@@ -151,7 +151,9 @@ function CartTable({ cartList, setCartList }) {
           </button>
         </div>
         <div>
-          <button onClick={handleDeleteAll}>장바구니 비우기</button>
+          <button disabled={isLoading} onClick={handleDeleteAll}>
+            장바구니 비우기
+          </button>
         </div>
       </div>
       <table className="totalTable">

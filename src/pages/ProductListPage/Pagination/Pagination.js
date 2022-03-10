@@ -2,7 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './Pagination.scss';
 
-function Pagination({ totalPages, updateUrl }) {
+function Pagination({ totalPages, updateUrl, isLoading }) {
   const [searchParams] = useSearchParams();
   const sort = searchParams.get('sort');
   const page = Number(searchParams.get('page'));
@@ -35,6 +35,7 @@ function Pagination({ totalPages, updateUrl }) {
               updateUrl({ sort, page: idx + 1 });
             }}
             aria-current={page === idx + 1 ? 'page' : null}
+            disabled={isLoading}
           >
             {idx + 1}
           </button>
