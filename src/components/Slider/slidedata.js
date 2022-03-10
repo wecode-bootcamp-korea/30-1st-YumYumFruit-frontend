@@ -1,14 +1,17 @@
 export const SLIDE_LIST = [
   {
     id: 1,
-    src: 'images/slide1.jpg',
+    imgSrc: 'images/slide1.jpg',
+    url: '/products/category=all&sort=price&page=1',
   },
   {
     id: 2,
-    src: 'images/slide2.jpg',
+    imgSrc: 'images/slide2.jpg',
+    url: '/products/category=1&sort=price&page=1',
   },
   {
     id: 3,
-    src: 'images/slide3.jpg',
+    imgSrc: 'images/slide3.jpg',
+    url: '/products/category=2&sort=price&page=1',
   },
 ];

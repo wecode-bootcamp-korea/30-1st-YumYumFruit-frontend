@@ -30,7 +30,7 @@ function Slider() {
     <section className="slider">
       <ul className="container" ref={ref}>
         {SLIDE_LIST.map(item => (
-          <Slide key={item.id} src={item.src} />
+          <Slide key={item.id} item={item} />
         ))}
       </ul>
       <button className="leftBtn" onClick={prevSlide}>
