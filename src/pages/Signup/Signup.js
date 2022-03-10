@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+import { API } from '../../config';
+=======
 import { API } from '../../config.js';
+>>>>>>> master
 import { SIGNUP_INPUT_DATA } from './SignupData';
 import SinupInputList from './SignupInputList';
 import JoinButton from './Button/JoinButton';
