@@ -23,14 +23,10 @@ function CartTableItem({
   const [quantityNum, setQuantityNum] = useState(quantity);
   const navigate = useNavigate();
 
-  // 수량 인풋 핸들러
   const handleQuantityInput = e => {
-    setQuantityNum(Number(e.target.value)); // value는 string
+    setQuantityNum(Number(e.target.value));
   };
 
-  // 수량 변경
-  // TIP) arr.findIndex(element) : 요소의 인덱스 반환
-  // TIP) newItem : 아이템 기존 정보 + cart_id, quantity
   const handleUpdateQty = async (cart_id, quantity) => {
     await updateQuantity(cart_id, quantity);
     setCartList(prevItems => {
@@ -49,7 +45,6 @@ function CartTableItem({
     navigate('/users/order');
   };
 
-  // 포장 유무에 따른 가격 합계
   const priceSum = packing_option
     ? (price + 3000) * quantity
     : price * quantity;

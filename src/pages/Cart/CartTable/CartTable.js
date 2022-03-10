@@ -5,12 +5,10 @@ import { deleteProduct, deleteAllItems, deleteCheckedItems } from 'api/api';
 import './CartTable.scss';
 
 function CartTable({ cartList, setCartList }) {
-  // 상품 체크 박스
-  // TODO) 구현 어려운 것 : 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
+  // TODO) 모두 체크 해제 시, 전체박스의 checked를 false로 바꾼다
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [isallChecked, setIsallChecked] = useState(false);
 
-  // set에 체크한 상품 추가
   const checkedItemsHandler = (id, isChecked) => {
     if (isChecked) {
       checkedItems.add(id);
@@ -21,7 +19,6 @@ function CartTable({ cartList, setCartList }) {
     }
   };
 
-  // 전체 체크 했을 경우, set에 모든 상품 추가
   const allCheckedHandler = isChecked => {
     if (isChecked) {
       setCheckedItems(new Set(cartList.map(item => item.cart_id)));
@@ -33,19 +30,16 @@ function CartTable({ cartList, setCartList }) {
     }
   };
 
-  // 개별 상품 삭제
   const handleDelete = async id => {
     await deleteProduct(id);
     setCartList(prevItems => prevItems.filter(item => item.cart_id !== id));
   };
 
-  // 전체 상품 삭제
   const handleDeleteAll = async () => {
     await deleteAllItems();
     setCartList([]);
   };
 
-  // 선택 상품 삭제
   const handleDeleteChecked = async items => {
     const array = [...items];
     await deleteCheckedItems(array);
@@ -55,26 +49,22 @@ function CartTable({ cartList, setCartList }) {
     setCheckedItems(new Set());
   };
 
-  // packingPriceSum : 포장 상품 가격 합계
   const packingPriceSum = cartList.reduce((acc, el) => {
     const { price, quantity, packing_option } = el;
     let sum = packing_option ? acc + (price + 3000) * quantity : acc + 0;
     return sum;
   }, 0);
 
-  // noPackingPriceSum : 미포장 상품 가격 합계
   const noPackingPriceSum = cartList.reduce((acc, el) => {
     const { price, quantity, packing_option } = el;
     let sum = !packing_option ? acc + price * quantity : acc + 0;
     return sum;
   }, 0);
 
-  // totalPrice : packing 합계 + noPacking 합계
   const totalPrice =
     (!packingPriceSum ? 0 : packingPriceSum) +
     (!noPackingPriceSum ? 0 : noPackingPriceSum);
 
-  // totalShippingFee : 3만원 이상일 경우 0원, 미만일 경우 상품 개수 * 4000
   const totalShippingFee = totalPrice >= 30000 ? 0 : cartList.length * 4000;
 
   // TODO) 전체주문 : cartList에 담긴 모든 cart_id / api 주소 및 method 협의
@@ -129,7 +119,7 @@ function CartTable({ cartList, setCartList }) {
                   상품구매금액
                   <span className="price"> {totalPrice.toLocaleString()} </span>
                   + 배송비
-                  <span className="shippingFee">
+                  <span className="price">
                     {' '}
                     {totalShippingFee === 0
                       ? '0 (무료)'
