@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.58.6.197:8000';
+const BASE_URL = 'http://10.58.0.144:8000';
 
 // 상품 목록
 export async function getProducts(query) {
