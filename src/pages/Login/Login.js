@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from '../../config';
+import { API } from '../../config.js';
 import './Login.scss';
 
 function Login() {

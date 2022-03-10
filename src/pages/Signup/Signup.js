@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { API } from '../../config';
+=======
+import { API } from '../../config.js';
+>>>>>>> master
 import { SIGNUP_INPUT_DATA } from './SignupData';
 import SinupInputList from './SignupInputList';
 import JoinButton from './Button/JoinButton';
@@ -77,14 +81,6 @@ function Signup() {
       });
   };
 
-  const onBlur = e => {
-    if (!signupValue.email.length >= 1) {
-      alert('냠냠? 이메일 입력을 해 주셨나요? 💦');
-    } else if (!signupValue.password.length >= 1) {
-      alert('푸룻? 비밀번호 입력을 해 주셨나요? 💦');
-    }
-  };
-
   const goToMain = () => {
     navigate('/');
   };
@@ -111,7 +107,6 @@ function Signup() {
                     key={item.id}
                     item={item}
                     onChange={handlesetSignupValue}
-                    onBlur={onBlur}
                   />
                 ))}
                 <tr>

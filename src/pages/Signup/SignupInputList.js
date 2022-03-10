@@ -1,7 +1,7 @@
 import React from 'react';
 import './Signup.scss';
 
-function SinupInputList({ onBlur, onChange, item }) {
+function SinupInputList({ onChange, item }) {
   const { type, name, className, maxLength, content, title, src } = item;
   return (
     <tr>
@@ -14,7 +14,6 @@ function SinupInputList({ onBlur, onChange, item }) {
           type={type}
           name={name}
           className={className}
-          onBlur={onBlur}
           maxLength={maxLength}
           onChange={onChange}
         />
