@@ -4,7 +4,7 @@ import './NavItem.scss';
 
 function NavItem({ item }) {
   const { url, name } = item;
-  return { name } === 'LOGOUT' ? (
+  return name === 'LOGOUT' ? (
     <Link
       to={url}
       className="navItem"
