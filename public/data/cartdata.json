@@ -1,0 +1,35 @@
+{
+  "user_info": {
+    "user_name": "김혜진",
+    "user_point": 10000
+  },
+  "cart_info": [
+    {
+      "cart_id": 1,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 1,
+      "packing_option": "선물포장 있음 (+3000)"
+    },
+    {
+      "cart_id": 4,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 1,
+      "packing_option": "선물포장 있음 (+3000)"
+    },
+    {
+      "cart_id": 7,
+      "product_id": 8,
+      "name": "딸기",
+      "price": 18000,
+      "thumbnail_image_url": "/images/test.jpg",
+      "quantity": 3,
+      "packing_option": "선물포장 없음"
+    }
+  ]
+}

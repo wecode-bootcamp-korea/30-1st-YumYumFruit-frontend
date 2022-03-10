@@ -23,6 +23,12 @@
       background-color: $theme-background-lightgray;
       color: $theme-font-black;
     }
+
+    &[disabled] {
+      color: $theme-font-lightgray;
+      text-decoration: none;
+      cursor: default;
+    }
   }
 
   .arrow {

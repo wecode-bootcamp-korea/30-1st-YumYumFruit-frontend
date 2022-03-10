@@ -13,6 +13,8 @@ function ProductListPage() {
   const [productList, setProductList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(null);
 
   const makeQuery = ({ sort = 'price', page = 1 }) => {
     const category = searchParams.get('category');
@@ -26,11 +28,21 @@ function ProductListPage() {
   };
 
   const handleLoad = async query => {
-    const { product_offset, total_number_of_pages, total_count } =
-      await getProducts(query);
-    setProductList(product_offset);
-    setTotalPages(total_number_of_pages);
-    setTotalCount(total_count);
+    let result;
+    try {
+      setLoadingError(null);
+      setIsLoading(true);
+      result = await getProducts(query);
+      const { product_offset, total_number_of_pages, total_count } = result;
+      setProductList(product_offset);
+      setTotalPages(total_number_of_pages);
+      setTotalCount(total_count);
+    } catch (error) {
+      setLoadingError(error);
+      return;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -66,9 +78,14 @@ function ProductListPage() {
           ))}
         </section>
         <div className="paging">
-          <Pagination totalPages={totalPages} updateUrl={updateUrl} />
+          <Pagination
+            totalPages={totalPages}
+            updateUrl={updateUrl}
+            isLoading={isLoading}
+          />
         </div>
       </div>
+      {loadingError && alert(loadingError.message)}
     </div>
   );
 }
