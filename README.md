@@ -1,5 +1,8 @@
 # 냠냠프룻
 
+![logo](https://user-images.githubusercontent.com/98295004/158053875-49bbc1a4-07ab-4760-9d95-c22b702da4fe.png)
+
+
 ### 프로젝트 소개
 
 - 냠냠제주 클론 프로젝트
