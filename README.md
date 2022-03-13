@@ -56,7 +56,8 @@
 
 - 해당 버튼에 따른 usenavgate 이용한 페이지 이동
 
-![Footer Img1.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/957cd4af-95e9-4e3b-a5f6-d67721df3efe/Footer_Img1.png)
+![Footer Img1](https://user-images.githubusercontent.com/96294372/158054204-993b7208-6c00-41c6-8d6e-a34f0307976c.PNG)
+
 
 ### Main
 
@@ -72,7 +73,8 @@
 유효성 검사를 통과하지 못 할 경우 그에 맞는 경고문구 출력
 모든 유효성 검사를 통과 할 경우 회원가입
     
-    ![회원가입4.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/41c6e08b-8987-4a23-9a2b-4ad05743b786/회원가입4.gif)
+    ![회원가입4](https://user-images.githubusercontent.com/96294372/158054191-be54ac57-7a24-467a-8bee-65dc29be4501.gif)
+
     
 
 - 로그인: 로그인시 입력창 클릭 후 공백인 상태로 다른곳을 클릭하면 
@@ -80,7 +82,8 @@
 아이디 및 비밀번호 입력 후 로그인 버튼 클릭 시 서버에 정보 체크 후 
 JWT로 발급받은 토큰을 받아 로컬스토리지에 저장
     
-    ![로그인4.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a29bb460-74fb-4614-854f-4bf118a441ad/로그인4.gif)
+    ![로그인4](https://user-images.githubusercontent.com/96294372/158054195-60a1b35d-7f62-49f4-a488-5fa218a403fd.gif)
+
     
 
 ### 상품 리스트
