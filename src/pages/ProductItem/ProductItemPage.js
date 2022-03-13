@@ -71,7 +71,7 @@ const ProductItemPage = () => {
         packing_options: [
           {
             quantity: total.true.quantity,
-            packing_option: Boolean(total.true.option),
+            packing_option: total.true.option === '선물포장 ',
           },
           {
             quantity: total.false.quantity,
@@ -93,6 +93,7 @@ const ProductItemPage = () => {
     goToPurchase(e.target.className);
   };
 
+  // total.true.option / total.false.option -> true, false
   const postBuyNowInfo = e => {
     fetch(`${API.cart}`, {
       method: 'POST',
@@ -104,11 +105,11 @@ const ProductItemPage = () => {
         packing_options: [
           {
             quantity: total.true.quantity,
-            packing_option: total.true.option,
+            packing_option: true,
           },
           {
             quantity: total.false.quantity,
-            packing_option: total.false.option,
+            packing_option: false,
           },
         ],
       }),

@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-import { API } from '../../config';
-=======
 import { API } from '../../config.js';
->>>>>>> master
 import './Login.scss';
 
 function Login() {
@@ -34,11 +30,7 @@ function Login() {
 
   const sendLoginInfo = e => {
     e.preventDefault();
-<<<<<<< HEAD
-    fetch(API.signIn, {
-=======
     fetch(`${API.signIn}`, {
->>>>>>> master
       method: 'POST',
       body: JSON.stringify({
         email: loginVlaue.id,

@@ -1,11 +1,11 @@
-const BASE_URL = 'http://10.58.0.144:8000';
+const BASE_URL = 'http://10.58.2.206:8000';
 
 function getToken() {
   return localStorage.getItem('token');
 }
 
 export async function getProducts(query) {
-  const response = await fetch(`http://10.58.2.143:8000/products${query}`);
+  const response = await fetch(`${BASE_URL}/products${query}`);
   if (!response.ok) {
     throw new Error('상품을 불러오는데 실패했습니다');
   }
