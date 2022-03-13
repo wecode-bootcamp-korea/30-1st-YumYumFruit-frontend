@@ -101,9 +101,8 @@ JWT로 발급받은 토큰을 받아 로컬스토리지에 저장
 - 포장옵션 선택 기능
 - 포장옵션 삭제 기능
 - 포장옵션별 수량선택 기능
-- 구매 버튼 클릭시 -> POST를 사용해 상품의 정보와 수량을 back-end로 전송
-    
-    ![냠냠프룻_상세페이지.gif](https://user-images.githubusercontent.com/87808288/158056251-3e2c79e1-a4bb-419a-81c7-74fda5f74d2d.gif)
+- 구매 버튼 클릭시 -> POST를 사용해 상품의 정보와 수량을 back-end로 전송     
+![냠냠프룻_상세페이지.gif](https://user-images.githubusercontent.com/87808288/158056251-3e2c79e1-a4bb-419a-81c7-74fda5f74d2d.gif)  
     
 
 ### 장바구니 페이지
