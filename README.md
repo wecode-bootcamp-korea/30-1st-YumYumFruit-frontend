@@ -18,7 +18,7 @@
 - 개발 기간 : 2022/2/28 ~ 2022/3/11
 - 개발 인원
     - 프론트엔드
-    - 김혜진 : [https://github.com/tyui3185](https://github.com/tyui3185)
+    - 김혜진 : [https://github.com/tyui3185](https://github.com/hyejin30)
     - 노유정 : [https://github.com/YOOKIKI](https://github.com/YOOKIKI)
     - 정건희 : [https://github.com/gunhee-jeong](https://github.com/gunhee-jeong)
     - 백엔드 : 박건우, 이예솔, 윤명국
